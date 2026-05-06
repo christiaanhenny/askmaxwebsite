@@ -56,7 +56,9 @@ main {
    nowrap layout the heading would jump in height every cycle. */
 .hero { text-align: center; padding: 64px 0 32px; }
 .hero h1 {
-  font-size: clamp(1.5rem, 6vw, 4rem);
+  /* Sized so "Start sounding like you." (the longer of the two h1 lines)
+     fits on one line down to ~320px viewport. */
+  font-size: clamp(1.25rem, 6vw, 4rem);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.04em;
@@ -66,7 +68,6 @@ main {
   display: block;
   white-space: nowrap;
 }
-.noun-line { min-height: 1.1em; }
 .rot {
   display: inline-block;
   transition: opacity 0.35s ease, color 0.35s ease;
@@ -79,6 +80,9 @@ main {
   color: var(--fg-muted);
   margin: 0 auto 24px;
   max-width: 520px;
+  /* Reserve 2 lines so the rotating noun (emails ↔ WhatsApp messages)
+     can't shift the CTA up and down between cycles. */
+  min-height: 2.8em;
 }
 .cta-note {
   margin-top: 12px;
