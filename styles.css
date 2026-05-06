@@ -66,6 +66,37 @@ main {
   will-change: opacity, color;
 }
 .rot.fading { opacity: 0; }
+
+/* Verb stack — "write" gets struck through, "prompt" fades in beside it */
+.verb-stack { white-space: nowrap; }
+#verb-old {
+  position: relative;
+  display: inline-block;
+  transition: color 0.5s ease 0.2s;
+}
+#verb-old::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  top: 52%;
+  width: 0;
+  height: 0.085em;
+  background: currentColor;
+  transform: translateY(-50%);
+  transition: width 0.6s cubic-bezier(.7, 0, .3, 1);
+  border-radius: 2px;
+}
+#verb-old.struck::after { width: 104%; }
+#verb-old.struck { color: #b0b0b0; }
+
+#verb-new {
+  display: inline-block;
+  margin-left: 0.35em;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#verb-new.shown { opacity: 1; transform: translateX(0); }
 .tagline {
   font-size: 1.2rem;
   color: var(--fg-muted);
@@ -191,10 +222,32 @@ kbd {
   display: inline-block;
 }
 
-/* ── Why ──────────────────────────────────────────────── */
-.why p { font-size: 1.1rem; margin-top: 0; }
-.why-points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 18px; }
-.why-points li { font-size: 1.05rem; line-height: 1.6; }
+/* ── Why (numbered reasons) ───────────────────────────── */
+.reasons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 28px;
+}
+.reasons li {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+}
+.reasons strong {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.reasons p {
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
 /* ── Beta form ────────────────────────────────────────── */
 .beta p { font-size: 1.1rem; color: var(--fg-muted); }

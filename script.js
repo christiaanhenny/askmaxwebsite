@@ -1,5 +1,14 @@
-// ── Rotating words in the hero headline ───────────────────────────────
-const VERBS = ['write', 'prompt'];
+// ── Hero animations ───────────────────────────────────────────────────
+// "write" gets struck through, then "prompt" fades in beside it (one-shot
+// on load — we want the conceptual swap to land, not loop).
+const verbOld = document.getElementById('verb-old');
+const verbNew = document.getElementById('verb-new');
+
+setTimeout(() => verbOld.classList.add('struck'),  1500);
+setTimeout(() => verbNew.classList.add('shown'),   2050);
+
+// The platform noun keeps rotating — emails / Slack / WhatsApp / etc,
+// each in its brand colour, so the multi-platform pitch reads visually.
 const NOUNS = [
   { text: 'emails',            color: '#ea4335' },
   { text: 'Slack messages',    color: '#4a154b' },
@@ -9,12 +18,8 @@ const NOUNS = [
   { text: 'YouTube comments',  color: '#ff0000' },
 ];
 
-const verbEl = document.getElementById('verb');
 const nounEl = document.getElementById('noun');
-
-let v = 0;
 let n = 0;
-
 nounEl.style.color = NOUNS[0].color;
 
 function fadeSwap(el, applyChange) {
@@ -24,11 +29,6 @@ function fadeSwap(el, applyChange) {
     el.classList.remove('fading');
   }, 350);
 }
-
-setInterval(() => {
-  v = (v + 1) % VERBS.length;
-  fadeSwap(verbEl, () => { verbEl.textContent = VERBS[v]; });
-}, 3500);
 
 setInterval(() => {
   n = (n + 1) % NOUNS.length;
