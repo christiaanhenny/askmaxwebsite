@@ -79,10 +79,7 @@ main {
   font-size: 1.1rem;
   color: var(--fg-muted);
   margin: 0 auto 24px;
-  max-width: 520px;
-  /* Reserve 2 lines so the rotating noun (emails ↔ WhatsApp messages)
-     can't shift the CTA up and down between cycles. */
-  min-height: 2.8em;
+  max-width: 560px;
 }
 .cta-note {
   margin-top: 12px;
