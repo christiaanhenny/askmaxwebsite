@@ -81,7 +81,7 @@ main {
   top: 52%;
   width: 0;
   height: 0.085em;
-  background: currentColor;
+  background: var(--fg); /* matches "prompt" colour, stays bold while "write" fades */
   transform: translateY(-50%);
   transition: width 0.6s cubic-bezier(.7, 0, .3, 1);
   border-radius: 2px;
