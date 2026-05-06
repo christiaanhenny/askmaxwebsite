@@ -3,86 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Portavox — it carries your voice</title>
-  <meta name="description" content="Portavox is an AI writing assistant that learns how you actually write. Click any text field, press ⌘⌥, prompt what you want — get a draft that sounds exactly like you.">
-  <meta property="og:title" content="Portavox — it carries your voice">
-  <meta property="og:description" content="An AI writing assistant that learns how you actually write. Click any text field, press ⌘⌥, prompt what you want — get a draft that sounds like you.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://portavox.ai">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <title>Portavox</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900' fill='white'%3EP%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 24px;
+      box-sizing: border-box;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wordmark {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+    .rule {
+      width: 32px;
+      height: 1px;
+      background: #333;
+      margin: 4px 0;
+    }
+    .msg {
+      color: #888;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      max-width: 420px;
+      line-height: 1.5;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-  <nav>
-    <a class="logo" href="/">Portavox</a>
-    <a class="nav-cta" href="#beta">Join the beta</a>
-  </nav>
-
-  <main>
-    <section class="hero">
-      <h1>
-        <span id="verb" class="rot">write</span><br>
-        hyper-personalized<br>
-        <span id="noun" class="rot">emails</span>
-      </h1>
-      <p class="tagline"><em>It carries your voice.</em></p>
-    </section>
-
-    <section class="video">
-      <div class="video-frame">
-        <video controls preload="metadata" poster="assets/poster.jpg">
-          <source src="assets/intro.mp4" type="video/mp4">
-        </video>
-        <div class="video-placeholder" aria-hidden="true">
-          <span class="play-icon">▶</span>
-          <span>Demo video — coming soon</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta">
-      <a class="btn primary" href="#" id="mac-download">↓ Download for Mac</a>
-      <span class="btn disabled">Windows — coming soon</span>
-    </section>
-
-    <section class="how">
-      <h2>How it works</h2>
-      <ol class="steps">
-        <li><span class="step-num">1</span><span>Click any text field — anywhere on your Mac.</span></li>
-        <li><span class="step-num">2</span><span>Press <kbd>⌘</kbd> <kbd>⌥</kbd>.</span></li>
-        <li><span class="step-num">3</span><span>Prompt what you want to say.</span></li>
-        <li><span class="step-num">4</span><span>Get a draft that sounds exactly like you.</span></li>
-      </ol>
-    </section>
-
-    <section class="why">
-      <h2>How is this possible?</h2>
-      <p>Portavox is the opposite of generic "AI tone." It learns from how you actually write — not tone presets, not copy-pasted samples. Just the words you've already sent.</p>
-      <ul class="why-points">
-        <li><strong>Trained on your real writing.</strong> No sliders, no "make it more professional." It just watches what you send and matches it.</li>
-        <li><strong>Knows the recipient.</strong> The way you talk to your sister isn't the way you talk to your CTO. Portavox keeps them straight — sign-offs, in-jokes, register, the works.</li>
-        <li><strong>Sharper every week.</strong> Every reply you send teaches it more. After two weeks it stops sounding like AI; after a month, even close friends don't notice.</li>
-      </ul>
-    </section>
-
-    <section class="beta" id="beta">
-      <h2>Get in early</h2>
-      <p>Private beta. Limited spots. Drop your email and we'll send you a download link.</p>
-      <form id="beta-form">
-        <input type="email" name="email" placeholder="you@example.com" required>
-        <button type="submit">Join the beta</button>
-      </form>
-      <p class="form-note" id="form-note" hidden>Opening your email client…</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2026 Portavox · <a href="mailto:chris@studysmart.ai">chris@studysmart.ai</a></p>
-  </footer>
-
-  <script src="script.js"></script>
+  <h1 class="wordmark">Portavox</h1>
+  <div class="rule"></div>
+  <p class="msg">This page is private.<br>Access by direct link only.</p>
 </body>
 </html>
