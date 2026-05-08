@@ -1,18 +1,18 @@
 // ── Hero rotating noun ────────────────────────────────────────────────
-// "Stop writing <X>." — X cycles through platforms in their brand colour.
+// Cycles through the surfaces PortaVox covers. Kept monochrome — the
+// rotation itself is enough motion; brand colours fight the B&W layout.
 const NOUNS = [
-  { text: 'Emails',            color: '#ea4335' },
-  { text: 'WhatsApp messages', color: '#25d366' },
-  { text: 'Slack messages',    color: '#4a154b' },
-  { text: 'iMessages',         color: '#0b93f6' },
-  { text: 'LinkedIn posts',    color: '#0a66c2' },
-  { text: 'YouTube comments',  color: '#ff0000' },
+  'Emails',
+  'WhatsApp messages',
+  'Slack messages',
+  'iMessages',
+  'LinkedIn posts',
+  'YouTube comments',
 ];
 
 const nounEl = document.getElementById('noun');
 if (nounEl) {
   let n = 0;
-  nounEl.style.color = NOUNS[0].color;
   const fadeSwap = (el, applyChange) => {
     el.classList.add('fading');
     setTimeout(() => {
@@ -23,8 +23,7 @@ if (nounEl) {
   setInterval(() => {
     n = (n + 1) % NOUNS.length;
     fadeSwap(nounEl, () => {
-      nounEl.textContent = NOUNS[n].text;
-      nounEl.style.color = NOUNS[n].color;
+      nounEl.textContent = NOUNS[n];
     });
   }, 4400);
 }
