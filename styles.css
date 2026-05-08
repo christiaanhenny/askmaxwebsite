@@ -89,10 +89,17 @@ main {
 }
 
 .tagline {
-  font-size: 1.1rem;
-  color: var(--fg-muted);
-  margin: 0 auto 24px;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0 auto 28px;
   max-width: 560px;
+  line-height: 1.4;
+}
+.tagline mark {
+  background: linear-gradient(180deg, transparent 0 55%, #ffe680 55% 95%, transparent 95%);
+  color: inherit;
+  padding: 0 2px;
 }
 .cta-note {
   margin-top: 12px;
