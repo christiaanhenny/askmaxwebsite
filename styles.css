@@ -179,16 +179,28 @@ section h3 {
   padding-left: 4px;
 }
 
-/* ── How (compact 4-step list) ───────────────────────── */
+/* ── How (Once / Every time blocks) ──────────────────── */
+.how-block {
+  max-width: 520px;
+  margin: 0 auto;
+}
+.how-block + .how-block {
+  margin-top: 32px;
+}
+.how-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin: 0 0 12px;
+}
 .steps-compact {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
   gap: 14px;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
   font-size: 1.1rem;
 }
 .steps-compact li {
