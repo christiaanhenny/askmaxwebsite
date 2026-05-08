@@ -185,15 +185,17 @@ section h3 {
   margin: 0 auto;
 }
 .how-block + .how-block {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 .how-label {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  margin: 0 0 12px;
+  margin: 0 0 14px;
+  /* Align with step text (after the number column) */
+  padding-left: calc(1.5rem + 14px);
 }
 .steps-compact {
   list-style: none;
