@@ -1,7 +1,7 @@
 // ── Hero rotating noun ────────────────────────────────────────────────
 // "Stop writing <X>." — X cycles through platforms in their brand colour.
 const NOUNS = [
-  { text: 'emails',            color: '#ea4335' },
+  { text: 'Emails',            color: '#ea4335' },
   { text: 'WhatsApp messages', color: '#25d366' },
   { text: 'Slack messages',    color: '#4a154b' },
   { text: 'iMessages',         color: '#0b93f6' },

@@ -79,6 +79,15 @@ main {
 }
 .rot.fading { opacity: 0; }
 
+.hero h1 em {
+  font-style: italic;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+  text-decoration-color: rgba(0, 0, 0, 0.18);
+}
+
 .tagline {
   font-size: 1.1rem;
   color: var(--fg-muted);
