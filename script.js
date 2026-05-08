@@ -26,7 +26,7 @@ if (nounEl) {
       nounEl.textContent = NOUNS[n].text;
       nounEl.style.color = NOUNS[n].color;
     });
-  }, 2200);
+  }, 6000);
 }
 
 // ── Beta signup ───────────────────────────────────────────────────────
