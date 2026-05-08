@@ -30,17 +30,51 @@ if (nounEl) {
 }
 
 // ── Beta signup ───────────────────────────────────────────────────────
-// No backend yet — open the user's mail client with a pre-filled message.
+// Posts directly to Supabase (table `beta_signups`, anon-insert RLS policy).
+// The anon key is safe to ship in the client — RLS prevents reads.
+const SUPABASE_URL = 'https://sqcyyrmfvvfzsahnplbv.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxY3l5cm1mdnZmenNhaG5wbGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNTgxMjEsImV4cCI6MjA5MjkzNDEyMX0.rglg5uNyGmZXITculZHo_oU8XcqFryrtBbr3A_yY2Uw';
+
 const form = document.getElementById('beta-form');
 const note = document.getElementById('form-note');
 if (form) {
-  form.addEventListener('submit', (e) => {
+  const button = form.querySelector('button');
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = form.email.value.trim();
     if (!email) return;
-    const subject = encodeURIComponent('PortaVox private beta — sign me up');
-    const body    = encodeURIComponent(`Please add me to the PortaVox private beta.\n\nEmail: ${email}\n`);
-    note.hidden = false;
-    window.location.href = `mailto:chris@studysmart.ai?subject=${subject}&body=${body}`;
+
+    button.disabled = true;
+    const originalLabel = button.textContent;
+    button.textContent = 'Sending…';
+    note.hidden = true;
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/beta_signups`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({
+          email,
+          user_agent: navigator.userAgent,
+          source: 'portavox.ai/download',
+        }),
+      });
+
+      if (res.ok || res.status === 409) {
+        form.innerHTML = '<p class="form-success">You\'re on the list. We\'ll be in touch soon.</p>';
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+    } catch (err) {
+      button.disabled = false;
+      button.textContent = originalLabel;
+      note.hidden = false;
+      note.textContent = 'Something went wrong. Try again or email chris@studysmart.ai.';
+    }
   });
 }
