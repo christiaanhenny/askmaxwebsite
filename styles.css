@@ -62,7 +62,7 @@ main {
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.04em;
-  margin: 0 0 20px;
+  margin: 0 0 40px;
 }
 .hero-line {
   display: block;
@@ -92,7 +92,7 @@ main {
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--fg);
-  margin: 0 auto 28px;
+  margin: 0 auto 36px;
   max-width: 560px;
   line-height: 1.4;
 }
@@ -551,18 +551,17 @@ footer a:hover { color: var(--fg); }
   .hero h1 {
     /* On phones we want the headline to feel BIG and confident.
        Drop the nowrap so longer rotating nouns ("WhatsApp messages",
-       "YouTube comments") never overflow narrow viewports — they
-       wrap to 2 lines if needed, and noun-line min-height
-       prevents layout jump on swap. */
+       "YouTube comments") never overflow narrow viewports. */
     font-size: clamp(1.6rem, 8.4vw, 2.6rem);
-    margin-bottom: 18px;
+    /* Tight line-height so the three H1 lines read as one block, not as
+       three separated rows. Combined with min-height 1.0em on the noun-line
+       this kills the perceived 20–30px dead band beneath the rotating noun
+       on mobile. */
+    line-height: 1.0;
+    margin-bottom: 36px;
   }
   .hero-line { white-space: normal; }
-  /* Tight reservation: the longest noun ('WhatsApp messages') still fits on
-     one line at this clamp size on viewports ≥320px, so 1.2em is enough.
-     Eliminates the dead air the previous 2.2em buffer left under
-     'Click. Prompt. Paste.' on phones. */
-  .noun-line { min-height: 1.2em; }
+  .noun-line { min-height: 1.0em; }
   .hero h1 em {
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
@@ -576,7 +575,7 @@ footer a:hover { color: var(--fg); }
   .hero-knows li { margin-left: 18px; padding-left: 2px; }
   .tagline {
     font-size: 1rem;
-    margin-bottom: 18px;
+    margin-bottom: 28px;
     line-height: 1.4;
   }
   .btn { padding: 13px 24px; font-size: 15px; }
