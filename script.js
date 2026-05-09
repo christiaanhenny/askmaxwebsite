@@ -61,7 +61,7 @@ if (form) {
         body: JSON.stringify({
           email,
           user_agent: navigator.userAgent,
-          source: 'portavox.ai/download',
+          source: document.body.dataset.pageSource || 'portavox.ai/download',
         }),
       });
 

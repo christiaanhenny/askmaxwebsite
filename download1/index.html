@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PortaVox — drafts you, not &ldquo;an AI&rdquo;</title>
+  <meta name="description" content="Gemini drafts a polite stranger. PortaVox drafts you &mdash; your phrases, your shorthand, what you actually remember about the person you&rsquo;re writing to.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta property="og:title" content="PortaVox — drafts you, not 'an AI'">
+  <meta property="og:description" content="Same prompt. Two worlds apart.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .concept-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    .hero-v1 h1 {
+      font-size: clamp(1.7rem, 6vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin: 0 0 18px;
+    }
+    .hero-v1 .hero-line { white-space: normal; display: block; }
+    .compare-stack {
+      display: grid;
+      gap: 22px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .compare-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .compare-prompt {
+      padding: 16px 22px;
+      background: var(--soft);
+      font-size: 0.92rem;
+      color: var(--fg-muted);
+      border-bottom: 1px solid var(--border);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .compare-prompt .who {
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      margin-right: 8px;
+    }
+    .compare-prompt em {
+      font-style: italic;
+      color: var(--fg);
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .compare-side {
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .compare-side + .compare-side {
+      border-left: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 230, 128, 0.06) 0%, transparent 60%);
+    }
+    .compare-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0;
+    }
+    .compare-side.you .compare-label { color: #b58900; }
+    .compare-text {
+      font-size: 0.96rem;
+      line-height: 1.55;
+      margin: 0;
+      white-space: pre-line;
+      color: var(--fg);
+    }
+    .compare-side.them .compare-text { color: #555; }
+    .compare-why {
+      padding: 14px 22px;
+      background: var(--soft);
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--fg-muted);
+      line-height: 1.55;
+    }
+    .compare-why strong { color: var(--fg); }
+    .picks {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .picks h2 { text-align: center; }
+    .picks-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+    .picks-list li {
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .picks-list .num {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--fg-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .picks-list strong {
+      display: block;
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+    .picks-list span {
+      color: var(--fg-muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      .compare-row { grid-template-columns: 1fr; }
+      .compare-side + .compare-side {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+    @media (max-width: 600px) {
+      .compare-prompt { padding: 14px 18px; font-size: 0.88rem; }
+      .compare-side { padding: 20px 18px; }
+      .compare-text { font-size: 0.94rem; }
+      .compare-why { padding: 12px 18px; font-size: 0.82rem; }
+      .picks-list li { padding: 16px 18px; gap: 12px; }
+      .picks-list .num { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body data-page-source="portavox.ai/download1">
+  <nav>
+    <a class="logo" href="/download">PortaVox</a>
+    <a class="nav-cta" href="#beta">Get early access</a>
+  </nav>
+
+  <main>
+    <section class="hero hero-v1">
+      <p class="concept-tag">Concept 1 &middot; The wedge</p>
+      <h1>
+        <span class="hero-line">Gemini drafts a stranger.</span>
+        <span class="hero-line">PortaVox drafts <em>you</em>.</span>
+      </h1>
+      <p class="tagline">Same prompt. Two worlds apart.</p>
+      <div class="cta">
+        <a class="btn primary" href="#beta">Get early access</a>
+      </div>
+      <p class="cta-note">Mac only &middot; Paid private beta</p>
+    </section>
+
+    <section class="compare">
+      <div class="compare-stack">
+
+        <article class="compare-card">
+          <p class="compare-prompt">
+            <span class="who">You say</span>
+            <em>tell sarah we slipped a day on the spec doc, she&rsquo;ll have it friday</em>
+          </p>
+          <div class="compare-row">
+            <div class="compare-side them">
+              <p class="compare-label">Gemini in Gmail</p>
+              <p class="compare-text">Hi Sarah,
+
+Hope you&rsquo;re doing well! I wanted to give you a quick heads-up that the spec document will be slightly delayed. We&rsquo;re now targeting Friday for delivery. Apologies for any inconvenience this may cause.
+
+Best regards,
+Chris</p>
+            </div>
+            <div class="compare-side you">
+              <p class="compare-label">PortaVox</p>
+              <p class="compare-text">Hey Sare &mdash; slipped a day on the spec, you&rsquo;ll have it Friday. Sorry for the wobble; legal review took longer than I&rsquo;d hoped.
+
+How&rsquo;s the launch prep? &mdash; C</p>
+            </div>
+          </div>
+          <p class="compare-why"><strong>What it knew:</strong> you call her &ldquo;Sare&rdquo;, you sign off &ldquo;C&rdquo; with her, you never write &ldquo;Hope you&rsquo;re doing well&rdquo;, and you remember she&rsquo;s in launch prep.</p>
+        </article>
+
+        <article class="compare-card">
+          <p class="compare-prompt">
+            <span class="who">You say</span>
+            <em>auth&rsquo;s flaking 500s in prod, ask marcus if he&rsquo;s seen this before</em>
+          </p>
+          <div class="compare-row">
+            <div class="compare-side them">
+              <p class="compare-label">ChatGPT in a tab</p>
+              <p class="compare-text">Hi Marcus,
+
+I wanted to bring an issue to your attention. The authentication service is currently returning intermittent 500 errors in production. Could you take a look when you have a moment?
+
+Thanks,
+Chris</p>
+            </div>
+            <div class="compare-side you">
+              <p class="compare-label">PortaVox</p>
+              <p class="compare-text">boss &mdash; auth flaking 500s in prod, looking now. you seen this pattern before?</p>
+            </div>
+          </div>
+          <p class="compare-why"><strong>What it knew:</strong> Marcus is your co-founder and you call him &ldquo;boss&rdquo; on Slack. Slack messages don&rsquo;t get greetings or sign-offs. You write lowercase to him, always.</p>
+        </article>
+
+        <article class="compare-card">
+          <p class="compare-prompt">
+            <span class="who">You say</span>
+            <em>congrats to paolo, marloes got the VP role finally</em>
+          </p>
+          <div class="compare-row">
+            <div class="compare-side them">
+              <p class="compare-label">Generic AI helper</p>
+              <p class="compare-text">Hi Paolo,
+
+Wonderful news about Marloes&rsquo; promotion! Please pass along my warmest congratulations. Wishing her all the best in this exciting new role.
+
+Best,
+Chris</p>
+            </div>
+            <div class="compare-side you">
+              <p class="compare-label">PortaVox</p>
+              <p class="compare-text">Pao &mdash; joh wat tof voor Marloes! VP eindelijk gelanded. Drinks dit weekend om dat te vieren? &mdash; C</p>
+            </div>
+          </div>
+          <p class="compare-why"><strong>What it knew:</strong> with Paolo you write Dutch, not English. Marloes is his wife. You call him &ldquo;Pao&rdquo;. You don&rsquo;t write &ldquo;fijn voor je&rdquo; &mdash; you marked it as a phrase you never use.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="picks">
+      <h2>Why it can write you.</h2>
+      <ol class="picks-list">
+        <li>
+          <span class="num">1</span>
+          <div>
+            <strong>Per-relationship voice.</strong>
+            <span>Greetings, sign-offs, sentence shape, even the language you switch to &mdash; learned per contact, not one tone for everyone.</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div>
+            <strong>Inside language, isolated.</strong>
+            <span>&ldquo;Manny&rdquo; only when you write to your wife. &ldquo;Boss&rdquo; only with your co-founder. Never leaks across contacts.</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div>
+            <strong>Facts about the person.</strong>
+            <span>Their wife&rsquo;s name, their kid&rsquo;s school, the role they just landed. Persistent, tagged, retrieved on every draft &mdash; not buried in a chat history.</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <div>
+            <strong>Phrases you killed.</strong>
+            <span>You crossed out &ldquo;just circling back&rdquo; twice. PortaVox never writes it again. Edits aren&rsquo;t suggestions; they&rsquo;re rules.</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">5</span>
+          <div>
+            <strong>The thread on screen.</strong>
+            <span>Reads what you&rsquo;re replying to. Knows whether it&rsquo;s a Slack DM (no greeting), a cold email (full structure), or a one-line iMessage. Picks shape automatically.</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">6</span>
+          <div>
+            <strong>Your project context.</strong>
+            <span>Pulls the exact line from the deal memo you uploaded for this client. Not a generic platitude &mdash; the actual sentence you wrote in the brief.</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="beta" id="beta">
+      <h2>Get in early.</h2>
+      <p>Paid private beta. Founding-member pricing. Drop your email and we&rsquo;ll send a download link.</p>
+      <form id="beta-form" aria-describedby="form-note">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Request access</button>
+      </form>
+      <p class="form-note" id="form-note" hidden></p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>PortaVox</strong> &middot; Your voice, carried everywhere.</p>
+    <p>&copy; 2026 PortaVox &middot; <a href="mailto:chris@studysmart.ai">chris@studysmart.ai</a></p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

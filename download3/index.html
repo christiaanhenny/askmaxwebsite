@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PortaVox — drafts that get more right every week</title>
+  <meta name="description" content="Every edit is a lesson. Day 1 needs cleanup. Day 14 ships. Not a prompt &mdash; a profile that grows.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .concept-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    .hero-v3 h1 {
+      font-size: clamp(1.7rem, 5.6vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+    .hero-v3 .hero-line { display: block; white-space: normal; }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .timeline-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #fff;
+    }
+    .timeline-card.future {
+      background: #0a0a0a;
+      color: #fff;
+      border-color: #0a0a0a;
+    }
+    .timeline-when {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0;
+    }
+    .timeline-card.future .timeline-when { color: #ffe680; }
+    .timeline-quote {
+      font-size: 0.96rem;
+      line-height: 1.55;
+      margin: 0;
+      white-space: pre-line;
+    }
+    .timeline-edits {
+      font-size: 0.84rem;
+      color: var(--fg-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .timeline-card.future .timeline-edits { color: #aaa; }
+    .timeline-edits strong { color: var(--fg); }
+    .timeline-card.future .timeline-edits strong { color: #fff; }
+    .timeline-edits del { color: #c44; }
+    .stars {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .stars-rows {
+      display: grid;
+      gap: 10px;
+    }
+    .stars-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      align-items: center;
+    }
+    .stars-display {
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      color: #f5b400;
+      font-weight: 700;
+    }
+    .stars-display .empty { color: var(--border); }
+    .stars-row p { margin: 0; }
+    .stars-row strong { font-weight: 700; }
+    .stars-row span { color: var(--fg-muted); font-size: 0.92rem; }
+    .loops {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .loops-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 16px;
+    }
+    .loops-list li {
+      padding: 20px 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .loops-list .arrow {
+      font-weight: 800;
+      color: var(--fg-muted);
+      font-size: 1.4rem;
+    }
+    .loops-list strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.02rem;
+    }
+    .loops-list span {
+      color: var(--fg-muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      .timeline { grid-template-columns: 1fr; }
+      .stars-row { grid-template-columns: 100px 1fr; gap: 12px; }
+    }
+    @media (max-width: 600px) {
+      .timeline-card { padding: 22px 20px; }
+      .stars-row { padding: 12px 16px; }
+      .loops-list li { padding: 18px 20px; gap: 12px; }
+    }
+  </style>
+</head>
+<body data-page-source="portavox.ai/download3">
+  <nav>
+    <a class="logo" href="/download">PortaVox</a>
+    <a class="nav-cta" href="#beta">Get early access</a>
+  </nav>
+
+  <main>
+    <section class="hero hero-v3">
+      <p class="concept-tag">Concept 3 &middot; Learning loop</p>
+      <h1>
+        <span class="hero-line">The drafts get</span>
+        <span class="hero-line">more <em>right</em></span>
+        <span class="hero-line">every week.</span>
+      </h1>
+      <p class="tagline">Day 1 needs cleanup. Day 14 ships untouched. Not a prompt &mdash; a profile that grows.</p>
+      <div class="cta">
+        <a class="btn primary" href="#beta">Get early access</a>
+      </div>
+      <p class="cta-note">Mac only</p>
+    </section>
+
+    <section class="timeline-section">
+      <h2>Same prompt. Three weeks apart.</h2>
+      <div class="timeline">
+        <article class="timeline-card">
+          <p class="timeline-when">Week 1</p>
+          <p class="timeline-quote">Hi Sarah,
+
+I wanted to reach out regarding the spec document. We&rsquo;ve hit a small delay; you&rsquo;ll receive it on Friday. Apologies.
+
+Best,
+Chris</p>
+          <p class="timeline-edits"><strong>You edit:</strong> kill the &ldquo;reach out&rdquo;, drop the &ldquo;Apologies&rdquo;, change &ldquo;Best&rdquo; to &ldquo;C&rdquo;, change &ldquo;Hi Sarah&rdquo; to &ldquo;Hey Sare&rdquo;.</p>
+        </article>
+
+        <article class="timeline-card">
+          <p class="timeline-when">Week 2</p>
+          <p class="timeline-quote">Hey Sare,
+
+Spec doc is delayed by a day &mdash; you&rsquo;ll have it Friday. Sorry for the wobble.
+
+C</p>
+          <p class="timeline-edits"><strong>You edit:</strong> tighten &ldquo;is delayed by a day&rdquo; to &ldquo;slipped a day&rdquo;. Add a question about her launch prep.</p>
+        </article>
+
+        <article class="timeline-card future">
+          <p class="timeline-when">Week 3+</p>
+          <p class="timeline-quote">Hey Sare &mdash; slipped a day on the spec, you&rsquo;ll have it Friday. Sorry for the wobble; legal review took longer than I&rsquo;d hoped.
+
+How&rsquo;s the launch prep? &mdash; C</p>
+          <p class="timeline-edits"><strong>You edit:</strong> nothing. Send.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="stars">
+      <h2>You can see it learning.</h2>
+      <div class="stars-rows">
+        <div class="stars-row">
+          <p class="stars-display">★<span class="empty">★★★★</span></p>
+          <p><strong>Lightly trained.</strong> <span>One email pasted. Drafts feel close, but generic on the edges.</span></p>
+        </div>
+        <div class="stars-row">
+          <p class="stars-display">★★<span class="empty">★★★</span></p>
+          <p><strong>Trained.</strong> <span>A few examples, ~600 chars in. Greetings and sign-offs land.</span></p>
+        </div>
+        <div class="stars-row">
+          <p class="stars-display">★★★<span class="empty">★★</span></p>
+          <p><strong>Well trained.</strong> <span>5+ pattern slots filled. Sentence rhythm starts to feel like you.</span></p>
+        </div>
+        <div class="stars-row">
+          <p class="stars-display">★★★★<span class="empty">★</span></p>
+          <p><strong>Sharp.</strong> <span>Multiple examples + your edits. PortaVox now mirrors the way you actually phrase asks.</span></p>
+        </div>
+        <div class="stars-row">
+          <p class="stars-display">★★★★★</p>
+          <p><strong>Fully trained.</strong> <span>6+ examples, 5+ confirmed edits, 8 slots populated. Drafts ship without edits most of the time.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="loops">
+      <h2>What &ldquo;learning&rdquo; actually means.</h2>
+      <ul class="loops-list">
+        <li>
+          <span class="arrow">→</span>
+          <div>
+            <strong>An edit becomes a rule after the third time.</strong>
+            <span>Cross out &ldquo;just circling back&rdquo; three times. PortaVox marks it as anti-pattern. Never written again.</span>
+          </div>
+        </li>
+        <li>
+          <span class="arrow">→</span>
+          <div>
+            <strong>A nickname graduates after the second use.</strong>
+            <span>Swap &ldquo;son&rdquo; for &ldquo;Manny&rdquo; twice in messages to your wife. PortaVox locks it in &mdash; only with her.</span>
+          </div>
+        </li>
+        <li>
+          <span class="arrow">→</span>
+          <div>
+            <strong>A relationship-specific style emerges after five edits.</strong>
+            <span>If you keep softening drafts to your investor, &ldquo;more cautious tone with Marcus&rdquo; becomes a contact-scoped override.</span>
+          </div>
+        </li>
+        <li>
+          <span class="arrow">→</span>
+          <div>
+            <strong>Six writing slots fill in over time.</strong>
+            <span>Greetings, openers, body rhythm, asks, closings, sign-offs &mdash; each learns separately. You see them populate as your profile fills out.</span>
+          </div>
+        </li>
+        <li>
+          <span class="arrow">→</span>
+          <div>
+            <strong>Reaction patterns library, not generic tones.</strong>
+            <span>Not just &ldquo;friendly tone&rdquo;. Specific: how you reply to good news, how you push back, how you decline an intro &mdash; learned from how you actually do it.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="beta" id="beta">
+      <h2>Start the loop.</h2>
+      <p>Paid private beta. Founding-member pricing. Two weeks of edits and you&rsquo;ll feel it.</p>
+      <form id="beta-form" aria-describedby="form-note">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Request access</button>
+      </form>
+      <p class="form-note" id="form-note" hidden></p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>PortaVox</strong> &middot; Your voice, carried everywhere.</p>
+    <p>&copy; 2026 PortaVox &middot; <a href="mailto:chris@studysmart.ai">chris@studysmart.ai</a></p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

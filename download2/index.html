@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PortaVox — one shortcut, every app</title>
+  <meta name="description" content="Gemini lives in Gmail. ChatGPT lives in a tab. PortaVox lives wherever your cursor is &mdash; one shortcut, every app on your Mac.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .concept-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    .hero-v2 h1 {
+      font-size: clamp(1.7rem, 5.6vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+    .hero-v2 .hero-line { display: block; white-space: normal; }
+    kbd {
+      display: inline-block;
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      border-bottom-width: 2px;
+      border-radius: 6px;
+      background: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.86em;
+      font-weight: 700;
+      letter-spacing: 0;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .app-tile {
+      padding: 18px 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-align: center;
+      transition: border-color 0.15s, transform 0.15s;
+      background: #fff;
+    }
+    .app-tile:hover {
+      border-color: var(--fg);
+      transform: translateY(-1px);
+    }
+    .app-tile-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .app-tile-name {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .app-tile-anywhere {
+      grid-column: span 4;
+      background: var(--fg);
+      color: #fff;
+      border-color: var(--fg);
+      padding: 22px 16px;
+      font-weight: 700;
+    }
+    .app-tile-anywhere .app-tile-name { color: #fff; }
+    .vs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .vs-col {
+      padding: 26px 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .vs-col.you { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+    .vs-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 14px;
+    }
+    .vs-col.you .vs-label { color: #999; }
+    .vs-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+    }
+    .vs-list li {
+      font-size: 0.94rem;
+      line-height: 1.5;
+      padding-left: 28px;
+      position: relative;
+      counter-increment: step;
+    }
+    .vs-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--fg-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .vs-col.you .vs-list li::before {
+      background: #ffe680;
+      color: #0a0a0a;
+    }
+    .reads {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .reads-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+      text-align: left;
+    }
+    .reads-list li {
+      padding: 18px 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .reads-list strong {
+      flex-shrink: 0;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .reads-list span {
+      color: var(--fg-muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      .vs { grid-template-columns: 1fr; gap: 14px; }
+      .app-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .app-tile-anywhere { grid-column: span 3; }
+    }
+    @media (max-width: 600px) {
+      .vs-col { padding: 22px 20px; }
+      .app-grid { grid-template-columns: repeat(2, 1fr); }
+      .app-tile-anywhere { grid-column: span 2; }
+      .reads-list li { padding: 16px 18px; flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body data-page-source="portavox.ai/download2">
+  <nav>
+    <a class="logo" href="/download">PortaVox</a>
+    <a class="nav-cta" href="#beta">Get early access</a>
+  </nav>
+
+  <main>
+    <section class="hero hero-v2">
+      <p class="concept-tag">Concept 2 &middot; Coverage</p>
+      <h1>
+        <span class="hero-line">One shortcut.</span>
+        <span class="hero-line">Every app.</span>
+        <span class="hero-line">Anywhere your <em>cursor</em> blinks.</span>
+      </h1>
+      <p class="tagline">Gemini lives in Gmail. ChatGPT lives in a tab. PortaVox lives wherever you&rsquo;re typing.</p>
+      <div class="cta">
+        <a class="btn primary" href="#beta">Get early access</a>
+      </div>
+      <p class="cta-note">Press <kbd>⌥</kbd> <kbd>Space</kbd> &middot; Mac only</p>
+    </section>
+
+    <section class="apps">
+      <h2>Works in every text field on your Mac.</h2>
+      <div class="app-grid">
+        <div class="app-tile"><div class="app-tile-icon">✉️</div><span class="app-tile-name">Mail</span></div>
+        <div class="app-tile"><div class="app-tile-icon">📧</div><span class="app-tile-name">Gmail</span></div>
+        <div class="app-tile"><div class="app-tile-icon">💬</div><span class="app-tile-name">Slack</span></div>
+        <div class="app-tile"><div class="app-tile-icon">🟢</div><span class="app-tile-name">WhatsApp</span></div>
+        <div class="app-tile"><div class="app-tile-icon">🟦</div><span class="app-tile-name">iMessage</span></div>
+        <div class="app-tile"><div class="app-tile-icon">💼</div><span class="app-tile-name">LinkedIn</span></div>
+        <div class="app-tile"><div class="app-tile-icon">📝</div><span class="app-tile-name">Notion</span></div>
+        <div class="app-tile"><div class="app-tile-icon">🗒️</div><span class="app-tile-name">Notes</span></div>
+        <div class="app-tile app-tile-anywhere">
+          <div class="app-tile-icon">⌨️</div>
+          <span class="app-tile-name">&hellip; and any other text field. Browser inputs, Discord, Telegram, Terminal, code editors. If your cursor blinks there, PortaVox writes there.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="friction">
+      <h2>The 30-second tax you stopped noticing.</h2>
+      <div class="vs">
+        <div class="vs-col">
+          <p class="vs-label">Without PortaVox</p>
+          <ol class="vs-list">
+            <li>Switch to ChatGPT in a different tab.</li>
+            <li>Copy the email or thread you&rsquo;re replying to.</li>
+            <li>Paste it into ChatGPT with a prompt.</li>
+            <li>Wait for the response.</li>
+            <li>Copy the response.</li>
+            <li>Switch back to your inbox.</li>
+            <li>Find where your cursor was.</li>
+            <li>Paste, edit to sound like you, send.</li>
+          </ol>
+        </div>
+        <div class="vs-col you">
+          <p class="vs-label">With PortaVox</p>
+          <ol class="vs-list">
+            <li>Press <kbd>⌥</kbd> <kbd>Space</kbd> in the field you&rsquo;re typing in.</li>
+            <li>Speak or type what you want to say.</li>
+            <li>Polished draft appears in your field. Send.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="reads">
+      <h2>It already sees what&rsquo;s on screen.</h2>
+      <ul class="reads-list">
+        <li>
+          <strong>The thread.</strong>
+          <span>Reads the email, Slack message or DM you&rsquo;re replying to &mdash; including selected text beyond the visible scroll area.</span>
+        </li>
+        <li>
+          <strong>The recipient.</strong>
+          <span>Picks up the To: field, the chat header, the LinkedIn name &mdash; and pulls everything it remembers about that person.</span>
+        </li>
+        <li>
+          <strong>The app.</strong>
+          <span>Slack DM gets no greeting. Cold email gets full structure. Tweet gets one line. Knows the difference automatically.</span>
+        </li>
+        <li>
+          <strong>The exact field.</strong>
+          <span>Pastes back into the input where your cursor was. No clipboard dance. No app switching. No &ldquo;wait where was I&rdquo;.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="beta" id="beta">
+      <h2>Get in early.</h2>
+      <p>Paid private beta. Founding-member pricing. Drop your email and we&rsquo;ll send a download link.</p>
+      <form id="beta-form" aria-describedby="form-note">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Request access</button>
+      </form>
+      <p class="form-note" id="form-note" hidden></p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>PortaVox</strong> &middot; Your voice, carried everywhere.</p>
+    <p>&copy; 2026 PortaVox &middot; <a href="mailto:chris@studysmart.ai">chris@studysmart.ai</a></p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

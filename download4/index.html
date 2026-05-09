@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PortaVox — same email, different person, different draft</title>
+  <meta name="description" content="PortaVox doesn&rsquo;t just sound like you. It sounds like you talking to them &mdash; per-contact memory, per-relationship voice, inside language that never leaks.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .concept-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    .hero-v4 h1 {
+      font-size: clamp(1.6rem, 5.4vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin: 0 0 18px;
+    }
+    .hero-v4 .hero-line { display: block; white-space: normal; }
+    .three-up {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .three-up-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #fff;
+    }
+    .three-up-to {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0;
+    }
+    .three-up-relation {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .three-up-quote {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin: 0;
+      white-space: pre-line;
+      flex: 1;
+    }
+    .three-up-tag {
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    .three-up-prompt {
+      max-width: 640px;
+      margin: 0 auto 28px;
+      padding: 18px 22px;
+      background: var(--soft);
+      border-radius: 14px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      line-height: 1.5;
+    }
+    .three-up-prompt em {
+      color: var(--fg);
+      font-style: italic;
+      font-weight: 500;
+    }
+    .three-up-prompt .who {
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .knows {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .knows-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+    .knows-list li {
+      padding: 20px 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .knows-list strong {
+      display: block;
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+    .knows-list p {
+      margin: 0;
+      color: var(--fg-muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+    .alias-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
+      padding: 8px 0;
+      font-size: 0.92rem;
+    }
+    .alias-row + .alias-row { border-top: 1px solid var(--border); }
+    .alias-app {
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .alias-name {
+      color: var(--fg-muted);
+      font-family: 'SF Mono', 'Menlo', monospace;
+    }
+    @media (max-width: 720px) {
+      .three-up { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .three-up-card { padding: 20px 18px; }
+      .three-up-prompt { padding: 16px 18px; }
+      .knows-list li { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body data-page-source="portavox.ai/download4">
+  <nav>
+    <a class="logo" href="/download">PortaVox</a>
+    <a class="nav-cta" href="#beta">Get early access</a>
+  </nav>
+
+  <main>
+    <section class="hero hero-v4">
+      <p class="concept-tag">Concept 4 &middot; Per-contact intelligence</p>
+      <h1>
+        <span class="hero-line">Same email.</span>
+        <span class="hero-line">Different person.</span>
+        <span class="hero-line">Different <em>draft</em>.</span>
+      </h1>
+      <p class="tagline">PortaVox doesn&rsquo;t just sound like you. It sounds like you talking to <em>them</em>.</p>
+      <div class="cta">
+        <a class="btn primary" href="#beta">Get early access</a>
+      </div>
+      <p class="cta-note">Mac only</p>
+    </section>
+
+    <section class="three-up-section">
+      <p class="three-up-prompt">
+        <span class="who">You say, once</span>
+        <em>tell them I&rsquo;m running 15 minutes late, traffic on the A2</em>
+      </p>
+      <div class="three-up">
+        <article class="three-up-card">
+          <p class="three-up-to">Drafted to</p>
+          <p class="three-up-relation">Marcus &middot; investor</p>
+          <p class="three-up-quote">Hi Marcus,
+
+Apologies &mdash; pushed back 15 min, traffic on the A2. Rescheduling the calendar invite now.
+
+Best,
+Chris</p>
+          <p class="three-up-tag">Formal greeting, full sign-off, &ldquo;apologies&rdquo;. Marcus gets the careful version.</p>
+        </article>
+
+        <article class="three-up-card">
+          <p class="three-up-to">Drafted to</p>
+          <p class="three-up-relation">Tim &middot; co-founder</p>
+          <p class="three-up-quote">boss running 15 late, A2 traffic. starting without me?</p>
+          <p class="three-up-tag">No greeting, lowercase, &ldquo;boss&rdquo; nickname, Slack-shaped. Tim gets the real you.</p>
+        </article>
+
+        <article class="three-up-card">
+          <p class="three-up-to">Drafted to</p>
+          <p class="three-up-relation">Eva &middot; sister</p>
+          <p class="three-up-quote">kom 15 min later zus, A2 staat vast 🙄 begin maar vast met koffie</p>
+          <p class="three-up-tag">Dutch (your language with her), no greeting, family shorthand, emoji ok.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="knows">
+      <h2>What it remembers per person.</h2>
+      <ul class="knows-list">
+        <li>
+          <strong>Inside language &mdash; isolated.</strong>
+          <p>&ldquo;Manny&rdquo; (your son&rsquo;s family nickname) only when writing to your wife. Never leaks to your boss. Never leaks to your client. PortaVox stores per-contact vocabulary, not a global dictionary.</p>
+        </li>
+        <li>
+          <strong>Multi-app aliases.</strong>
+          <p>Same person, different names per surface. PortaVox uses the right one automatically.</p>
+          <div class="alias-row"><span class="alias-app">Slack</span><span class="alias-name">Maud van Leeuwen</span></div>
+          <div class="alias-row"><span class="alias-app">Email</span><span class="alias-name">Maud</span></div>
+          <div class="alias-row"><span class="alias-app">WhatsApp</span><span class="alias-name">M</span></div>
+          <div class="alias-row"><span class="alias-app">LinkedIn</span><span class="alias-name">Maud van Leeuwen-Bakker</span></div>
+        </li>
+        <li>
+          <strong>Facts about them.</strong>
+          <p>Their wife&rsquo;s name. Their kid&rsquo;s school. The deal they&rsquo;re closing. The trip they&rsquo;re back from. Tagged, persistent, surfaced when relevant &mdash; not buried in a chat history that resets every session.</p>
+        </li>
+        <li>
+          <strong>What&rsquo;s on their plate, with cooldowns.</strong>
+          <p>&ldquo;Marathon next Sunday&rdquo;. &ldquo;Wife just got promoted&rdquo;. &ldquo;Renovation ongoing&rdquo;. PortaVox surfaces these once, tracks whether you acknowledged, and waits the right amount of time before bringing it up again. Not nagging &mdash; cadence-aware.</p>
+        </li>
+        <li>
+          <strong>Per-language preference.</strong>
+          <p>Auto-detects you write Dutch with Paolo, English with Marcus, German with Felix. Never asks again.</p>
+        </li>
+        <li>
+          <strong>Per-contact project context.</strong>
+          <p>The deal memo you uploaded for this client. The brief you wrote for that prospect. Pulled into drafts where they&rsquo;re relevant, ignored elsewhere.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="beta" id="beta">
+      <h2>Get in early.</h2>
+      <p>Paid private beta. Founding-member pricing. Drop your email and we&rsquo;ll send a download link.</p>
+      <form id="beta-form" aria-describedby="form-note">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Request access</button>
+      </form>
+      <p class="form-note" id="form-note" hidden></p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>PortaVox</strong> &middot; Your voice, carried everywhere.</p>
+    <p>&copy; 2026 PortaVox &middot; <a href="mailto:chris@studysmart.ai">chris@studysmart.ai</a></p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
