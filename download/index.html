@@ -16,40 +16,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <style>
-    /* Compact 3-step inside the hero. Three small cards in a row, even on mobile. */
+    /* Three quiet numbered labels — no card chrome, just typography.
+       Reads as a sequence, not as UI. Centered row on desktop;
+       comfortable vertical stack on mobile. */
     .hero-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      max-width: 560px;
-      margin: 0 auto 32px;
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px 40px;
+      max-width: 720px;
+      margin: 0 auto 56px;
     }
     .hero-step {
-      padding: 14px 12px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-align: center;
-      background: #fff;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
     }
     .hero-step-num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 20px;
-      height: 20px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--soft);
       color: var(--fg-muted);
-      font-size: 0.72rem;
+      font-size: 0.8rem;
       font-weight: 800;
       font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
     }
     .hero-step-text {
-      font-size: 0.92rem;
+      font-size: 1rem;
       font-weight: 600;
       margin: 0;
       line-height: 1.3;
@@ -57,12 +58,12 @@
     }
     .hero-step-text .key {
       display: inline-block;
-      padding: 1px 6px;
+      padding: 1px 7px;
       border: 1px solid var(--border);
       border-bottom-width: 2px;
       border-radius: 5px;
       background: var(--soft);
-      font-size: 0.84em;
+      font-size: 0.86em;
       font-weight: 700;
     }
 
@@ -73,9 +74,13 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--fg-muted);
-      margin: 0 auto 14px;
+      margin: 0 auto 22px;
       text-align: center;
     }
+    /* Bullet rhythm: a touch more breathing room between items so the
+       six lines don't read as one dense block. */
+    .hero .hero-knows { line-height: 1.85; margin-bottom: 40px; }
+    .hero .hero-knows li { padding: 2px 0; }
 
     /* "Same input. Different person. Different draft." section */
     .three-up-prompt {
@@ -256,12 +261,19 @@
       .speed-stats { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .hero-steps { gap: 6px; max-width: 380px; margin-bottom: 22px; }
-      .hero-step { padding: 11px 7px; gap: 4px; }
-      .hero-step-num { width: 18px; height: 18px; font-size: 0.68rem; }
-      .hero-step-text { font-size: 0.78rem; }
-      .hero-step-text .key { font-size: 0.76em; padding: 1px 5px; }
-      .knows-heading { font-size: 0.66rem; margin-bottom: 10px; letter-spacing: 0.14em; }
+      /* Stack the three steps vertically on phones, with comfortable gaps
+         and left-aligned text so they read as a calm checklist instead of
+         three little chips fighting for width. */
+      .hero-steps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        max-width: 280px;
+        margin: 4px auto 40px;
+      }
+      .hero-step-text { font-size: 0.98rem; }
+      .knows-heading { font-size: 0.7rem; margin-bottom: 18px; letter-spacing: 0.14em; }
+      .hero .hero-knows { line-height: 1.7; margin-bottom: 32px; }
       .three-up-prompt { padding: 14px 18px; font-size: 0.92rem; margin-bottom: 22px; }
       .three-up-card { padding: 20px 18px; }
       .why-grid li { padding: 16px 18px; }

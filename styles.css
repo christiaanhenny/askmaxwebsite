@@ -558,7 +558,11 @@ footer a:hover { color: var(--fg); }
     margin-bottom: 18px;
   }
   .hero-line { white-space: normal; }
-  .noun-line { min-height: 2.2em; }
+  /* Tight reservation: the longest noun ('WhatsApp messages') still fits on
+     one line at this clamp size on viewports ≥320px, so 1.2em is enough.
+     Eliminates the dead air the previous 2.2em buffer left under
+     'Click. Prompt. Paste.' on phones. */
+  .noun-line { min-height: 1.2em; }
   .hero h1 em {
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
