@@ -50,19 +50,59 @@
     }
     .hero-10x .tagline { margin-top: 0; }
 
-    /* ── Section spacing ──────────────────────────────────── */
-    section h2 { margin-bottom: 16px; }
-    .section-lede {
-      text-align: center;
-      max-width: 620px;
-      margin: 0 auto 44px;
-      color: var(--fg-muted);
-      font-size: 1.04rem;
-      line-height: 1.55;
-    }
-    .section-lede strong { color: var(--fg); font-weight: 600; }
+    /* ── Sections base ────────────────────────────────────── */
+    section h2 { margin-bottom: 36px; }
 
-    /* ── Step list (used in drafting mechanic) ────────────── */
+    /* ── Bullet list (used by sections 2, 3, 6, 7) ────────── */
+    .block-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .block-list > li {
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .block-list strong {
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      padding-right: 0;
+    }
+    .block-list li:has(.soon) strong { padding-right: 80px; }
+    .block-list .body {
+      color: var(--fg-muted);
+      font-size: 0.93rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .block-list .body em { color: var(--fg); font-style: italic; }
+    .soon {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #8a6800;
+      background: rgba(255, 230, 128, 0.5);
+      border-radius: 999px;
+      padding: 3px 9px;
+      line-height: 1;
+    }
+
+    /* ── Numbered step list (used by "Now the fun begins") ─ */
     .step-list {
       list-style: none;
       padding: 0;
@@ -70,7 +110,7 @@
       max-width: 680px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 22px;
       text-align: left;
     }
     .step-list li {
@@ -80,8 +120,8 @@
     }
     .step-list .step-num {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: var(--soft);
       color: var(--fg-muted);
@@ -89,19 +129,18 @@
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.96rem;
       font-variant-numeric: tabular-nums;
     }
     .step-body { flex: 1; padding-top: 4px; }
     .step-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.005em;
       margin: 0 0 4px;
-      color: var(--fg);
     }
     .step-detail {
-      font-size: 0.96rem;
+      font-size: 0.95rem;
       color: var(--fg-muted);
       line-height: 1.55;
       margin: 0;
@@ -117,38 +156,6 @@
       font-weight: 700;
       color: var(--fg);
     }
-    .step-detail em { color: var(--fg); font-style: italic; }
-
-    /* ── Knows-grid (what it checks per draft) ────────────── */
-    .knows-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 880px;
-    }
-    .knows-grid li {
-      padding: 22px 24px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #fff;
-    }
-    .knows-grid strong {
-      display: block;
-      font-size: 1.02rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      letter-spacing: -0.005em;
-    }
-    .knows-grid p {
-      margin: 0;
-      color: var(--fg-muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-    .knows-grid p em { color: var(--fg); font-style: italic; }
 
     /* ── App strip ────────────────────────────────────────── */
     .app-strip {
@@ -157,7 +164,7 @@
       justify-content: center;
       gap: 8px 10px;
       max-width: 680px;
-      margin: 40px auto 0;
+      margin: 36px auto 0;
     }
     .app-strip span {
       padding: 8px 16px;
@@ -169,33 +176,42 @@
       font-weight: 600;
     }
 
-    /* ── Every-app section bullets ────────────────────────── */
-    .every-app-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
+    /* ── "It learns" section: onboarding intro + fun-begins ─ */
+    .learns-intro {
+      text-align: center;
       max-width: 640px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: left;
-    }
-    .every-app-bullets li {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
+      margin: 0 auto 48px;
       font-size: 1.04rem;
-      line-height: 1.5;
-      color: var(--fg);
-    }
-    .every-app-bullets li::before {
-      content: "→";
-      flex-shrink: 0;
+      line-height: 1.55;
       color: var(--fg-muted);
+    }
+    .learns-intro strong { color: var(--fg); font-weight: 600; }
+
+    .fun-begins {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-top: 0;
+    }
+    .fun-eyebrow {
+      text-align: center;
+      font-size: 0.88rem;
       font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      margin: 0 auto 30px;
     }
 
-    /* ── Stars ladder (training strength) ─────────────────── */
+    /* ── Stars ladder ─────────────────────────────────────── */
+    .stars-wrap { margin-top: 56px; }
+    .stars-eyebrow {
+      text-align: center;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 auto 22px;
+    }
     .stars-rows { display: grid; gap: 10px; max-width: 760px; margin: 0 auto; }
     .stars-row {
       display: grid;
@@ -215,72 +231,10 @@
     }
     .stars-display .empty { color: var(--border); }
     .stars-row p:last-child { margin: 0; }
-    .stars-row strong { font-weight: 700; font-size: 0.98rem; }
-    .stars-row span { color: var(--fg-muted); font-size: 0.9rem; }
-
-    /* ── Coming-next RI list ──────────────────────────────── */
-    .coming-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 760px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .coming-list li {
-      padding: 20px 24px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #fff;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .coming-list strong {
-      font-size: 1.02rem;
-      font-weight: 700;
-      letter-spacing: -0.005em;
-      padding-right: 80px;
-    }
-    .coming-list p {
-      margin: 0;
-      color: var(--fg-muted);
-      font-size: 0.93rem;
-      line-height: 1.55;
-    }
-    .coming-list p em { color: var(--fg); font-style: italic; }
-    .soon {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      font-size: 0.58rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #8a6800;
-      background: rgba(255, 230, 128, 0.5);
-      border-radius: 999px;
-      padding: 3px 9px;
-      line-height: 1;
-    }
-
-    /* ── Coming-next section header treatment ─────────────── */
-    .coming-section h2 .roadmap-eyebrow {
-      display: block;
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fg-muted);
-      margin-bottom: 6px;
-    }
+    .stars-row strong { font-weight: 700; font-size: 0.96rem; }
+    .stars-row span { color: var(--fg-muted); font-size: 0.88rem; }
 
     /* ── Mobile ───────────────────────────────────────────── */
-    @media (max-width: 720px) {
-      .knows-grid { grid-template-columns: 1fr; }
-    }
     @media (max-width: 600px) {
       .hero-10x { padding: 52px 0 44px; }
       .hero-10x h1 {
@@ -289,24 +243,24 @@
         margin-bottom: 28px;
       }
       .hero-promises p { font-size: 1.02rem; }
-      .section-lede { font-size: 0.98rem; margin-bottom: 32px; }
-      .step-list { gap: 22px; }
+      section h2 { margin-bottom: 28px; }
+      .block-list li { padding: 18px 20px; }
+      .block-list strong { font-size: 0.98rem; }
+      .block-list li:has(.soon) strong { padding-right: 70px; }
+      .block-list .body { font-size: 0.9rem; }
+      .step-list { gap: 20px; }
       .step-list li { gap: 14px; }
-      .step-list .step-num { width: 30px; height: 30px; font-size: 0.88rem; }
-      .step-title { font-size: 1.02rem; }
-      .step-detail { font-size: 0.92rem; }
-      .knows-grid li { padding: 18px 20px; }
-      .knows-grid strong { font-size: 0.98rem; }
-      .knows-grid p { font-size: 0.88rem; }
-      .app-strip { margin-top: 30px; gap: 6px 8px; }
+      .step-list .step-num { width: 28px; height: 28px; font-size: 0.86rem; }
+      .step-title { font-size: 1rem; }
+      .step-detail { font-size: 0.9rem; }
+      .app-strip { margin-top: 26px; gap: 6px 8px; }
       .app-strip span { font-size: 0.85rem; padding: 7px 13px; }
-      .every-app-bullets li { font-size: 0.98rem; }
+      .learns-intro { font-size: 0.98rem; margin-bottom: 36px; }
+      .fun-eyebrow { font-size: 0.82rem; margin-bottom: 24px; }
+      .stars-wrap { margin-top: 42px; }
       .stars-row { grid-template-columns: 96px 1fr; gap: 12px; padding: 12px 14px; }
       .stars-row strong { font-size: 0.94rem; }
       .stars-row span { font-size: 0.86rem; }
-      .coming-list li { padding: 18px 20px; }
-      .coming-list strong { font-size: 0.98rem; padding-right: 70px; }
-      .coming-list p { font-size: 0.9rem; }
       .soon { top: 16px; right: 16px; }
     }
   </style>
@@ -339,81 +293,41 @@
       </div>
     </section>
 
-    <!-- DRAFTING MECHANIC -->
+    <!-- SECTION 2 -->
     <section>
-      <h2>Drafting any message takes seconds, not minutes.</h2>
-      <p class="section-lede">One shortcut, anywhere your cursor blinks. From thought to polished message in three seconds.</p>
-      <ol class="step-list">
+      <h2>Removes friction from building relationships.</h2>
+      <ul class="block-list">
         <li>
-          <span class="step-num">1</span>
-          <div class="step-body">
-            <p class="step-title">Click in any text field.</p>
-            <p class="step-detail">Email reply, LinkedIn message, WhatsApp, Slack thread &mdash; anywhere on your Mac where your cursor blinks.</p>
-          </div>
+          <strong>Prompt the message you want to draft.</strong>
+          <p class="body">By voice or by typing &mdash; whatever&rsquo;s faster in the moment.</p>
         </li>
         <li>
-          <span class="step-num">2</span>
-          <div class="step-body">
-            <p class="step-title">Press <span class="key">⌥ Space</span>. Say what you want.</p>
-            <p class="step-detail"><em>&ldquo;Tell Sarah we slipped a day on the spec, she&rsquo;ll have it Friday, and ask how the launch prep is going.&rdquo;</em></p>
-          </div>
+          <strong>The AI checks everything that matters.</strong>
+          <p class="body">Your personal writing style, the documents you&rsquo;ve uploaded, the conversation history with this person.</p>
         </li>
         <li>
-          <span class="step-num">3</span>
-          <div class="step-body">
-            <p class="step-title">Get a draft that sounds like you.</p>
-            <p class="step-detail">PortaVox reads your screen, checks everything it knows about you and the recipient, and pastes a polished draft back where your cursor was.</p>
-          </div>
+          <strong>Get a draft that blows your mind.</strong>
+          <p class="body">In your voice, calibrated to this recipient, grounded in your real context.</p>
         </li>
         <li>
-          <span class="step-num">4</span>
-          <div class="step-body">
-            <p class="step-title">Edit if needed. The AI learns.</p>
-            <p class="step-detail">Every edit teaches PortaVox how you write. Next week, you edit less. The week after, less still.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- WHAT IT KNOWS PER DRAFT -->
-    <section>
-      <h2>It already knows the situation.</h2>
-      <p class="section-lede">Before drafting a single word, PortaVox checks five things &mdash; so the message lands like you spent an hour on it.</p>
-      <ul class="knows-grid">
-        <li>
-          <strong>Your writing style.</strong>
-          <p>Greetings, sign-offs, sentence rhythm, the expressions you actually use &mdash; learned from your real messages.</p>
-        </li>
-        <li>
-          <strong>Your document context.</strong>
-          <p>Every brief, deal memo, contract, and doc you&rsquo;ve uploaded &mdash; pulled in when relevant, ignored when not.</p>
-        </li>
-        <li>
-          <strong>The conversation history.</strong>
-          <p>What you talked about last time. What you decided. What you said you&rsquo;d follow up on.</p>
-        </li>
-        <li>
-          <strong>The recipient.</strong>
-          <p>Their name across apps, their nickname only you use, the facts you&rsquo;ve shared about their life and work.</p>
-        </li>
-        <li>
-          <strong>The app shape.</strong>
-          <p>No greeting in a Slack DM. Full structure in a cold email. One line in iMessage. Knows the difference.</p>
-        </li>
-        <li>
-          <strong>Today, on this screen.</strong>
-          <p>Reads what you&rsquo;re replying to. Sees the thread, the recipient, the context. No manual copy-pasting.</p>
+          <strong>Edit the draft &mdash; and PortaVox carries your voice even better next time.</strong>
+          <p class="body">Every edit is a permanent lesson. Cross out a phrase twice and it&rsquo;s never written again.</p>
         </li>
       </ul>
     </section>
 
-    <!-- EVERY APP -->
+    <!-- SECTION 3 -->
     <section>
-      <h2>Lives in every app on your Mac.</h2>
-      <p class="section-lede">Not in another tab. Not in a separate window. Right where you&rsquo;re already typing.</p>
-      <ul class="every-app-bullets">
-        <li>PortaVox sees what&rsquo;s on your screen, in whichever app you&rsquo;re using.</li>
-        <li>It figures out who you&rsquo;re writing to and which app you&rsquo;re in &mdash; and adapts the draft accordingly.</li>
+      <h2>Communicates in every app.</h2>
+      <ul class="block-list">
+        <li>
+          <strong>PortaVox sees what&rsquo;s on your screen.</strong>
+          <p class="body">The email thread, the chat history, the post you&rsquo;re replying to &mdash; no manual copy-pasting.</p>
+        </li>
+        <li>
+          <strong>It figures out who you&rsquo;re writing to and which app you&rsquo;re in.</strong>
+          <p class="body">No greeting in a Slack DM. Full structure in a cold email. One line in iMessage. Adapts automatically.</p>
+        </li>
       </ul>
       <div class="app-strip">
         <span>Mail</span>
@@ -429,63 +343,111 @@
       </div>
     </section>
 
-    <!-- LEARNING LOOP -->
+    <!-- SECTION 4 + 5 -->
     <section>
-      <h2>Sharper every week.</h2>
-      <p class="section-lede">At the start, paste a handful of emails, WhatsApp messages, LinkedIn posts. PortaVox learns your style, your words, your patterns. <strong>Then every edit you make makes it sharper.</strong></p>
-      <div class="stars-rows">
-        <div class="stars-row">
-          <p class="stars-display">★<span class="empty">★★★★</span></p>
-          <p><strong>Lightly trained.</strong> <span>One email pasted. Drafts feel close.</span></p>
-        </div>
-        <div class="stars-row">
-          <p class="stars-display">★★<span class="empty">★★★</span></p>
-          <p><strong>Trained.</strong> <span>Greetings and sign-offs land.</span></p>
-        </div>
-        <div class="stars-row">
-          <p class="stars-display">★★★<span class="empty">★★</span></p>
-          <p><strong>Well trained.</strong> <span>Sentence rhythm starts to feel like you.</span></p>
-        </div>
-        <div class="stars-row">
-          <p class="stars-display">★★★★<span class="empty">★</span></p>
-          <p><strong>Sharp.</strong> <span>Mirrors the way you actually phrase things.</span></p>
-        </div>
-        <div class="stars-row">
-          <p class="stars-display">★★★★★</p>
-          <p><strong>Fully trained.</strong> <span>Drafts ship without edits most of the time.</span></p>
+      <h2>It learns from all your edits.</h2>
+      <p class="learns-intro">At the start, paste a handful of emails, WhatsApp messages, LinkedIn posts. <strong>PortaVox learns your style, your words, your patterns.</strong></p>
+
+      <div class="fun-begins">
+        <p class="fun-eyebrow">Now the fun begins.</p>
+        <ol class="step-list">
+          <li>
+            <span class="step-num">1</span>
+            <div class="step-body">
+              <p class="step-title">Click in any text field.</p>
+              <p class="step-detail">Email reply, LinkedIn message, WhatsApp, Slack thread &mdash; anywhere your cursor blinks.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div class="step-body">
+              <p class="step-title">Press <span class="key">⌥ Space</span> to record your message.</p>
+              <p class="step-detail">Talk for five seconds &mdash; ramble, repeat, change your mind. PortaVox sorts it.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div class="step-body">
+              <p class="step-title">Get a draft that sounds like you.</p>
+              <p class="step-detail">Polished, in your voice, calibrated to the recipient and the app.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <div class="step-body">
+              <p class="step-title">Edit the draft. The AI learns.</p>
+              <p class="step-detail">Every edit teaches PortaVox how you write. Next week, you edit less. The week after, less still.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="stars-wrap">
+        <p class="stars-eyebrow">How it gets sharper over time</p>
+        <div class="stars-rows">
+          <div class="stars-row">
+            <p class="stars-display">★<span class="empty">★★★★</span></p>
+            <p><strong>Lightly trained.</strong> <span>One email pasted. Drafts feel close.</span></p>
+          </div>
+          <div class="stars-row">
+            <p class="stars-display">★★<span class="empty">★★★</span></p>
+            <p><strong>Trained.</strong> <span>Greetings and sign-offs land.</span></p>
+          </div>
+          <div class="stars-row">
+            <p class="stars-display">★★★<span class="empty">★★</span></p>
+            <p><strong>Well trained.</strong> <span>Sentence rhythm starts to feel like you.</span></p>
+          </div>
+          <div class="stars-row">
+            <p class="stars-display">★★★★<span class="empty">★</span></p>
+            <p><strong>Sharp.</strong> <span>Mirrors the way you actually phrase things.</span></p>
+          </div>
+          <div class="stars-row">
+            <p class="stars-display">★★★★★</p>
+            <p><strong>Fully trained.</strong> <span>Drafts ship without edits most of the time.</span></p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- COMING NEXT: RELATIONSHIP INTELLIGENCE -->
-    <section class="coming-section">
-      <h2><span class="roadmap-eyebrow">Coming next</span>Relationship intelligence.</h2>
-      <p class="section-lede">The next layer on top of voice-perfect drafting: PortaVox watches every conversation and surfaces what matters before it slips.</p>
-      <ul class="coming-list">
+    <!-- SECTION 6 -->
+    <section>
+      <h2>Relationship intelligence.</h2>
+      <ul class="block-list">
         <li>
           <strong>Extracts to-do&rsquo;s &amp; to-get&rsquo;s.</strong>
           <span class="soon">Soon</span>
-          <p>Auto-pulled from sent and received messages. What you owe each person, what they owe you &mdash; surfaced before it slips.</p>
+          <p class="body">Auto-pulled from sent and received messages. What you owe each person, what they owe you &mdash; tracked so you&rsquo;re hyper-productive.</p>
         </li>
         <li>
-          <strong>Suggests attentive messages.</strong>
+          <strong>Tracks things to be attentive for &mdash; and suggests messages.</strong>
           <span class="soon">Soon</span>
-          <p>Their marathon Saturday, their kid&rsquo;s school start, the deal closing &mdash; surfaced with a draft you can send in a tap.</p>
+          <p class="body">Their marathon Saturday, their kid&rsquo;s school start, the deal closing &mdash; surfaced when the moment matters, with a draft you can send in a tap.</p>
         </li>
         <li>
           <strong>Tracks deadlines and progress.</strong>
           <span class="soon">Soon</span>
-          <p>Knows what you promised and when. Flags it the morning of, with a draft ready.</p>
-        </li>
-        <li>
-          <strong>Hyper-custom pitches.</strong>
-          <span class="soon">Soon</span>
-          <p>Because PortaVox knows the recipient, the relationship history, and the docs that matter for this specific deal.</p>
+          <p class="body">Knows what you promised and when. Flags it the morning of, with a draft ready.</p>
         </li>
       </ul>
     </section>
 
-    <!-- USE CASES -->
+    <!-- SECTION 7 -->
+    <section>
+      <h2>Answers from your projects.</h2>
+      <ul class="block-list">
+        <li>
+          <strong>Give PortaVox access to folders and it answers on autopilot.</strong>
+          <p class="body">Deal memos, briefs, contracts, internal docs &mdash; pulled into the right draft at the right moment, ignored when irrelevant.</p>
+        </li>
+        <li>
+          <strong>Hyper-custom pitches, because of relationship intelligence.</strong>
+          <span class="soon">Soon</span>
+          <p class="body">PortaVox combines your project knowledge with everything it knows about the recipient &mdash; their role, their history with you, what they care about &mdash; into pitches tuned to this specific person.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECTION 8: USE CASES -->
     <section class="usecases">
       <h2>Built for anyone who writes a lot.</h2>
       <ul class="case-grid">
