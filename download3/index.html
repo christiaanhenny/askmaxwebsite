@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>PortaVox &middot; 10× your communication, 1/10 of the time</title>
-  <meta name="description" content="No more word-puzzling. No forgotten promises. Attentive to everyone who matters — without effort. PortaVox carries your voice.">
+  <meta name="description" content="No more word-puzzling. No forgotten promises. Attentive to everyone who matters, without effort. PortaVox carries your voice.">
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,123 +31,149 @@
       padding: 0 4px;
     }
     .hero-promises {
-      max-width: 640px;
-      margin: 0 auto 36px;
+      max-width: 660px;
+      margin: 0 auto 40px;
       font-size: 1.15rem;
       font-weight: 500;
       line-height: 1.6;
       color: var(--fg);
     }
     .hero-promises strong { font-weight: 700; }
-    .hero-10x .tagline { margin-top: 0; }
 
-    /* ── Sections base ────────────────────────────────────── */
-    section h2 { margin-bottom: 36px; }
-
-    /* ── Simple numbered list (section 2: drafting flow) ──── */
-    .numbered-list {
+    /* Compact 3-step mechanic row (inline in hero) */
+    .hero-steps {
       list-style: none;
       padding: 0;
-      margin: 0 auto;
-      max-width: 620px;
-      counter-reset: item;
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px 36px;
+      max-width: 720px;
+      margin: 0 auto 40px;
     }
-    .numbered-list li {
-      counter-increment: item;
-      font-size: 1.12rem;
-      line-height: 1.4;
-      color: var(--fg);
-      position: relative;
-      padding: 6px 0 6px 50px;
-      font-weight: 500;
-    }
-    .numbered-list li::before {
-      content: counter(item);
-      position: absolute;
-      left: 0;
-      top: 4px;
-      width: 32px;
-      height: 32px;
+    .hero-steps li { display: flex; align-items: center; gap: 10px; }
+    .hero-steps .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: var(--soft);
       color: var(--fg-muted);
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+    .hero-steps .what {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .hero-steps .key {
+      display: inline-block;
+      padding: 1px 7px;
+      border: 1px solid var(--border);
+      border-bottom-width: 2px;
+      border-radius: 5px;
+      background: var(--soft);
+      font-size: 0.86em;
+      font-weight: 700;
     }
 
-    /* ── Bullet list (used by sections 3, 6, 7) ───────────── */
-    .block-list {
+    .hero-10x .tagline { margin-top: 0; margin-bottom: 28px; }
+
+    /* ── Same input demo (the BOOM proof) ─────────────────── */
+    .demo-section { padding: 64px 0 56px; }
+    .demo-prompt {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      padding: 16px 22px;
+      background: var(--soft);
+      border-radius: 14px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      line-height: 1.5;
+    }
+    .demo-prompt em { color: var(--fg); font-style: italic; font-weight: 500; }
+    .demo-prompt .who {
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .three-up {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .three-up-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #fff;
+    }
+    .three-up-to {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0;
+    }
+    .three-up-relation { font-size: 1rem; font-weight: 700; margin: 0; }
+    .three-up-quote {
+      font-size: 0.94rem;
+      line-height: 1.55;
+      margin: 0;
+      white-space: pre-line;
+      flex: 1;
+    }
+
+    /* ── Compact RI list (one-line items, no body bloat) ──── */
+    .ri-list {
       list-style: none;
       padding: 0;
       margin: 0 auto;
       max-width: 720px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
-    .block-list > li {
-      padding: 20px 24px;
+    .ri-list li {
+      padding: 16px 22px;
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       background: #fff;
       position: relative;
       display: flex;
-      flex-direction: column;
-      gap: 5px;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    .block-list strong {
-      font-size: 1.02rem;
+    .ri-list strong {
+      font-size: 1rem;
       font-weight: 700;
       letter-spacing: -0.005em;
-      padding-right: 0;
+      color: var(--fg);
     }
-    .block-list li:has(.soon) strong { padding-right: 80px; }
-    .block-list .body {
-      color: var(--fg-muted);
+    .ri-list .ri-detail {
       font-size: 0.93rem;
-      line-height: 1.55;
-      margin: 0;
-    }
-    .block-list .body em { color: var(--fg); font-style: italic; }
-    .block-list .sublist {
-      list-style: none;
-      padding: 10px 0 0 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .block-list .sublist li {
-      font-size: 0.9rem;
       color: var(--fg-muted);
       line-height: 1.5;
-      padding-left: 16px;
-      position: relative;
+      flex: 1;
     }
-    .block-list .sublist li::before {
-      content: "•";
-      position: absolute;
-      left: 2px;
-      top: 0;
-      color: var(--fg-muted);
-      font-weight: 700;
-    }
-    .block-list .sublist li strong {
-      color: var(--fg);
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .soon {
-      position: absolute;
-      top: 18px;
-      right: 18px;
+    .ri-list .soon {
       font-size: 0.58rem;
       font-weight: 800;
       letter-spacing: 0.16em;
@@ -159,139 +185,10 @@
       line-height: 1;
     }
 
-    /* ── Numbered step list (used by "Now the fun begins") ─ */
-    .step-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 680px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      text-align: left;
-    }
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-    }
-    .step-list .step-num {
-      flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--soft);
-      color: var(--fg-muted);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.96rem;
-      font-variant-numeric: tabular-nums;
-    }
-    .step-body { flex: 1; padding-top: 4px; }
-    .step-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: -0.005em;
-      margin: 0 0 4px;
-    }
-    .step-detail {
-      font-size: 0.95rem;
-      color: var(--fg-muted);
-      line-height: 1.55;
-      margin: 0;
-    }
-    .step-detail .key {
-      display: inline-block;
-      padding: 1px 7px;
-      border: 1px solid var(--border);
-      border-bottom-width: 2px;
-      border-radius: 5px;
-      background: var(--soft);
-      font-size: 0.86em;
-      font-weight: 700;
-      color: var(--fg);
-    }
-
-    /* ── App strip ────────────────────────────────────────── */
-    .app-strip {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px 10px;
-      max-width: 680px;
-      margin: 36px auto 0;
-    }
-    .app-strip span {
-      padding: 8px 16px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: #fff;
-      font-size: 0.9rem;
-      color: var(--fg);
-      font-weight: 600;
-    }
-
-    /* ── "It learns" section: onboarding intro + fun-begins ─ */
-    .learns-intro {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 48px;
-      font-size: 1.04rem;
-      line-height: 1.55;
-      color: var(--fg-muted);
-    }
-    .learns-intro strong { color: var(--fg); font-weight: 600; }
-
-    .fun-begins {
-      max-width: 720px;
-      margin: 0 auto;
-      padding-top: 0;
-    }
-    .fun-eyebrow {
-      text-align: center;
-      font-size: 0.88rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      color: var(--fg);
-      margin: 0 auto 30px;
-    }
-
-    /* ── Stars ladder ─────────────────────────────────────── */
-    .stars-wrap { margin-top: 56px; }
-    .stars-eyebrow {
-      text-align: center;
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fg-muted);
-      margin: 0 auto 22px;
-    }
-    .stars-rows { display: grid; gap: 10px; max-width: 760px; margin: 0 auto; }
-    .stars-row {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 18px;
-      padding: 14px 18px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      align-items: center;
-    }
-    .stars-display {
-      font-size: 1.05rem;
-      letter-spacing: 0.12em;
-      color: #f5b400;
-      font-weight: 700;
-      margin: 0;
-    }
-    .stars-display .empty { color: var(--border); }
-    .stars-row p:last-child { margin: 0; }
-    .stars-row strong { font-weight: 700; font-size: 0.96rem; }
-    .stars-row span { color: var(--fg-muted); font-size: 0.88rem; }
-
     /* ── Mobile ───────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .three-up { grid-template-columns: 1fr; }
+    }
     @media (max-width: 600px) {
       .hero-10x { padding: 52px 0 44px; }
       .hero-10x h1 {
@@ -299,26 +196,28 @@
         line-height: 1.04;
         margin-bottom: 28px;
       }
-      .hero-promises p { font-size: 1.02rem; }
-      section h2 { margin-bottom: 28px; }
-      .block-list li { padding: 18px 20px; }
-      .block-list strong { font-size: 0.98rem; }
-      .block-list li:has(.soon) strong { padding-right: 70px; }
-      .block-list .body { font-size: 0.9rem; }
-      .step-list { gap: 20px; }
-      .step-list li { gap: 14px; }
-      .step-list .step-num { width: 28px; height: 28px; font-size: 0.86rem; }
-      .step-title { font-size: 1rem; }
-      .step-detail { font-size: 0.9rem; }
-      .app-strip { margin-top: 26px; gap: 6px 8px; }
-      .app-strip span { font-size: 0.85rem; padding: 7px 13px; }
-      .learns-intro { font-size: 0.98rem; margin-bottom: 36px; }
-      .fun-eyebrow { font-size: 0.82rem; margin-bottom: 24px; }
-      .stars-wrap { margin-top: 42px; }
-      .stars-row { grid-template-columns: 96px 1fr; gap: 12px; padding: 12px 14px; }
-      .stars-row strong { font-size: 0.94rem; }
-      .stars-row span { font-size: 0.86rem; }
-      .soon { top: 16px; right: 16px; }
+      .hero-promises {
+        font-size: 1.02rem;
+        margin-bottom: 30px;
+      }
+      .hero-steps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        max-width: 260px;
+        margin: 0 auto 32px;
+      }
+      .hero-steps .what { font-size: 0.94rem; }
+      .demo-section { padding: 44px 0 40px; }
+      .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
+      .three-up-card { padding: 20px 18px; }
+      .ri-list li {
+        padding: 14px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .ri-list .ri-detail { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -334,6 +233,11 @@
     <section class="hero-10x">
       <h1><mark>10&times;</mark> your communication. <mark>1/10</mark> of the time.</h1>
       <p class="hero-promises">No more word-puzzling on how to say what. No forgotten promises. Attentive to everyone who matters, without effort. <strong>PortaVox carries your voice.</strong></p>
+      <ol class="hero-steps">
+        <li><span class="num">1</span><span class="what">Press <span class="key">⌥ Space</span></span></li>
+        <li><span class="num">2</span><span class="what">Say what you want</span></li>
+        <li><span class="num">3</span><span class="what">Paste, in your voice</span></li>
+      </ol>
       <p class="tagline">Heavy writers save <mark>2&ndash;4 hours a day</mark>.</p>
       <div class="cta">
         <a class="btn primary" href="#beta">Get early access</a>
@@ -345,109 +249,76 @@
       </div>
     </section>
 
-    <!-- SECTION 4 + 5 (now the second section) -->
-    <section>
-      <h2>PortaVox removes friction from building relationships.</h2>
-      <p class="learns-intro">At the start, paste a handful of emails, WhatsApp messages, LinkedIn posts. <strong>PortaVox learns your style, your words, your patterns.</strong></p>
+    <!-- THE BOOM PROOF: same input, different person, different draft -->
+    <section class="demo-section">
+      <h2>Same input. Different person. Different draft.</h2>
+      <p class="demo-prompt">
+        <span class="who">You say, once</span>
+        <em>tell them I&rsquo;m running 15 minutes late, traffic on the A2</em>
+      </p>
+      <div class="three-up">
+        <article class="three-up-card">
+          <p class="three-up-to">Drafted to</p>
+          <p class="three-up-relation">Marcus &middot; investor</p>
+          <p class="three-up-quote">Hi Marcus,
 
-      <div class="fun-begins">
-        <p class="fun-eyebrow">Now the fun begins.</p>
-        <ol class="step-list">
-          <li>
-            <span class="step-num">1</span>
-            <div class="step-body">
-              <p class="step-title">Click in any text field.</p>
-              <p class="step-detail">Email reply, LinkedIn message, WhatsApp, Slack thread. Anywhere your cursor blinks.</p>
-            </div>
-          </li>
-          <li>
-            <span class="step-num">2</span>
-            <div class="step-body">
-              <p class="step-title">Press <span class="key">⌥ Space</span> to record your message.</p>
-              <p class="step-detail">Talk for five seconds. Ramble, repeat, change your mind. PortaVox sorts it.</p>
-            </div>
-          </li>
-          <li>
-            <span class="step-num">3</span>
-            <div class="step-body">
-              <p class="step-title">Get a draft that sounds like you.</p>
-              <p class="step-detail">PortaVox checks your writing style, the documents you&rsquo;ve uploaded, your conversation history with this person, and the app you&rsquo;re in. Then pastes a polished draft back where your cursor was.</p>
-            </div>
-          </li>
-          <li>
-            <span class="step-num">4</span>
-            <div class="step-body">
-              <p class="step-title">Edit the draft. The AI learns.</p>
-              <p class="step-detail">Every edit teaches PortaVox how you write. Next week, you edit less. The week after, less still.</p>
-            </div>
-          </li>
-        </ol>
+Apologies &mdash; pushed back 15 min, traffic on the A2. Rescheduling the calendar invite now.
+
+Best,
+Chris</p>
+        </article>
+        <article class="three-up-card">
+          <p class="three-up-to">Drafted to</p>
+          <p class="three-up-relation">Tim &middot; co-founder</p>
+          <p class="three-up-quote">boss running 15 late, A2 traffic. starting without me?</p>
+        </article>
+        <article class="three-up-card">
+          <p class="three-up-to">Drafted to</p>
+          <p class="three-up-relation">Eva &middot; sister</p>
+          <p class="three-up-quote">kom 15 min later zus, A2 staat vast 🙄 begin maar vast met koffie</p>
+        </article>
       </div>
-
     </section>
 
-    <!-- SECTION 6 -->
+    <!-- RELATIONSHIP INTELLIGENCE (compact) -->
     <section>
-      <h2>Relationship intelligence.</h2>
-      <ul class="block-list">
+      <h2>It knows your people. Really knows them.</h2>
+      <ul class="ri-list">
         <li>
           <strong>Builds emotional rapport.</strong>
-          <p class="body">PortaVox holds every detail that makes a relationship feel close, and uses it every time you write to that person.</p>
-          <ul class="sublist">
-            <li><strong>Tone of voice per person.</strong> Different register for your investor, your co-founder, your sister.</li>
-            <li><strong>Inside language.</strong> Nicknames and shorthand only the two of you use, locked to that one person.</li>
-            <li><strong>Facts about them.</strong> Their partner&rsquo;s name, their kids, their role, their hobbies.</li>
-            <li><strong>Conversation history.</strong> What you talked about last time, what you decided, what you said you&rsquo;d follow up on.</li>
-            <li><strong>Reaction patterns.</strong> How you reply to good news, to bad news, to a cold intro.</li>
-          </ul>
+          <span class="ri-detail">Tone, inside language, facts, conversation history, reaction patterns.</span>
         </li>
         <li>
           <strong>Cross-channel memory.</strong>
-          <p class="body">Same person across email, Slack, WhatsApp, LinkedIn. One relationship, one memory, no matter where the conversation moves.</p>
+          <span class="ri-detail">Same person across email, Slack, WhatsApp, LinkedIn.</span>
         </li>
         <li>
-          <strong>Extracts to-do&rsquo;s &amp; to-get&rsquo;s.</strong>
+          <strong>Tracks every promise.</strong>
+          <span class="ri-detail">What you owe each person, what they owe you.</span>
           <span class="soon">Soon</span>
-          <p class="body">Auto-pulled from sent and received messages. What you owe each person, what they owe you. Tracked so you&rsquo;re hyper-productive.</p>
         </li>
         <li>
-          <strong>Tracks things to be attentive for, and suggests messages.</strong>
+          <strong>Surfaces what&rsquo;s on their plate.</strong>
+          <span class="ri-detail">Their marathon Saturday, their kid&rsquo;s school start, the deal closing.</span>
           <span class="soon">Soon</span>
-          <p class="body">Their marathon Saturday, their kid&rsquo;s school start, the deal closing. Surfaced when the moment matters, with a draft you can send in a tap.</p>
         </li>
         <li>
-          <strong>Tracks deadlines and progress.</strong>
+          <strong>Never goes cold.</strong>
+          <span class="ri-detail">Notices the relationships starting to slip. Drafts the check-in.</span>
           <span class="soon">Soon</span>
-          <p class="body">Knows what you promised and when. Flags it the morning of, with a draft ready.</p>
         </li>
       </ul>
     </section>
 
-    <!-- SECTION 7 -->
-    <section>
-      <h2>Answers from your projects.</h2>
-      <ul class="block-list">
-        <li>
-          <strong>Give PortaVox access to folders and it answers on autopilot.</strong>
-          <p class="body">Deal memos, briefs, contracts, internal docs. Pulled into the right draft at the right moment, ignored when irrelevant.</p>
-        </li>
-        <li>
-          <strong>Hyper-custom pitches, because of relationship intelligence.</strong>
-          <span class="soon">Soon</span>
-          <p class="body">PortaVox combines your project knowledge with everything it knows about the recipient (their role, their history with you, what they care about) into pitches tuned to this specific person.</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- SECTION 8: USE CASES -->
+    <!-- USE CASES -->
     <section class="usecases">
       <h2>Built for anyone who writes a lot.</h2>
       <ul class="case-grid">
-        <li><strong>Founders</strong><span>Investor updates, intros, fundraising replies. Warm, with full context.</span></li>
-        <li><strong>Consultants</strong><span>Client comms grounded in your briefs, your decks, your deal memos.</span></li>
-        <li><strong>Sales</strong><span>Follow-ups that remember the last conversation, the kid&rsquo;s name, the deal stage.</span></li>
-        <li><strong>Managers &amp; CEOs</strong><span>Stay close to every report and every key relationship, even at scale.</span></li>
-        <li><strong>Recruiters</strong><span>Outreach that doesn&rsquo;t read like a template. Because it isn&rsquo;t.</span></li>
+        <li><strong>Founders</strong><span>Investor updates, intros, fundraising replies.</span></li>
+        <li><strong>Consultants</strong><span>Client comms grounded in your briefs and decks.</span></li>
+        <li><strong>Sales</strong><span>Follow-ups that remember the deal, the kid, the last conversation.</span></li>
+        <li><strong>Managers &amp; CEOs</strong><span>Stay close to every report and every key relationship.</span></li>
+        <li><strong>Recruiters</strong><span>Outreach that doesn&rsquo;t read like a template.</span></li>
         <li><strong>&hellip;and anyone with 50+ messages a day.</strong><span>You know who you are.</span></li>
       </ul>
     </section>
