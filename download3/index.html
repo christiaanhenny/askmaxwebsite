@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>PortaVox &mdash; 10× your communication, 1/10 of the time</title>
+  <title>PortaVox &middot; 10× your communication, 1/10 of the time</title>
   <meta name="description" content="No more word-puzzling. No forgotten promises. Attentive to everyone who matters — without effort. PortaVox carries your voice.">
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
@@ -31,29 +31,58 @@
       padding: 0 4px;
     }
     .hero-promises {
-      max-width: 600px;
+      max-width: 640px;
       margin: 0 auto 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .hero-promises p {
       font-size: 1.15rem;
       font-weight: 500;
-      line-height: 1.5;
-      margin: 0;
+      line-height: 1.6;
       color: var(--fg);
     }
-    .hero-promises p.brand {
-      font-weight: 700;
-      margin-top: 12px;
-    }
+    .hero-promises strong { font-weight: 700; }
     .hero-10x .tagline { margin-top: 0; }
 
     /* ── Sections base ────────────────────────────────────── */
     section h2 { margin-bottom: 36px; }
 
-    /* ── Bullet list (used by sections 2, 3, 6, 7) ────────── */
+    /* ── Simple numbered list (section 2: drafting flow) ──── */
+    .numbered-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 620px;
+      counter-reset: item;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .numbered-list li {
+      counter-increment: item;
+      font-size: 1.12rem;
+      line-height: 1.4;
+      color: var(--fg);
+      position: relative;
+      padding: 6px 0 6px 50px;
+      font-weight: 500;
+    }
+    .numbered-list li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--fg-muted);
+      font-size: 0.95rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Bullet list (used by sections 3, 6, 7) ───────────── */
     .block-list {
       list-style: none;
       padding: 0;
@@ -276,12 +305,7 @@
     <!-- HERO -->
     <section class="hero-10x">
       <h1><mark>10&times;</mark> your communication. <mark>1/10</mark> of the time.</h1>
-      <div class="hero-promises">
-        <p>No more word-puzzling on how to say what.</p>
-        <p>No forgotten promises.</p>
-        <p>Attentive to everyone who matters &mdash; without effort.</p>
-        <p class="brand">PortaVox carries your voice.</p>
-      </div>
+      <p class="hero-promises">No more word-puzzling on how to say what. No forgotten promises. Attentive to everyone who matters, without effort. <strong>PortaVox carries your voice.</strong></p>
       <p class="tagline">Heavy writers save <mark>2&ndash;4 hours a day</mark>.</p>
       <div class="cta">
         <a class="btn primary" href="#beta">Get early access</a>
@@ -296,24 +320,12 @@
     <!-- SECTION 2 -->
     <section>
       <h2>Removes friction from building relationships.</h2>
-      <ul class="block-list">
-        <li>
-          <strong>Prompt the message you want to draft.</strong>
-          <p class="body">By voice or by typing &mdash; whatever&rsquo;s faster in the moment.</p>
-        </li>
-        <li>
-          <strong>The AI checks everything that matters.</strong>
-          <p class="body">Your personal writing style, the documents you&rsquo;ve uploaded, the conversation history with this person.</p>
-        </li>
-        <li>
-          <strong>Get a draft that blows your mind.</strong>
-          <p class="body">In your voice, calibrated to this recipient, grounded in your real context.</p>
-        </li>
-        <li>
-          <strong>Edit the draft &mdash; and PortaVox carries your voice even better next time.</strong>
-          <p class="body">Every edit is a permanent lesson. Cross out a phrase twice and it&rsquo;s never written again.</p>
-        </li>
-      </ul>
+      <ol class="numbered-list">
+        <li>Prompt the message you want to draft.</li>
+        <li>PortaVox checks your writing style, your documents, your conversation history.</li>
+        <li>Get a draft that blows your mind.</li>
+        <li>Edit. PortaVox carries your voice even better next time.</li>
+      </ol>
     </section>
 
     <!-- SECTION 3 -->
@@ -322,7 +334,7 @@
       <ul class="block-list">
         <li>
           <strong>PortaVox sees what&rsquo;s on your screen.</strong>
-          <p class="body">The email thread, the chat history, the post you&rsquo;re replying to &mdash; no manual copy-pasting.</p>
+          <p class="body">The email thread, the chat history, the post you&rsquo;re replying to. No manual copy-pasting.</p>
         </li>
         <li>
           <strong>It figures out who you&rsquo;re writing to and which app you&rsquo;re in.</strong>
@@ -355,14 +367,14 @@
             <span class="step-num">1</span>
             <div class="step-body">
               <p class="step-title">Click in any text field.</p>
-              <p class="step-detail">Email reply, LinkedIn message, WhatsApp, Slack thread &mdash; anywhere your cursor blinks.</p>
+              <p class="step-detail">Email reply, LinkedIn message, WhatsApp, Slack thread. Anywhere your cursor blinks.</p>
             </div>
           </li>
           <li>
             <span class="step-num">2</span>
             <div class="step-body">
               <p class="step-title">Press <span class="key">⌥ Space</span> to record your message.</p>
-              <p class="step-detail">Talk for five seconds &mdash; ramble, repeat, change your mind. PortaVox sorts it.</p>
+              <p class="step-detail">Talk for five seconds. Ramble, repeat, change your mind. PortaVox sorts it.</p>
             </div>
           </li>
           <li>
@@ -416,12 +428,12 @@
         <li>
           <strong>Extracts to-do&rsquo;s &amp; to-get&rsquo;s.</strong>
           <span class="soon">Soon</span>
-          <p class="body">Auto-pulled from sent and received messages. What you owe each person, what they owe you &mdash; tracked so you&rsquo;re hyper-productive.</p>
+          <p class="body">Auto-pulled from sent and received messages. What you owe each person, what they owe you. Tracked so you&rsquo;re hyper-productive.</p>
         </li>
         <li>
-          <strong>Tracks things to be attentive for &mdash; and suggests messages.</strong>
+          <strong>Tracks things to be attentive for, and suggests messages.</strong>
           <span class="soon">Soon</span>
-          <p class="body">Their marathon Saturday, their kid&rsquo;s school start, the deal closing &mdash; surfaced when the moment matters, with a draft you can send in a tap.</p>
+          <p class="body">Their marathon Saturday, their kid&rsquo;s school start, the deal closing. Surfaced when the moment matters, with a draft you can send in a tap.</p>
         </li>
         <li>
           <strong>Tracks deadlines and progress.</strong>
@@ -437,12 +449,12 @@
       <ul class="block-list">
         <li>
           <strong>Give PortaVox access to folders and it answers on autopilot.</strong>
-          <p class="body">Deal memos, briefs, contracts, internal docs &mdash; pulled into the right draft at the right moment, ignored when irrelevant.</p>
+          <p class="body">Deal memos, briefs, contracts, internal docs. Pulled into the right draft at the right moment, ignored when irrelevant.</p>
         </li>
         <li>
           <strong>Hyper-custom pitches, because of relationship intelligence.</strong>
           <span class="soon">Soon</span>
-          <p class="body">PortaVox combines your project knowledge with everything it knows about the recipient &mdash; their role, their history with you, what they care about &mdash; into pitches tuned to this specific person.</p>
+          <p class="body">PortaVox combines your project knowledge with everything it knows about the recipient (their role, their history with you, what they care about) into pitches tuned to this specific person.</p>
         </li>
       </ul>
     </section>
@@ -451,11 +463,11 @@
     <section class="usecases">
       <h2>Built for anyone who writes a lot.</h2>
       <ul class="case-grid">
-        <li><strong>Founders</strong><span>Investor updates, intros, fundraising replies &mdash; warm, with full context.</span></li>
+        <li><strong>Founders</strong><span>Investor updates, intros, fundraising replies. Warm, with full context.</span></li>
         <li><strong>Consultants</strong><span>Client comms grounded in your briefs, your decks, your deal memos.</span></li>
         <li><strong>Sales</strong><span>Follow-ups that remember the last conversation, the kid&rsquo;s name, the deal stage.</span></li>
-        <li><strong>Managers &amp; CEOs</strong><span>Stay close to every report and every key relationship &mdash; even at scale.</span></li>
-        <li><strong>Recruiters</strong><span>Outreach that doesn&rsquo;t read like a template &mdash; because it isn&rsquo;t.</span></li>
+        <li><strong>Managers &amp; CEOs</strong><span>Stay close to every report and every key relationship, even at scale.</span></li>
+        <li><strong>Recruiters</strong><span>Outreach that doesn&rsquo;t read like a template. Because it isn&rsquo;t.</span></li>
         <li><strong>&hellip;and anyone with 50+ messages a day.</strong><span>You know who you are.</span></li>
       </ul>
     </section>
