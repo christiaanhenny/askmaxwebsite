@@ -116,6 +116,34 @@
       margin: 0;
     }
     .block-list .body em { color: var(--fg); font-style: italic; }
+    .block-list .sublist {
+      list-style: none;
+      padding: 10px 0 0 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .block-list .sublist li {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+      line-height: 1.5;
+      padding-left: 16px;
+      position: relative;
+    }
+    .block-list .sublist li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      top: 0;
+      color: var(--fg-muted);
+      font-weight: 700;
+    }
+    .block-list .sublist li strong {
+      color: var(--fg);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
     .soon {
       position: absolute;
       top: 18px;
@@ -319,7 +347,7 @@
 
     <!-- SECTION 4 + 5 (now the second section) -->
     <section>
-      <h2>It learns from all your edits.</h2>
+      <h2>PortaVox removes friction from building relationships.</h2>
       <p class="learns-intro">At the start, paste a handful of emails, WhatsApp messages, LinkedIn posts. <strong>PortaVox learns your style, your words, your patterns.</strong></p>
 
       <div class="fun-begins">
@@ -362,6 +390,21 @@
     <section>
       <h2>Relationship intelligence.</h2>
       <ul class="block-list">
+        <li>
+          <strong>Builds emotional rapport.</strong>
+          <p class="body">PortaVox holds every detail that makes a relationship feel close, and uses it every time you write to that person.</p>
+          <ul class="sublist">
+            <li><strong>Tone of voice per person.</strong> Different register for your investor, your co-founder, your sister.</li>
+            <li><strong>Inside language.</strong> Nicknames and shorthand only the two of you use, locked to that one person.</li>
+            <li><strong>Facts about them.</strong> Their partner&rsquo;s name, their kids, their role, their hobbies.</li>
+            <li><strong>Conversation history.</strong> What you talked about last time, what you decided, what you said you&rsquo;d follow up on.</li>
+            <li><strong>Reaction patterns.</strong> How you reply to good news, to bad news, to a cold intro.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Cross-channel memory.</strong>
+          <p class="body">Same person across email, Slack, WhatsApp, LinkedIn. One relationship, one memory, no matter where the conversation moves.</p>
+        </li>
         <li>
           <strong>Extracts to-do&rsquo;s &amp; to-get&rsquo;s.</strong>
           <span class="soon">Soon</span>
