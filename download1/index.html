@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>PortaVox &mdash; reinventing relationship intelligence</title>
-  <meta name="description" content="Remembers Tom's marathon Saturday. Tracks the spec you owe Sarah Friday. Replies in your voice, with all of it built in.">
+  <meta name="description" content="Great relationships are built in the details. PortaVox holds every thread of every relationship — so every message you send lands like you spent an hour on it.">
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,54 +15,60 @@
     /* ── Aspirational page-level hero ─────────────────────── */
     .hero-aspirational {
       text-align: center;
-      padding: 80px 0 64px;
+      padding: 96px 0 80px;
     }
     .hero-aspirational h1 {
-      font-size: clamp(2.2rem, 5.6vw, 4rem);
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
       font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      margin: 0 auto 32px;
-      max-width: 920px;
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+      margin: 0 auto 36px;
+      max-width: 1040px;
     }
     .hero-aspirational h1 em {
       font-style: italic;
       font-weight: inherit;
       text-decoration: underline;
-      text-decoration-thickness: 3px;
-      text-underline-offset: 8px;
+      text-decoration-thickness: 4px;
+      text-underline-offset: 10px;
       text-decoration-color: rgba(0, 0, 0, 0.18);
     }
     .hero-aspirational .hero-sub {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 500;
       color: var(--fg);
       max-width: 720px;
-      margin: 0 auto 40px;
-      line-height: 1.55;
+      margin: 0 auto 44px;
+      line-height: 1.6;
     }
-    .hero-aspirational .hero-sub em {
-      font-style: normal;
+    .hero-aspirational .hero-sub .payoff {
+      display: block;
+      margin-top: 18px;
       color: var(--fg);
     }
 
-    /* ── Relationship intelligence grid ────────────────────── */
-    .ri-section {
-      border-top: 1px solid var(--border);
-    }
-    .ri-section > h2 {
+    /* ── Section sub-line under an H2 ──────────────────────── */
+    .section-sub {
       text-align: center;
-      max-width: 760px;
-      margin: 0 auto 48px;
+      font-size: 1.04rem;
+      color: var(--fg-muted);
+      max-width: 700px;
+      margin: -20px auto 48px;
+      line-height: 1.6;
     }
-    .ri-grid {
+    .section-sub strong { color: var(--fg); font-weight: 600; }
+
+    /* ── Themed feature grid (used by Friction + Support) ─── */
+    .feature-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
       max-width: 1040px;
       margin: 0 auto;
     }
-    .ri-card {
+    .feature-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .feature-grid.cols-2 { grid-template-columns: repeat(2, 1fr); max-width: 820px; }
+
+    .feature-card {
       padding: 26px 24px;
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -72,7 +78,7 @@
       gap: 12px;
       position: relative;
     }
-    .ri-card-tag {
+    .feature-tag {
       position: absolute;
       top: 16px;
       right: 16px;
@@ -87,27 +93,25 @@
       margin: 0;
       line-height: 1;
     }
-    .ri-card-title {
+    .feature-title {
       font-size: 1.06rem;
       font-weight: 700;
       margin: 0;
-      padding-right: 96px;
       letter-spacing: -0.01em;
       line-height: 1.3;
+      padding-right: 0;
     }
-    .ri-card:not(:has(.ri-card-tag)) .ri-card-title { padding-right: 0; }
-    .ri-card-body {
+    .feature-card:has(.feature-tag) .feature-title { padding-right: 96px; }
+    .feature-body {
       font-size: 0.93rem;
       color: var(--fg-muted);
       margin: 0;
       line-height: 1.6;
     }
-    .ri-card-body em {
-      font-style: italic;
-      color: var(--fg);
-    }
-    /* Mini TO DO / TO GET visualization inside the first card */
-    .ri-todo-mini {
+    .feature-body em { font-style: italic; color: var(--fg); }
+
+    /* TO DO / TO GET mini visualization inside the first friction card */
+    .todo-mini {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
@@ -116,12 +120,8 @@
       border-radius: 12px;
       margin-top: 4px;
     }
-    .ri-todo-col {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .ri-todo-label {
+    .todo-col { display: flex; flex-direction: column; gap: 8px; }
+    .todo-label {
       font-size: 0.6rem;
       font-weight: 800;
       letter-spacing: 0.16em;
@@ -129,42 +129,45 @@
       color: var(--fg-muted);
       margin: 0;
     }
-    .ri-todo-col ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .ri-todo-col li {
+    .todo-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+    .todo-col li {
       font-size: 0.82rem;
       color: var(--fg);
       line-height: 1.4;
       padding-left: 16px;
       position: relative;
     }
-    .ri-todo-col.do li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #b58900;
-      font-weight: 800;
-    }
-    .ri-todo-col.get li::before {
-      content: "○";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--fg-muted);
-      font-weight: 800;
-    }
+    .todo-col.do li::before { content: "✓"; position: absolute; left: 0; top: 0; color: #b58900; font-weight: 800; }
+    .todo-col.get li::before { content: "○"; position: absolute; left: 0; top: 0; color: var(--fg-muted); font-weight: 800; }
 
-    /* ── Moment-of-use chapter ("Click. Prompt. Paste.") ─── */
-    .moment-section {
-      text-align: center;
+    /* Mini profile card inside the "Facts about them" support card */
+    .profile-mini {
+      padding: 12px 14px;
+      background: var(--soft);
+      border-radius: 12px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
+    .profile-mini-name {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin: 0 0 4px;
+    }
+    .profile-mini-fact {
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+      margin: 0;
+      line-height: 1.45;
+    }
+    .profile-mini-fact strong { color: var(--fg); font-weight: 600; }
+
+    /* ── Moment-of-use chapter (Click. Prompt. Paste.) ─── */
+    .moment-section { text-align: center; }
     .section-eyebrow {
       font-size: 0.74rem;
       font-weight: 700;
@@ -181,10 +184,7 @@
       letter-spacing: -0.04em;
       margin: 0 0 40px;
     }
-    .moment-h2 .hero-line {
-      display: block;
-      white-space: nowrap;
-    }
+    .moment-h2 .hero-line { display: block; white-space: nowrap; }
     .moment-h2 .noun-line { min-height: 1.1em; }
     .moment-h2 em {
       font-style: italic;
@@ -200,10 +200,6 @@
       will-change: opacity, color;
     }
     .moment-h2 .rot.fading { opacity: 0; }
-
-    /* Reused style blocks from /download for the bullet lists,
-       3-up draft cards, why-it-can-write, sees-screen, stars,
-       and speed-stats. Kept inline so /download1 is self-contained. */
 
     .hero-steps {
       list-style: none;
@@ -423,29 +419,31 @@
 
     /* Mobile rhythm */
     @media (max-width: 720px) {
-      .ri-grid { grid-template-columns: 1fr; }
+      .feature-grid.cols-3,
+      .feature-grid.cols-2 { grid-template-columns: 1fr; }
       .three-up { grid-template-columns: 1fr; }
       .why-grid { grid-template-columns: 1fr; }
       .sees-list { grid-template-columns: 1fr; }
       .speed-stats { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .hero-aspirational { padding: 48px 0 40px; }
+      .hero-aspirational { padding: 56px 0 48px; }
       .hero-aspirational h1 {
-        font-size: clamp(1.8rem, 8.2vw, 2.6rem);
-        line-height: 1.05;
-        margin-bottom: 24px;
+        font-size: clamp(2rem, 9vw, 2.9rem);
+        line-height: 1.04;
+        margin-bottom: 26px;
       }
       .hero-aspirational .hero-sub {
         font-size: 1.02rem;
-        margin-bottom: 30px;
-        line-height: 1.5;
+        margin-bottom: 32px;
+        line-height: 1.55;
       }
-      .ri-section > h2 { margin-bottom: 32px; }
-      .ri-card { padding: 22px 20px; }
-      .ri-card-title { font-size: 1rem; padding-right: 86px; }
-      .ri-todo-mini { padding: 12px; }
-      .ri-todo-col li { font-size: 0.78rem; }
+      .section-sub { font-size: 0.98rem; margin-top: -14px; margin-bottom: 32px; }
+      .feature-card { padding: 22px 20px; }
+      .feature-title { font-size: 1rem; }
+      .feature-card:has(.feature-tag) .feature-title { padding-right: 86px; }
+      .todo-mini { padding: 12px; }
+      .todo-col li { font-size: 0.78rem; }
 
       .moment-h2 {
         font-size: clamp(1.6rem, 8.4vw, 2.6rem);
@@ -490,9 +488,14 @@
   </nav>
 
   <main>
+
+    <!-- HERO -->
     <section class="hero-aspirational">
       <h1>Reinventing <em>relationship</em> intelligence.</h1>
-      <p class="hero-sub">Remembers Tom&rsquo;s marathon Saturday. Tracks the spec you owe Sarah Friday. Replies in your voice, with all of it built in.</p>
+      <p class="hero-sub">
+        Great relationships are built in the details. The kid&rsquo;s birthday remembered. The promise from coffee three months ago, kept. The shorthand only the two of you use. The reply that comes the day after their win, not three weeks later.
+        <span class="payoff">PortaVox holds every thread of every relationship &mdash; so every message you send lands like you spent an hour on it. Even when you spent five seconds.</span>
+      </p>
       <div class="cta">
         <a class="btn primary" href="#beta">Get early access</a>
       </div>
@@ -503,24 +506,26 @@
       </div>
     </section>
 
-    <section class="ri-section">
-      <h2>It remembers what most people forget.</h2>
-      <div class="ri-grid">
+    <!-- FRICTION REMOVAL -->
+    <section class="friction-section">
+      <h2>Removes the friction from staying in touch.</h2>
+      <p class="section-sub">The follow-up you forgot. The promise from coffee. The win they posted that deserves a reply. PortaVox watches every conversation &mdash; and surfaces what matters before it slips.</p>
+      <div class="feature-grid cols-3">
 
-        <article class="ri-card">
-          <p class="ri-card-tag">Coming soon</p>
-          <h3 class="ri-card-title">Every promise, tracked.</h3>
-          <p class="ri-card-body">Reads sent and received messages. Builds a running list of what you owe each person &mdash; and what they owe you.</p>
-          <div class="ri-todo-mini">
-            <div class="ri-todo-col do">
-              <p class="ri-todo-label">To do</p>
+        <article class="feature-card">
+          <p class="feature-tag">Coming soon</p>
+          <h3 class="feature-title">Every promise, tracked.</h3>
+          <p class="feature-body">Reads sent and received messages. Builds a running list of what you owe each person &mdash; and what they owe you.</p>
+          <div class="todo-mini">
+            <div class="todo-col do">
+              <p class="todo-label">To do</p>
               <ul>
                 <li>Send Sarah the spec by Friday</li>
                 <li>Reply to Marcus re: Q3 plan</li>
               </ul>
             </div>
-            <div class="ri-todo-col get">
-              <p class="ri-todo-label">To get</p>
+            <div class="todo-col get">
+              <p class="todo-label">To get</p>
               <ul>
                 <li>Maud&rsquo;s signed contract</li>
                 <li>Term sheet from Marcus</li>
@@ -529,36 +534,22 @@
           </div>
         </article>
 
-        <article class="ri-card">
-          <h3 class="ri-card-title">What&rsquo;s on their plate.</h3>
-          <p class="ri-card-body">&ldquo;Tom&rsquo;s marathon Saturday.&rdquo; &ldquo;Marloes just got promoted to VP.&rdquo; &ldquo;The Q3 deal closes next week.&rdquo; Surfaced when it matters &mdash; never naggy.</p>
+        <article class="feature-card">
+          <p class="feature-tag">Coming soon</p>
+          <h3 class="feature-title">Never go cold.</h3>
+          <p class="feature-body">&ldquo;You haven&rsquo;t replied to Sarah in 9 days. Want a quick check-in?&rdquo; Drafted, ready to send. The relationships that matter never slip.</p>
         </article>
 
-        <article class="ri-card">
-          <h3 class="ri-card-title">Inside language, locked in.</h3>
-          <p class="ri-card-body">&ldquo;Manny&rdquo; only with your wife. &ldquo;Boss&rdquo; only with your co-founder. &ldquo;Pao&rdquo; only in Italian with Paolo. Never leaks across people.</p>
-        </article>
-
-        <article class="ri-card">
-          <p class="ri-card-tag">Coming soon</p>
-          <h3 class="ri-card-title">React the moment it matters.</h3>
-          <p class="ri-card-body">Marcus posts &ldquo;We closed our Series B.&rdquo; PortaVox surfaces it and drafts: &ldquo;Massive &mdash; congrats to the team. Drinks this week?&rdquo;</p>
-        </article>
-
-        <article class="ri-card">
-          <p class="ri-card-tag">Coming soon</p>
-          <h3 class="ri-card-title">Never go cold.</h3>
-          <p class="ri-card-body">&ldquo;You haven&rsquo;t replied to Sarah in 9 days. Want a quick check-in?&rdquo; Drafted, ready to send.</p>
-        </article>
-
-        <article class="ri-card">
-          <h3 class="ri-card-title">A different you, per person.</h3>
-          <p class="ri-card-body">&ldquo;Hi Marcus, apologies&rdquo; to your investor. &ldquo;boss running 15 late&rdquo; to your co-founder. &ldquo;kom 15 min later zus 🙄&rdquo; to your sister.</p>
+        <article class="feature-card">
+          <p class="feature-tag">Coming soon</p>
+          <h3 class="feature-title">React the moment it matters.</h3>
+          <p class="feature-body">Marcus posts &ldquo;We closed our Series B.&rdquo; PortaVox surfaces it and drafts: &ldquo;Massive &mdash; congrats to the team. Drinks this week?&rdquo;</p>
         </article>
 
       </div>
     </section>
 
+    <!-- CLICK. PROMPT. PASTE. -->
     <section class="moment-section">
       <p class="section-eyebrow">And when it&rsquo;s time to write back</p>
       <h2 class="moment-h2">
@@ -598,15 +589,43 @@
       </div>
     </section>
 
-    <section class="demo">
-      <div class="video-frame" aria-label="Demo video coming soon">
-        <div class="video-placeholder">
-          <span class="play-icon">&#9654;</span>
-          <span class="placeholder-label">30-second demo &mdash; coming soon</span>
-        </div>
+    <!-- SUPPORT / MEMORY -->
+    <section class="support-section">
+      <h2>The support you need to build great relationships.</h2>
+      <p class="section-sub">The kid&rsquo;s name. The wife&rsquo;s promotion. The deal you closed together last spring. The nicknames only the two of you use. PortaVox keeps it all in mind &mdash; and surfaces what matters the moment you write.</p>
+      <div class="feature-grid cols-2">
+
+        <article class="feature-card">
+          <h3 class="feature-title">What&rsquo;s on their plate.</h3>
+          <p class="feature-body">&ldquo;Tom&rsquo;s marathon Saturday.&rdquo; &ldquo;Marloes just got promoted to VP.&rdquo; &ldquo;The Q3 deal closes next week.&rdquo; Surfaced when it matters &mdash; never naggy.</p>
+        </article>
+
+        <article class="feature-card">
+          <h3 class="feature-title">Inside language, locked in.</h3>
+          <p class="feature-body">&ldquo;Manny&rdquo; only with your wife. &ldquo;Boss&rdquo; only with your co-founder. &ldquo;Pao&rdquo; only in Italian with Paolo. Never leaks across people.</p>
+        </article>
+
+        <article class="feature-card">
+          <h3 class="feature-title">Facts about them.</h3>
+          <p class="feature-body">The role they just landed. The kid who just started school. The dietary thing you accidentally forgot last time. Every detail kept in mind.</p>
+          <div class="profile-mini">
+            <p class="profile-mini-name">Tom van der Meer</p>
+            <p class="profile-mini-fact"><strong>Co-founder</strong> of Solid Ventures</p>
+            <p class="profile-mini-fact"><strong>Wife</strong> Marloes &middot; just promoted to VP</p>
+            <p class="profile-mini-fact"><strong>Son</strong> Bram, 7 &middot; just started school</p>
+            <p class="profile-mini-fact"><strong>Loves</strong> trail running, dark chocolate</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <h3 class="feature-title">Your context, on tap.</h3>
+          <p class="feature-body">Every deal memo. Every brief. Every doc you&rsquo;ve uploaded. Pulled into the draft when relevant &mdash; ignored when not.</p>
+        </article>
+
       </div>
     </section>
 
+    <!-- SAME INPUT, 3 DRAFTS -->
     <section>
       <h2>Same input. Different person. Different draft.</h2>
       <p class="three-up-prompt">
@@ -637,6 +656,7 @@ Chris</p>
       </div>
     </section>
 
+    <!-- WHY IT CAN WRITE LIKE YOU -->
     <section class="why">
       <h2>Why it can write like you.</h2>
       <ul class="why-grid">
@@ -645,28 +665,21 @@ Chris</p>
           <span>&ldquo;Best, Chris&rdquo; to your investor. &ldquo;Cheers C&rdquo; to your co-founder. &ldquo;C&rdquo; to your sister.</span>
         </li>
         <li>
-          <strong>Inside language.</strong>
-          <span>&ldquo;Manny&rdquo; only with your wife. &ldquo;Boss&rdquo; only with Tim. &ldquo;Pao&rdquo; only with Paolo.</span>
-        </li>
-        <li>
-          <strong>Facts about them.</strong>
-          <span>Marloes is his wife. His daughter just started at Stanford. He coaches kids&rsquo; football on Tuesdays.</span>
-        </li>
-        <li>
           <strong>Edits become rules.</strong>
           <span>Cross out &ldquo;just circling back&rdquo; twice. PortaVox never writes it again.</span>
         </li>
         <li>
-          <strong>The thread on screen.</strong>
-          <span>Reads the email Sarah sent. Knows you&rsquo;re in a Slack DM with engineering. Doesn&rsquo;t greet a Slack thread.</span>
+          <strong>Knows the app shape.</strong>
+          <span>No greeting in a Slack DM. Full structure in a cold email. One line in iMessage.</span>
         </li>
         <li>
-          <strong>Your context.</strong>
-          <span>Pulls the exact sentence from the brief you uploaded for this client &mdash; not a generic platitude.</span>
+          <strong>Reaction patterns.</strong>
+          <span>Knows how you reply to good news. To bad news. To a cold intro.</span>
         </li>
       </ul>
     </section>
 
+    <!-- SEES SCREEN -->
     <section class="sees">
       <h2>It already sees what&rsquo;s on your screen.</h2>
       <ul class="sees-list">
@@ -677,6 +690,7 @@ Chris</p>
       </ul>
     </section>
 
+    <!-- LEARNS FROM EDITS -->
     <section class="stars">
       <h2>It learns from every edit.</h2>
       <div class="stars-rows">
@@ -703,6 +717,7 @@ Chris</p>
       </div>
     </section>
 
+    <!-- SPEED STATS -->
     <section>
       <h2>Why voice-first is the unlock.</h2>
       <div class="speed-stats">
@@ -721,18 +736,20 @@ Chris</p>
       </div>
     </section>
 
+    <!-- USE CASES -->
     <section class="usecases">
       <h2>For people with hundreds of relationships.</h2>
       <ul class="case-grid">
         <li><strong>Founders</strong><span>Investor updates, intros, fundraising replies &mdash; warm, with full context.</span></li>
+        <li><strong>Managers &amp; CEOs</strong><span>Stay close to every report, every board member, every key customer &mdash; even at scale.</span></li>
         <li><strong>Sales</strong><span>Follow-ups that remember the last conversation, the kid&rsquo;s name, the deal stage.</span></li>
         <li><strong>Recruiters</strong><span>Outreach that doesn&rsquo;t read like a template &mdash; because it isn&rsquo;t.</span></li>
-        <li><strong>Customer success</strong><span>Replies grounded in your help docs and the customer&rsquo;s history.</span></li>
         <li><strong>Consultants &amp; lawyers</strong><span>Drafts grounded in your briefs, your deal memos, your matter notes.</span></li>
-        <li><strong>Operators &amp; managers</strong><span>Keep the team aligned without retyping the same context every week.</span></li>
+        <li><strong>Customer success</strong><span>Replies grounded in your help docs and the customer&rsquo;s history.</span></li>
       </ul>
     </section>
 
+    <!-- BETA -->
     <section class="beta" id="beta">
       <h2>Be the founder who never forgets a relationship.</h2>
       <p>Drop your email. We&rsquo;ll send the download link, the onboarding (paste a few of your old messages so PortaVox learns your voice), and your founding-member pricing locked in for life.</p>
