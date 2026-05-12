@@ -38,7 +38,11 @@
       line-height: 1.6;
       color: var(--fg);
     }
-    .hero-promises strong { font-weight: 700; }
+    .hero-promises strong {
+      display: block;
+      margin-top: 14px;
+      font-weight: 700;
+    }
     .hero-10x .tagline { margin-top: 0; margin-bottom: 28px; }
 
     /* ── Demo video sits between hero and 4-step flow ─────── */
@@ -307,17 +311,27 @@
       .two-up { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .hero-10x { padding: 56px 0 64px; }
+      .hero-10x {
+        /* Fill the viewport so the video lands clearly below the fold,
+           and content centers inside the hero for visual balance.
+           svh = small-viewport-height, the most stable unit on iOS. */
+        min-height: calc(100svh - 80px);
+        padding: 24px 0 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
       .hero-10x h1 {
         font-size: clamp(2rem, 9.4vw, 2.9rem);
         line-height: 1.04;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
       }
       .hero-promises {
         font-size: 1.02rem;
-        margin-bottom: 30px;
+        margin-bottom: 26px;
       }
-      .video-section { padding: 40px 0 32px; }
+      .hero-10x .tagline { margin-bottom: 22px; }
+      .video-section { padding: 32px 0 24px; }
       .video-frame { border-radius: 12px; }
       .demo-section { padding: 44px 0 40px; }
       .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
@@ -355,7 +369,7 @@
     <!-- VIDEO DEMO -->
     <section class="video-section">
       <div class="video-frame">
-        <video controls preload="metadata" poster="/assets/poster.jpg">
+        <video controls preload="none" poster="/assets/poster.jpg">
           <source src="/assets/intro.mp4" type="video/mp4">
         </video>
         <div class="video-placeholder" aria-hidden="true">
