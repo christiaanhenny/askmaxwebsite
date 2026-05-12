@@ -21,16 +21,19 @@
     /* ── Hero ─────────────────────────────────────────────── */
     .hero-10x {
       text-align: center;
-      padding: 88px 0 64px;
+      padding: 56px 0 56px;
     }
     .hero-10x h1 {
       font-size: clamp(2.4rem, 6.4vw, 4.8rem);
       font-weight: 900;
       line-height: 1.05;
       letter-spacing: -0.04em;
-      margin: 0 auto 36px;
+      margin: 0 auto 28px;
       max-width: 980px;
     }
+    /* Force the h1 onto two balanced lines so neither yellow highlight
+       lands at the very edge of the viewport. */
+    .hero-10x h1 .line { display: block; }
     .hero-10x h1 mark {
       background: linear-gradient(180deg, transparent 0 60%, #ffe680 60% 95%, transparent 95%);
       color: inherit;
@@ -38,7 +41,7 @@
     }
     .hero-promises {
       max-width: 660px;
-      margin: 0 auto 40px;
+      margin: 0 auto 28px;
       font-size: 1.15rem;
       font-weight: 500;
       line-height: 1.6;
@@ -49,7 +52,7 @@
       margin-top: 14px;
       font-weight: 700;
     }
-    .hero-10x .tagline { margin-top: 0; margin-bottom: 28px; }
+    .hero-10x .tagline { margin-top: 0; margin-bottom: 22px; }
 
     /* ── Demo video sits between hero and 4-step flow ─────── */
     .video-section {
@@ -364,7 +367,10 @@
 
     <!-- HERO -->
     <section class="hero-10x">
-      <h1><mark>10&times;</mark> your communication in <mark>1/10</mark> of the time.</h1>
+      <h1>
+        <span class="line"><mark>10&times;</mark> your communication</span>
+        <span class="line">in <mark>1/10</mark> of the time.</span>
+      </h1>
       <p class="hero-promises">No more word-puzzling on how to say what. Write your best messages ever. Never forget a promise you made. Be attentive to everyone who matters, without effort.</p>
       <p class="tagline">Heavy writers save <mark>2&ndash;4 hours a day</mark>.</p>
       <div class="cta">
