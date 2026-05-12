@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>PortaVox &middot; 10× your communication, 1/10 of the time</title>
+  <title>PortaVox &middot; 10&times; your communication, 1/10 of the time</title>
   <meta name="description" content="No more word-puzzling. No forgotten promises. Attentive to everyone who matters, without effort. PortaVox carries your voice.">
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
@@ -39,50 +39,60 @@
       color: var(--fg);
     }
     .hero-promises strong { font-weight: 700; }
+    .hero-10x .tagline { margin-top: 0; margin-bottom: 28px; }
 
-    /* Compact 3-step mechanic row (inline in hero) */
-    .hero-steps {
+    /* ── 4-step flow row (no arrows, just numbered cards) ──── */
+    .flow-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 1040px;
+      margin: 0 auto;
       list-style: none;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px 36px;
-      max-width: 720px;
-      margin: 0 auto 40px;
     }
-    .hero-steps li { display: flex; align-items: center; gap: 10px; }
-    .hero-steps .num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
+    .flow-step {
+      padding: 24px 22px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .flow-step.final {
+      background: #0a0a0a;
+      color: #fff;
+      border-color: #0a0a0a;
+    }
+    .flow-num {
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--soft);
       color: var(--fg-muted);
-      font-size: 0.78rem;
       font-weight: 800;
-      flex-shrink: 0;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-variant-numeric: tabular-nums;
     }
-    .hero-steps .what {
-      font-size: 0.96rem;
-      font-weight: 600;
-      color: var(--fg);
-    }
-    .hero-steps .key {
-      display: inline-block;
-      padding: 1px 7px;
-      border: 1px solid var(--border);
-      border-bottom-width: 2px;
-      border-radius: 5px;
-      background: var(--soft);
-      font-size: 0.86em;
+    .flow-step.final .flow-num { background: #ffe680; color: #0a0a0a; }
+    .flow-what {
+      font-size: 1.04rem;
       font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
     }
-
-    .hero-10x .tagline { margin-top: 0; margin-bottom: 28px; }
+    .flow-detail {
+      font-size: 0.92rem;
+      color: var(--fg-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .flow-step.final .flow-detail { color: #ccc; }
 
     /* ── Same input demo (the BOOM proof) ─────────────────── */
     .demo-section { padding: 64px 0 56px; }
@@ -140,12 +150,91 @@
       flex: 1;
     }
 
+    /* ── Two-up reach grid (every app) ────────────────────── */
+    .two-up {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .two-up-card {
+      padding: 24px 22px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .two-up-card strong {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+    }
+    .two-up-card span {
+      color: var(--fg-muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    /* ── Once + Every time blocks (learns over time) ──────── */
+    .learn-blocks { max-width: 560px; margin: 0 auto; }
+    .learn-block + .learn-block { margin-top: 36px; }
+    .learn-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 14px;
+      padding-left: calc(1.5rem + 14px);
+    }
+    .learn-once {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      margin: 0;
+      padding-left: calc(1.5rem + 14px);
+      color: var(--fg);
+    }
+    .learn-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+      font-size: 1.05rem;
+    }
+    .learn-steps li {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      line-height: 1.5;
+    }
+    .learn-steps .num {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--fg-muted);
+      font-variant-numeric: tabular-nums;
+      min-width: 1.5rem;
+    }
+    .learn-steps .key {
+      display: inline-block;
+      padding: 1px 7px;
+      border: 1px solid var(--border);
+      border-bottom-width: 2px;
+      border-radius: 5px;
+      background: var(--soft);
+      font-size: 0.86em;
+      font-weight: 700;
+    }
+
     /* ── Compact RI list (one-line items, no body bloat) ──── */
     .ri-list {
       list-style: none;
       padding: 0;
       margin: 0 auto;
-      max-width: 720px;
+      max-width: 760px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -186,8 +275,12 @@
     }
 
     /* ── Mobile ───────────────────────────────────────────── */
+    @media (max-width: 800px) {
+      .flow-4 { grid-template-columns: 1fr; gap: 10px; }
+    }
     @media (max-width: 720px) {
       .three-up { grid-template-columns: 1fr; }
+      .two-up { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .hero-10x { padding: 52px 0 44px; }
@@ -200,14 +293,6 @@
         font-size: 1.02rem;
         margin-bottom: 30px;
       }
-      .hero-steps {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
-        max-width: 260px;
-        margin: 0 auto 32px;
-      }
-      .hero-steps .what { font-size: 0.94rem; }
       .demo-section { padding: 44px 0 40px; }
       .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
       .three-up-card { padding: 20px 18px; }
@@ -218,12 +303,14 @@
         gap: 4px;
       }
       .ri-list .ri-detail { font-size: 0.9rem; }
+      .learn-label,
+      .learn-once { padding-left: 0; }
     }
   </style>
 </head>
 <body data-page-source="portavox.ai/download3">
   <nav>
-    <a class="logo" href="/download">PortaVox</a>
+    <a class="logo" href="/download3">PortaVox</a>
     <a class="nav-cta" href="#beta">Get early access</a>
   </nav>
 
@@ -232,12 +319,7 @@
     <!-- HERO -->
     <section class="hero-10x">
       <h1><mark>10&times;</mark> your communication. <mark>1/10</mark> of the time.</h1>
-      <p class="hero-promises">No more word-puzzling on how to say what. No forgotten promises. Attentive to everyone who matters, without effort. <strong>PortaVox carries your voice.</strong></p>
-      <ol class="hero-steps">
-        <li><span class="num">1</span><span class="what">Press <span class="key">⌥ Space</span></span></li>
-        <li><span class="num">2</span><span class="what">Say what you want</span></li>
-        <li><span class="num">3</span><span class="what">Paste, in your voice</span></li>
-      </ol>
+      <p class="hero-promises">No more word-puzzling on how to say what. Never forget a promise you made. Be attentive to everyone who matters, without effort. <strong>PortaVox carries your voice.</strong></p>
       <p class="tagline">Heavy writers save <mark>2&ndash;4 hours a day</mark>.</p>
       <div class="cta">
         <a class="btn primary" href="#beta">Get early access</a>
@@ -247,6 +329,33 @@
         <span class="cta-meta-item">Paid private beta</span>
         <span class="cta-meta-item">Founding-member pricing, locked in for life</span>
       </div>
+    </section>
+
+    <!-- WHAT IT DOES: 4-step flow -->
+    <section>
+      <h2>PortaVox removes the friction from building relationships.</h2>
+      <ol class="flow-4">
+        <li class="flow-step">
+          <span class="flow-num">1</span>
+          <p class="flow-what">Prompt the message you want to draft.</p>
+          <p class="flow-detail">Speak or type. Just say what you mean.</p>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">2</span>
+          <p class="flow-what">PortaVox pulls in everything that matters.</p>
+          <p class="flow-detail">Your writing style, your documents, the conversation history.</p>
+        </li>
+        <li class="flow-step">
+          <span class="flow-num">3</span>
+          <p class="flow-what">Get a draft that blows your mind.</p>
+          <p class="flow-detail">In your voice, tuned to the person you&rsquo;re writing to.</p>
+        </li>
+        <li class="flow-step final">
+          <span class="flow-num">4</span>
+          <p class="flow-what">Edit. PortaVox carries your voice better next time.</p>
+          <p class="flow-detail">Every tweak teaches it how you really write.</p>
+        </li>
+      </ol>
     </section>
 
     <!-- THE BOOM PROOF: same input, different person, different draft -->
@@ -262,7 +371,7 @@
           <p class="three-up-relation">Marcus &middot; investor</p>
           <p class="three-up-quote">Hi Marcus,
 
-Apologies &mdash; pushed back 15 min, traffic on the A2. Rescheduling the calendar invite now.
+Apologies, pushed back 15 min, traffic on the A2. Rescheduling the calendar invite now.
 
 Best,
 Chris</p>
@@ -280,32 +389,64 @@ Chris</p>
       </div>
     </section>
 
-    <!-- RELATIONSHIP INTELLIGENCE (compact) -->
+    <!-- LEARNS OVER TIME -->
     <section>
-      <h2>It knows your people. Really knows them.</h2>
+      <h2>It sounds more like you over time.</h2>
+      <div class="learn-blocks">
+        <div class="learn-block">
+          <p class="learn-label">Once</p>
+          <p class="learn-once">Upload a handful of emails, WhatsApp messages, etc. PortaVox learns your style, your words, your patterns.</p>
+        </div>
+        <div class="learn-block">
+          <p class="learn-label">Now the fun begins</p>
+          <ol class="learn-steps">
+            <li><span class="num">1</span><span>Click any text field, email reply, LinkedIn message, WhatsApp.</span></li>
+            <li><span class="num">2</span><span>Press <span class="key">⌥ Space</span> and say what you want.</span></li>
+            <li><span class="num">3</span><span>Get a draft that sounds like you.</span></li>
+            <li><span class="num">4</span><span>Edit it. PortaVox learns, so you edit less next time.</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVERY APP -->
+    <section>
+      <h2>Communicate in every app.</h2>
+      <div class="two-up">
+        <div class="two-up-card">
+          <strong>It sees what you see on your screen.</strong>
+          <span>The thread, the document, the chat history, the form you&rsquo;re replying in.</span>
+        </div>
+        <div class="two-up-card">
+          <strong>It knows who you&rsquo;re writing to and where.</strong>
+          <span>Email, Slack, WhatsApp, LinkedIn, iMessage, browser fields, anywhere you click.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATIONSHIP INTELLIGENCE -->
+    <section>
+      <h2>Relationship intelligence.</h2>
       <ul class="ri-list">
         <li>
-          <strong>Builds emotional rapport.</strong>
-          <span class="ri-detail">Tone, inside language, facts, conversation history, reaction patterns.</span>
+          <strong>Captures every to-do and to-get.</strong>
+          <span class="ri-detail">Promises you made, things you&rsquo;re owed, never lost in a thread again.</span>
         </li>
         <li>
-          <strong>Cross-channel memory.</strong>
-          <span class="ri-detail">Same person across email, Slack, WhatsApp, LinkedIn.</span>
+          <strong>Tracks what to be attentive for.</strong>
+          <span class="ri-detail">Drafts the check-in before you&rsquo;d have remembered it yourself.</span>
         </li>
         <li>
-          <strong>Tracks every promise.</strong>
-          <span class="ri-detail">What you owe each person, what they owe you.</span>
-          <span class="soon">Soon</span>
+          <strong>Tracks deadlines and progress.</strong>
+          <span class="ri-detail">Knows what&rsquo;s due, what&rsquo;s slipping, what just shipped.</span>
         </li>
         <li>
-          <strong>Surfaces what&rsquo;s on their plate.</strong>
-          <span class="ri-detail">Their marathon Saturday, their kid&rsquo;s school start, the deal closing.</span>
-          <span class="soon">Soon</span>
+          <strong>Answers from your projects.</strong>
+          <span class="ri-detail">Point it at a folder. It replies on autopilot, grounded in your real material.</span>
         </li>
         <li>
-          <strong>Never goes cold.</strong>
-          <span class="ri-detail">Notices the relationships starting to slip. Drafts the check-in.</span>
-          <span class="soon">Soon</span>
+          <strong>Pitches that land, because it knows the relationship.</strong>
+          <span class="ri-detail">Hyper-custom outreach: their context, your voice, the right ask.</span>
         </li>
       </ul>
     </section>
