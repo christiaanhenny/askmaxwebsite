@@ -236,40 +236,45 @@
       font-weight: 700;
     }
 
-    /* ── Compact RI list (one-line items, no body bloat) ──── */
+    /* ── RI list: vertical stack per item, title above detail ── */
     .ri-list {
       list-style: none;
       padding: 0;
       margin: 0 auto;
-      max-width: 760px;
+      max-width: 720px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .ri-list li {
-      padding: 16px 22px;
+      padding: 22px 26px;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       background: #fff;
-      position: relative;
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      flex-wrap: wrap;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .ri-list li:hover {
+      border-color: var(--fg);
+      transform: translateY(-1px);
     }
     .ri-list strong {
-      font-size: 1rem;
+      display: block;
+      font-size: 1.06rem;
       font-weight: 700;
-      letter-spacing: -0.005em;
+      letter-spacing: -0.01em;
       color: var(--fg);
+      margin-bottom: 6px;
     }
     .ri-list .ri-detail {
-      font-size: 0.93rem;
+      display: block;
+      font-size: 0.95rem;
       color: var(--fg-muted);
-      line-height: 1.5;
-      flex: 1;
+      line-height: 1.6;
     }
     .ri-list .soon {
+      display: inline-block;
+      margin-left: 8px;
+      vertical-align: 2px;
       font-size: 0.58rem;
       font-weight: 800;
       letter-spacing: 0.16em;
@@ -304,13 +309,9 @@
       .demo-section { padding: 44px 0 40px; }
       .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
       .three-up-card { padding: 20px 18px; }
-      .ri-list li {
-        padding: 14px 18px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-      .ri-list .ri-detail { font-size: 0.9rem; }
+      .ri-list li { padding: 18px 20px; }
+      .ri-list strong { font-size: 1.02rem; }
+      .ri-list .ri-detail { font-size: 0.92rem; }
       .learn-label,
       .learn-once { padding-left: 0; }
     }
