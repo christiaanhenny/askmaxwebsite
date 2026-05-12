@@ -47,6 +47,18 @@
       max-width: 920px;
       margin: 0 auto;
     }
+    /* Keep the placeholder light until the real demo lands —
+       a black 16:9 block right under the hero pulls all the eye weight. */
+    .video-frame {
+      background: var(--soft);
+      box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.12);
+    }
+    .video-frame video { background: var(--soft); }
+    .video-placeholder { color: var(--fg-muted); }
+    .play-icon {
+      background: rgba(10, 10, 10, 0.06);
+      color: var(--fg-muted);
+    }
 
     /* ── 4-step flow row (no arrows, just numbered cards) ──── */
     .flow-4 {
@@ -295,7 +307,7 @@
       .two-up { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .hero-10x { padding: 52px 0 44px; }
+      .hero-10x { padding: 56px 0 64px; }
       .hero-10x h1 {
         font-size: clamp(2rem, 9.4vw, 2.9rem);
         line-height: 1.04;
@@ -305,7 +317,8 @@
         font-size: 1.02rem;
         margin-bottom: 30px;
       }
-      .video-section { padding: 16px 0 40px; }
+      .video-section { padding: 40px 0 32px; }
+      .video-frame { border-radius: 12px; }
       .demo-section { padding: 44px 0 40px; }
       .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
       .three-up-card { padding: 20px 18px; }
@@ -328,7 +341,7 @@
     <!-- HERO -->
     <section class="hero-10x">
       <h1><mark>10&times;</mark> your communication in <mark>1/10</mark> of the time.</h1>
-      <p class="hero-promises">No more word-puzzling on how to say what. Never forget a promise you made. Be attentive to everyone who matters, without effort. <strong>PortaVox carries your voice.</strong></p>
+      <p class="hero-promises">No more word-puzzling on how to say what. Write your best messages ever. Never forget a promise you made. Be attentive to everyone who matters, without effort. <strong>PortaVox carries your voice.</strong></p>
       <p class="tagline">Heavy writers save <mark>2&ndash;4 hours a day</mark>.</p>
       <div class="cta">
         <a class="btn primary" href="#beta">Count me in</a>
@@ -487,7 +500,7 @@ Chris</p>
 
     <!-- BETA -->
     <section class="beta" id="beta">
-      <h2>Want to test it with me?</h2>
+      <h2>10&times; your communication in 1/10 of the time.</h2>
       <p>Closed beta. I&rsquo;m only inviting friends and people whose feedback I trust. Drop your email and I&rsquo;ll get back to you personally.</p>
       <form id="beta-form" aria-describedby="form-note">
         <input type="email" name="email" placeholder="you@example.com" required>
