@@ -104,9 +104,9 @@
       gap: 10px;
     }
     .flow-step.final {
-      background: #0a0a0a;
-      color: #fff;
-      border-color: #0a0a0a;
+      background: #fef3c7;
+      color: var(--fg);
+      border-color: #fde68a;
     }
     .flow-num {
       width: 26px;
@@ -135,7 +135,7 @@
       margin: 0;
       line-height: 1.5;
     }
-    .flow-step.final .flow-detail { color: #ccc; }
+    .flow-step.final .flow-detail { color: var(--fg-muted); }
 
     /* ── Same input demo (the BOOM proof) ─────────────────── */
     .demo-section { padding: 104px 0; }
@@ -267,9 +267,9 @@
       gap: 16px;
     }
     .how-card.active {
-      background: #0a0a0a;
-      color: #fff;
-      border-color: #0a0a0a;
+      background: #fef3c7;
+      color: var(--fg);
+      border-color: #fde68a;
     }
     .how-when {
       font-size: 0.7rem;
@@ -279,7 +279,7 @@
       color: var(--fg-muted);
       margin: 0;
     }
-    .how-card.active .how-when { color: #ffe680; }
+    .how-card.active .how-when { color: #8a6800; }
     .how-text {
       font-size: 1.12rem;
       line-height: 1.55;
@@ -287,14 +287,14 @@
       margin: 0;
       font-weight: 500;
     }
-    .how-card.active .how-text { color: #fff; }
+    .how-card.active .how-text { color: var(--fg); }
     .how-text mark {
       background: linear-gradient(180deg, transparent 0 60%, #ffe680 60% 95%, transparent 95%);
       color: inherit;
       padding: 0 3px;
     }
     .how-card.active .how-text mark {
-      background: linear-gradient(180deg, transparent 0 60%, rgba(255, 230, 128, 0.35) 60% 95%, transparent 95%);
+      background: linear-gradient(180deg, transparent 0 60%, #fbbf24 60% 95%, transparent 95%);
     }
     @media (max-width: 720px) {
       .how-pair { grid-template-columns: 1fr; }
