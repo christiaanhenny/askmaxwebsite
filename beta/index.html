@@ -18,10 +18,21 @@
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   </script>
   <style>
+    /* ── Section rhythm: generous breathing room everywhere ─ */
+    main > section { padding: 104px 0; }
+
     /* ── Hero ─────────────────────────────────────────────── */
     .hero-10x {
       text-align: center;
-      padding: 56px 0 56px;
+      padding: 48px 0;
+      /* Fill the full viewport minus nav, on every screen. Video
+         starts at the fold line, so the user must scroll to see it.
+         lvh handles mobile URL-bar collapse without recalculating. */
+      min-height: calc(100vh - 72px);
+      min-height: calc(100lvh - 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .hero-10x h1 {
       font-size: clamp(2.4rem, 6.4vw, 4.8rem);
@@ -56,7 +67,7 @@
 
     /* ── Demo video sits between hero and 4-step flow ─────── */
     .video-section {
-      padding: 24px 0 56px;
+      padding: 80px 24px 104px;
       max-width: 920px;
       margin: 0 auto;
     }
@@ -127,7 +138,7 @@
     .flow-step.final .flow-detail { color: #ccc; }
 
     /* ── Same input demo (the BOOM proof) ─────────────────── */
-    .demo-section { padding: 64px 0 56px; }
+    .demo-section { padding: 104px 0; }
     .demo-prompt {
       max-width: 620px;
       margin: 0 auto 28px;
@@ -320,19 +331,14 @@
       .two-up { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
+      /* Sections on mobile: generous but not absurd */
+      main > section { padding: 72px 0; }
+
       .hero-10x {
-        /* Fill the largest possible viewport (lvh = URL-bar collapsed)
-           minus nav height, so the video lands below the fold on 90%+
-           of phones (iPhone X and up, modern Android). lvh is fixed,
-           so it doesn't recalculate when the URL bar collapses — that
-           prevents the page from "jumping" on first scroll/reload.
-           100vh fallback for browsers that don't support lvh yet. */
+        /* Mobile uses 60px nav offset (smaller nav padding on phones). */
         min-height: calc(100vh - 60px);
         min-height: calc(100lvh - 60px);
         padding: 32px 0 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
       }
       .hero-10x h1 {
         font-size: clamp(2rem, 9.4vw, 2.9rem);
@@ -344,9 +350,9 @@
         margin-bottom: 26px;
       }
       .hero-10x .tagline { margin-bottom: 22px; }
-      .video-section { padding: 24px 0 24px; }
+      .video-section { padding: 56px 16px 72px; }
       .video-frame { border-radius: 12px; }
-      .demo-section { padding: 44px 0 40px; }
+      .demo-section { padding: 72px 0; }
       .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
       .three-up-card { padding: 20px 18px; }
       .ri-list li { padding: 18px 20px; }
