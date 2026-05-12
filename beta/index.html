@@ -221,16 +221,57 @@
       line-height: 1.55;
     }
 
-    /* ── "How is this possible" two-line explainer ────────── */
-    .how-line {
-      max-width: 580px;
+    /* ── "How is this possible" two-card pair ─────────────── */
+    .how-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      max-width: 880px;
       margin: 0 auto;
-      text-align: center;
-      font-size: 1.14rem;
-      line-height: 1.6;
-      color: var(--fg);
+      align-items: stretch;
     }
-    .how-line + .how-line { margin-top: 22px; }
+    .how-card {
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .how-card.active {
+      background: #0a0a0a;
+      color: #fff;
+      border-color: #0a0a0a;
+    }
+    .how-when {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0;
+    }
+    .how-card.active .how-when { color: #ffe680; }
+    .how-text {
+      font-size: 1.12rem;
+      line-height: 1.55;
+      color: var(--fg);
+      margin: 0;
+      font-weight: 500;
+    }
+    .how-card.active .how-text { color: #fff; }
+    .how-text mark {
+      background: linear-gradient(180deg, transparent 0 60%, #ffe680 60% 95%, transparent 95%);
+      color: inherit;
+      padding: 0 3px;
+    }
+    .how-card.active .how-text mark {
+      background: linear-gradient(180deg, transparent 0 60%, rgba(255, 230, 128, 0.35) 60% 95%, transparent 95%);
+    }
+    @media (max-width: 720px) {
+      .how-pair { grid-template-columns: 1fr; }
+    }
 
     /* ── Once + Every time blocks (learns over time) ──────── */
     .learn-blocks { max-width: 560px; margin: 0 auto; }
@@ -473,8 +514,16 @@ Chris</p>
     <!-- HOW IS THIS POSSIBLE -->
     <section>
       <h2>How is this possible?</h2>
-      <p class="how-line">Upload a handful of emails and messages. PortaVox learns your style.</p>
-      <p class="how-line">When you tweak the drafts you get, PortaVox learns with lightning speed.</p>
+      <div class="how-pair">
+        <div class="how-card">
+          <p class="how-when">Once</p>
+          <p class="how-text">Upload a handful of emails and messages. PortaVox learns your style.</p>
+        </div>
+        <div class="how-card active">
+          <p class="how-when">Then, every edit</p>
+          <p class="how-text">When you tweak the drafts you get, PortaVox learns with <mark>lightning speed</mark>.</p>
+        </div>
+      </div>
     </section>
 
     <!-- EVERY APP -->
