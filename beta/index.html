@@ -401,6 +401,68 @@
       line-height: 1;
     }
 
+    /* ── Privacy: lives on your Mac, e2ee, zero retention ── */
+    .privacy-dark {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 96px 24px;
+      /* Full-bleed break-out from main's 880px constraint */
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+    .privacy-dark h2 {
+      color: #fff;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 18px;
+    }
+    .privacy-dark h2 mark {
+      background: linear-gradient(180deg, transparent 0 60%, #ffe680 60% 95%, transparent 95%);
+      color: inherit;
+      padding: 0 4px;
+    }
+    .privacy-dark .lede {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 44px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.04rem;
+      line-height: 1.6;
+    }
+    .privacy-dark .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .privacy-dark .card {
+      padding: 26px 26px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .privacy-dark .card strong {
+      display: block;
+      font-size: 1.06rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .privacy-dark .card span {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    @media (max-width: 900px) {
+      .privacy-dark .grid-3 { grid-template-columns: 1fr; }
+      .privacy-dark { padding: 72px 20px; }
+    }
+
     /* ── Mobile ───────────────────────────────────────────── */
     @media (max-width: 800px) {
       .flow-4 { grid-template-columns: 1fr; gap: 10px; }
@@ -584,18 +646,22 @@ Chris</p>
       </div>
     </section>
 
-    <!-- ZERO RETENTION -->
-    <section>
-      <h2>Zero retention. In writing.</h2>
-      <p class="sees-lede">PortaVox uses AI to draft. That means the AI briefly reads the message it&rsquo;s writing for you. After that, your content is deleted by the provider &mdash; and never used to train any model.</p>
-      <div class="two-up">
-        <div class="two-up-card">
-          <strong>Deleted, not retained.</strong>
-          <span>Whatever PortaVox sends to the AI to draft a message is deleted from the provider&rsquo;s systems after the draft is returned. That&rsquo;s a clause in our contract &mdash; not a privacy-policy line that can change later.</span>
+    <!-- PRIVACY: on your Mac, end-to-end encrypted, zero retention -->
+    <section class="privacy-dark">
+      <h2>Lives on your Mac. <mark>End-to-end encrypted</mark>. Never trains a model.</h2>
+      <p class="lede">PortaVox runs on your Mac. The memory of every relationship &mdash; what you discussed, what you promised, what you&rsquo;re owed &mdash; is end-to-end encrypted with a key only you hold.</p>
+      <div class="grid-3">
+        <div class="card">
+          <strong>On your Mac.</strong>
+          <span>The app, your style learning, your conversation history &mdash; all on the device in front of you. Not in our cloud, not on someone else&rsquo;s hard drive.</span>
         </div>
-        <div class="two-up-card">
-          <strong>Never used for training.</strong>
-          <span>Your messages don&rsquo;t train the AI provider&rsquo;s models, ours, or anyone else&rsquo;s. Not now, not in a future fine-tune. That clause doesn&rsquo;t expire when the beta does.</span>
+        <div class="card">
+          <strong>End-to-end encrypted.</strong>
+          <span>Your relationship memory is encrypted with a key only you hold. We literally cannot read it. Even if our servers were breached, what&rsquo;s in them is gibberish without your key.</span>
+        </div>
+        <div class="card">
+          <strong>Zero retention. No training.</strong>
+          <span>What PortaVox sends to the AI to draft a single message is deleted by the provider on return &mdash; by contract &mdash; and never used to train any model. Yours, theirs, anyone else&rsquo;s.</span>
         </div>
       </div>
     </section>
