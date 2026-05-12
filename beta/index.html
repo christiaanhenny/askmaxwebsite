@@ -11,6 +11,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <script>
+    // Force every refresh to start at the top — without this, iOS Safari
+    // restores scroll position (or jumps when the URL bar collapses), which
+    // makes the page appear to "jump down" on reload.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  </script>
   <style>
     /* ── Hero ─────────────────────────────────────────────── */
     .hero-10x {
@@ -312,11 +318,15 @@
     }
     @media (max-width: 600px) {
       .hero-10x {
-        /* Fill the viewport so the video lands clearly below the fold,
-           and content centers inside the hero for visual balance.
-           svh = small-viewport-height, the most stable unit on iOS. */
-        min-height: calc(100svh - 80px);
-        padding: 24px 0 32px;
+        /* Fill the largest possible viewport (lvh = URL-bar collapsed)
+           minus nav height, so the video lands below the fold on 90%+
+           of phones (iPhone X and up, modern Android). lvh is fixed,
+           so it doesn't recalculate when the URL bar collapses — that
+           prevents the page from "jumping" on first scroll/reload.
+           100vh fallback for browsers that don't support lvh yet. */
+        min-height: calc(100vh - 60px);
+        min-height: calc(100lvh - 60px);
+        padding: 32px 0 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -331,7 +341,7 @@
         margin-bottom: 26px;
       }
       .hero-10x .tagline { margin-bottom: 22px; }
-      .video-section { padding: 32px 0 24px; }
+      .video-section { padding: 24px 0 24px; }
       .video-frame { border-radius: 12px; }
       .demo-section { padding: 44px 0 40px; }
       .demo-prompt { padding: 14px 18px; font-size: 0.92rem; }
