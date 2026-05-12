@@ -193,6 +193,33 @@
       flex: 1;
     }
 
+    /* ── "It sees what you see" intro + app strip ──────────── */
+    .sees-lede {
+      text-align: center;
+      max-width: 620px;
+      margin: -16px auto 44px;
+      color: var(--fg-muted);
+      font-size: 1.04rem;
+      line-height: 1.6;
+    }
+    .app-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 10px;
+      max-width: 680px;
+      margin: 36px auto 0;
+    }
+    .app-strip span {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 0.9rem;
+      color: var(--fg);
+      font-weight: 600;
+    }
+
     /* ── Two-up reach grid (every app) ────────────────────── */
     .two-up {
       display: grid;
@@ -412,6 +439,9 @@
       .ri-list .ri-detail { font-size: 0.92rem; }
       .learn-label,
       .learn-once { padding-left: 0; }
+      .sees-lede { font-size: 0.96rem; margin-bottom: 32px; }
+      .app-strip { margin-top: 28px; gap: 6px 8px; }
+      .app-strip span { font-size: 0.84rem; padding: 7px 13px; }
     }
   </style>
 </head>
@@ -455,7 +485,7 @@
 
     <!-- WHAT IT DOES: 4-step flow -->
     <section>
-      <h2>PortaVox removes the friction from building relationships.</h2>
+      <h2>Build closer relationships. 1% of the friction.</h2>
       <ol class="flow-4">
         <li class="flow-step">
           <span class="flow-num">1</span>
@@ -526,18 +556,31 @@ Chris</p>
       </div>
     </section>
 
-    <!-- EVERY APP -->
+    <!-- IT SEES WHAT YOU SEE -->
     <section>
-      <h2>Communicate in every app.</h2>
+      <h2>It sees what you see.</h2>
+      <p class="sees-lede">No copy-pasting context. No switching tabs. PortaVox reads the screen you&rsquo;re already on.</p>
       <div class="two-up">
         <div class="two-up-card">
-          <strong>It sees what you see on your screen.</strong>
-          <span>The thread, the document, the chat history, the form you&rsquo;re replying in.</span>
+          <strong>The conversation you&rsquo;re in.</strong>
+          <span>The email thread, the Slack history, the WhatsApp chain, the LinkedIn DM you&rsquo;re replying to. PortaVox knows the context without you re-typing a word of it.</span>
         </div>
         <div class="two-up-card">
-          <strong>It knows who you&rsquo;re writing to and where.</strong>
-          <span>Email, Slack, WhatsApp, LinkedIn, iMessage, browser fields, anywhere you click.</span>
+          <strong>The app and the recipient.</strong>
+          <span>Slack DM with your co-founder versus cold email to a prospect versus iMessage to your sister. PortaVox knows the difference and adapts the draft.</span>
         </div>
+      </div>
+      <div class="app-strip">
+        <span>Mail</span>
+        <span>Slack</span>
+        <span>WhatsApp</span>
+        <span>iMessage</span>
+        <span>LinkedIn</span>
+        <span>Notion</span>
+        <span>Discord</span>
+        <span>Browser</span>
+        <span>Notes</span>
+        <span>Telegram</span>
       </div>
     </section>
 
