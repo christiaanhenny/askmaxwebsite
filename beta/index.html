@@ -401,11 +401,12 @@
       line-height: 1;
     }
 
-    /* ── Privacy: lives on your Mac, e2ee, zero retention ── */
-    .privacy-dark {
-      background: #0a0a0a;
-      color: #fff;
-      padding: 96px 24px;
+    /* ── Privacy: lives on your Mac, e2ee, zero retention ──
+       Soft cream strip, not a dark warning band. */
+    .privacy {
+      background: #fff8e6;
+      color: var(--fg);
+      padding: 56px 24px;
       /* Full-bleed break-out from main's 880px constraint */
       position: relative;
       width: 100vw;
@@ -414,53 +415,54 @@
       margin-left: -50vw;
       margin-right: -50vw;
     }
-    .privacy-dark h2 {
-      color: #fff;
+    .privacy h2 {
+      color: var(--fg);
       text-align: center;
       max-width: 860px;
-      margin: 0 auto 18px;
+      margin: 0 auto 14px;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
     }
-    .privacy-dark h2 mark {
-      background: linear-gradient(180deg, transparent 0 60%, #ffe680 60% 95%, transparent 95%);
+    .privacy h2 mark {
+      background: linear-gradient(180deg, transparent 0 60%, #ffd84d 60% 95%, transparent 95%);
       color: inherit;
       padding: 0 4px;
     }
-    .privacy-dark .lede {
+    .privacy .lede {
       text-align: center;
-      max-width: 720px;
-      margin: 0 auto 44px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 1.04rem;
+      max-width: 680px;
+      margin: 0 auto 32px;
+      color: var(--fg-muted);
+      font-size: 0.98rem;
       line-height: 1.6;
     }
-    .privacy-dark .grid-3 {
+    .privacy .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 12px;
       max-width: 980px;
       margin: 0 auto;
     }
-    .privacy-dark .card {
-      padding: 26px 26px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.04);
+    .privacy .card {
+      padding: 18px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
     }
-    .privacy-dark .card strong {
+    .privacy .card strong {
       display: block;
-      font-size: 1.06rem;
+      font-size: 0.98rem;
       font-weight: 700;
-      margin-bottom: 8px;
-      color: #fff;
+      margin-bottom: 4px;
+      color: var(--fg);
     }
-    .privacy-dark .card span {
-      font-size: 0.94rem;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.72);
+    .privacy .card span {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--fg-muted);
     }
     @media (max-width: 900px) {
-      .privacy-dark .grid-3 { grid-template-columns: 1fr; }
-      .privacy-dark { padding: 72px 20px; }
+      .privacy .grid-3 { grid-template-columns: 1fr; }
+      .privacy { padding: 40px 20px; }
     }
 
     /* ── Mobile ───────────────────────────────────────────── */
@@ -647,7 +649,7 @@ Chris</p>
     </section>
 
     <!-- PRIVACY: on your Mac, end-to-end encrypted, zero retention -->
-    <section class="privacy-dark">
+    <section class="privacy">
       <h2>Lives on your Mac. <mark>End-to-end encrypted</mark>. Never trains a model.</h2>
       <p class="lede">PortaVox runs on your Mac. The memory of every relationship &mdash; what you discussed, what you promised, what you&rsquo;re owed &mdash; is end-to-end encrypted with a key only you hold.</p>
       <div class="grid-3">
