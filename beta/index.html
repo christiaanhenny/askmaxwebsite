@@ -139,58 +139,124 @@
 
     /* ── Same input demo (the BOOM proof) ─────────────────── */
     .demo-section { padding: 104px 0; }
+    .demo-eyebrow {
+      text-align: center;
+      max-width: 620px;
+      margin: -16px auto 28px;
+      color: var(--fg-muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
     .demo-prompt {
       max-width: 620px;
-      margin: 0 auto 28px;
-      padding: 16px 22px;
+      margin: 0 auto 36px;
+      padding: 18px 24px;
       background: var(--soft);
       border-radius: 14px;
       text-align: center;
-      font-size: 0.95rem;
-      color: var(--fg-muted);
       line-height: 1.5;
     }
-    .demo-prompt em { color: var(--fg); font-style: italic; font-weight: 500; }
+    .demo-prompt em {
+      color: var(--fg);
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.18rem;
+      letter-spacing: -0.005em;
+    }
     .demo-prompt .who {
       font-weight: 700;
-      color: var(--fg);
-      letter-spacing: 0.04em;
+      color: var(--fg-muted);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       display: block;
       margin-bottom: 6px;
     }
     .three-up {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      max-width: 920px;
+      gap: 16px;
+      max-width: 1040px;
       margin: 0 auto;
     }
     .three-up-card {
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 22px 20px;
+      padding: 22px 22px 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       background: #fff;
     }
     .three-up-to {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--fg-muted);
       margin: 0;
     }
-    .three-up-relation { font-size: 1rem; font-weight: 700; margin: 0; }
+    .three-up-relation {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 4px 0 0;
+      letter-spacing: -0.005em;
+    }
+    .three-up-knows {
+      list-style: none;
+      padding: 14px 14px;
+      margin: 0;
+      background: #fffaea;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #5c4a00;
+    }
+    .three-up-knows .knows-label {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #8a6800;
+      margin-bottom: 6px;
+    }
+    .three-up-knows li {
+      padding-left: 12px;
+      position: relative;
+      margin-top: 4px;
+    }
+    .three-up-knows li::before {
+      content: "·";
+      position: absolute;
+      left: 2px;
+      font-weight: 700;
+    }
     .three-up-quote {
-      font-size: 0.94rem;
-      line-height: 1.55;
+      font-size: 0.92rem;
+      line-height: 1.6;
       margin: 0;
       white-space: pre-line;
       flex: 1;
+      padding: 14px 16px;
+      background: var(--soft);
+      border-radius: 10px;
+    }
+    .three-up-quote-label {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 -6px;
+    }
+    .demo-closer {
+      text-align: center;
+      max-width: 720px;
+      margin: 36px auto 0;
+      color: var(--fg-muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
     }
 
     /* ── "It sees what you see" intro + app strip ──────────── */
@@ -574,35 +640,60 @@
       </ol>
     </section>
 
-    <!-- THE BOOM PROOF: same input, different person, different draft -->
+    <!-- THE BOOM PROOF: one prompt, three rich drafts -->
     <section class="demo-section">
-      <h2>Same input. Different person. Different draft.</h2>
+      <h2>You say five words. PortaVox does the rest.</h2>
+      <p class="demo-eyebrow">Each draft pulls only from your past chats, your notes, and your edits. Nothing is invented.</p>
       <p class="demo-prompt">
-        <span class="who">You say, once</span>
-        <em>tell them I&rsquo;m running 15 minutes late, traffic on the A2</em>
+        <span class="who">You say</span>
+        <em>I can&rsquo;t make Friday.</em>
       </p>
       <div class="three-up">
         <article class="three-up-card">
-          <p class="three-up-to">Email &middot; to</p>
-          <p class="three-up-relation">Marcus &middot; investor</p>
-          <p class="three-up-quote">Hi Marcus,
+          <p class="three-up-to">Gmail &middot; to</p>
+          <p class="three-up-relation">Sarah &middot; investor</p>
+          <ul class="three-up-knows">
+            <span class="knows-label">It pulls from</span>
+            <li>Friday with Sarah is the weekly investor sync</li>
+            <li>You owe her runway projections by Friday</li>
+            <li>Her last note: &ldquo;Tue or Wed next week works for me&rdquo;</li>
+          </ul>
+          <p class="three-up-quote-label">Draft</p>
+          <p class="three-up-quote">Hi Sarah,
 
-Apologies, pushed back 15 min, traffic on the A2. Rescheduling the calendar invite now.
+Apologies, I won&rsquo;t be able to make Friday&rsquo;s sync. Could we move to early next week? Tuesday or Wednesday morning works on my side.
+
+The runway projections will still land in your inbox Friday as promised, so you&rsquo;ll have them ahead of whichever slot we land on.
 
 Best,
-Chris</p>
+John</p>
         </article>
         <article class="three-up-card">
           <p class="three-up-to">Slack &middot; to</p>
-          <p class="three-up-relation">Tim &middot; co-founder</p>
-          <p class="three-up-quote">boss running 15 late, A2 traffic. starting without me?</p>
+          <p class="three-up-relation">Marc &middot; co-founder</p>
+          <ul class="three-up-knows">
+            <span class="knows-label">It pulls from</span>
+            <li>Friday with Marc is the v3 design review</li>
+            <li>Open promise: design feedback owed this week</li>
+            <li>You&rsquo;ve edited &ldquo;Hi Marc&rdquo; to &ldquo;Yo&rdquo; once, it learned</li>
+          </ul>
+          <p class="three-up-quote-label">Draft</p>
+          <p class="three-up-quote">Yo, can&rsquo;t do Friday&rsquo;s design review, sorry. Sending my notes on the v3 mockups tonight so you can keep moving. Brunch with Lena still on this weekend?</p>
         </article>
         <article class="three-up-card">
           <p class="three-up-to">WhatsApp &middot; to</p>
           <p class="three-up-relation">Eva &middot; sister</p>
-          <p class="three-up-quote">kom 15 min later zus, A2 staat vast 🙄 begin maar vast met koffie</p>
+          <ul class="three-up-knows">
+            <span class="knows-label">It pulls from</span>
+            <li>Friday with Eva is family dinner at her new place</li>
+            <li>Her marathon is Sunday, inside the cadence window</li>
+            <li>She just moved to Amsterdam</li>
+          </ul>
+          <p class="three-up-quote-label">Draft</p>
+          <p class="three-up-quote">Hey sis, can&rsquo;t make Friday dinner sorry, save me a plate? Good luck at the marathon Sunday btw, you got this! How&rsquo;s the new place coming along?</p>
         </article>
       </div>
+      <p class="demo-closer">Same five words. Three different Fridays. Three different sets of relevant context. PortaVox never invents, and never mixes context between people.</p>
     </section>
 
     <!-- HOW IS THIS POSSIBLE -->
