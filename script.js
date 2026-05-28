@@ -29,56 +29,6 @@ if (nounEl) {
   }, 4400);
 }
 
-// ── Beta signup ───────────────────────────────────────────────────────
-// Posts directly to Supabase (table `beta_signups`, anon-insert RLS policy).
-// The anon key is safe to ship in the client — RLS prevents reads.
-const SUPABASE_URL = 'https://sqcyyrmfvvfzsahnplbv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxY3l5cm1mdnZmenNhaG5wbGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNTgxMjEsImV4cCI6MjA5MjkzNDEyMX0.rglg5uNyGmZXITculZHo_oU8XcqFryrtBbr3A_yY2Uw';
-
-const form = document.getElementById('beta-form');
-const note = document.getElementById('form-note');
-if (form) {
-  const button = form.querySelector('button');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = form.email.value.trim();
-    if (!email) return;
-
-    button.disabled = true;
-    const originalLabel = button.textContent;
-    button.textContent = 'Sending…';
-    note.hidden = true;
-
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/beta_signups`, {
-        method: 'POST',
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal',
-        },
-        body: JSON.stringify({
-          email,
-          user_agent: navigator.userAgent,
-          source: document.body.dataset.pageSource || 'portavox.ai/download',
-        }),
-      });
-
-      if (res.ok || res.status === 409) {
-        form.innerHTML = '<p class="form-success">You\'re on the list. We\'ll be in touch soon.</p>';
-      } else {
-        throw new Error(`HTTP ${res.status}`);
-      }
-    } catch (err) {
-      button.disabled = false;
-      button.textContent = originalLabel;
-      note.hidden = false;
-      note.textContent = 'Something went wrong. Try again or email chris@studysmart.ai.';
-    }
-  });
-}
-
 // ── Beta access gate ──────────────────────────────────────────────────
 // Casual gate, not real security. The /beta/ page is invite-only — first
 // visitors see a password card, returning visitors see the page directly
@@ -145,8 +95,9 @@ function isBetaUnlocked() {
 
 // ── Latest release download CTA ───────────────────────────────────────
 // Pulls the latest published release from the AskMax repo and points
-// the download button at its .dmg asset. Falls back silently if the
-// API call fails (button keeps its hardcoded href = releases page).
+// the download button at its .dmg asset. If no release exists yet or
+// the API call fails, the section stays hidden — testers see only the
+// marketing content above. No fallback waitlist form anymore.
 async function loadLatestRelease() {
   const section = document.getElementById('download-section');
   const cta = document.getElementById('download-cta');
