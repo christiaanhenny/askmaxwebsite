@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terms of Service &middot; PortaVox</title>
+  <meta name="description" content="The legal terms that govern your use of PortaVox.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Long-form legal document — narrower reading column than the
+       landing's 880px main, generous vertical rhythm, no decorative
+       tricks. Mirrors /privacy/ so the visual transition feels
+       coherent. */
+    .doc {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+    .doc h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    .doc .updated {
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+      margin: 0 0 32px;
+    }
+    .doc .lede {
+      font-size: 1.15rem;
+      line-height: 1.55;
+      color: var(--fg);
+      margin: 0 0 48px;
+    }
+    .doc h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 56px 0 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .doc h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+    .doc h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 24px 0 8px;
+    }
+    .doc p, .doc ul, .doc ol {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--fg);
+    }
+    .doc ul, .doc ol { padding-left: 22px; margin: 12px 0 16px; }
+    .doc li { margin: 4px 0; }
+    .doc strong { font-weight: 700; }
+    .doc a {
+      color: var(--fg);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(0,0,0,0.3);
+    }
+    .doc a:hover { text-decoration-color: var(--fg); }
+    .doc code {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      padding: 1px 6px;
+      background: var(--soft);
+      border-radius: 4px;
+    }
+    .callout {
+      padding: 16px 18px;
+      background: var(--soft);
+      border-radius: 10px;
+      margin: 20px 0;
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .doc .legal-note {
+      font-size: 0.92rem;
+      color: var(--fg-muted);
+      font-style: italic;
+    }
+    @media (max-width: 600px) {
+      .doc { padding: 32px 20px 64px; }
+      .doc h2 { font-size: 1.3rem; margin-top: 40px; padding-top: 20px; }
+    }
+  </style>
+</head>
+<body data-page-source="portavox.ai/terms">
+  <nav>
+    <a class="logo" href="/beta">PortaVox</a>
+    <a class="nav-cta" href="/beta">Back to beta</a>
+  </nav>
+
+  <main>
+    <article class="doc">
+      <h1>Terms of Service</h1>
+      <p class="updated">Last updated: 28 May 2026 &middot; Version 1.0</p>
+
+      <p class="lede">These Terms of Service (&ldquo;Terms&rdquo;) govern your use of PortaVox. By installing or using the application, you agree to be bound by these Terms. If you do not agree, do not install or use PortaVox.</p>
+
+      <div class="callout">
+        <strong>Plain-language summary</strong>
+        PortaVox is currently in private beta. We provide it &ldquo;as is&rdquo; while we figure things out together. Your data stays encrypted on your device. Don&rsquo;t abuse the service, don&rsquo;t reverse-engineer it, and we&rsquo;ll do our best to make it useful for you. Swiss law applies. If something breaks, our liability is capped at what you paid (which during the beta is zero).
+      </div>
+
+      <h2>1. Who we are</h2>
+      <p>PortaVox is operated by <strong>Good Ventures SAGL</strong>, a Swiss limited liability company (Società a Garanzia Limitata) registered in Ticino, Switzerland (&ldquo;PortaVox,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;). You can reach us at <a href="mailto:christiaan.henny@portavox.ai">christiaan.henny@portavox.ai</a> for general questions, <a href="mailto:privacy@portavox.ai">privacy@portavox.ai</a> for privacy matters, or <a href="mailto:security@portavox.ai">security@portavox.ai</a> for security disclosures.</p>
+
+      <h2>2. The Service</h2>
+      <p>PortaVox is a desktop application for macOS that helps you write in your own voice across email, chat, and messaging apps. It uses on-device storage for your personal context (writing style, contacts, memory facts, conversation history) and routes inference requests to third-party AI providers for one-shot text generation. Detailed information about how data flows and where it is processed is in our <a href="/privacy/">Privacy &amp; Security</a> policy, which is incorporated into these Terms by reference.</p>
+      <p>We may add, change, or remove features at any time. We will give reasonable notice for material changes that affect existing users, except where immediate change is required for security, legal, or operational reasons.</p>
+
+      <h2>3. Eligibility and accounts</h2>
+      <p>You must be at least 18 years old and capable of entering into a binding agreement under applicable law to use PortaVox. By using PortaVox, you represent that you meet these requirements.</p>
+      <p>You are responsible for keeping your account credentials and your <strong>encryption passphrase</strong> secure. The encryption passphrase is the only key to your synced data; we cannot recover it for you. If you lose it, the data synced to other devices becomes unreadable. We are not liable for any loss of access resulting from a forgotten or compromised passphrase.</p>
+      <p>You are responsible for all activity that occurs through your account, whether authorised by you or not.</p>
+
+      <h2>4. Beta software</h2>
+      <p>During the beta period, PortaVox is provided as pre-release software for evaluation purposes. This means:</p>
+      <ul>
+        <li>The service may contain bugs, performance issues, and incomplete features.</li>
+        <li>We may suspend, restart, or temporarily disable the service for maintenance, debugging, or fixes without prior notice.</li>
+        <li>We may collect crash reports, anonymous usage statistics, and your direct feedback to improve the service. See the <a href="/privacy/">Privacy &amp; Security</a> policy for the specifics of what we collect.</li>
+        <li>Features available during the beta may change or be removed in subsequent releases.</li>
+        <li>We may end the beta at any time. We will give reasonable notice before disabling beta access.</li>
+      </ul>
+      <p>You should not rely on PortaVox for any critical workflow during the beta period. Keep your own backups of important content. We are not responsible for content that is lost because of beta-stage instability.</p>
+
+      <h2>5. Acceptable use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use PortaVox in violation of any applicable law or regulation, including export controls, sanctions, or privacy laws.</li>
+        <li>Use PortaVox to generate content that is unlawful, harassing, defamatory, fraudulent, threatening, infringing on intellectual property rights, or otherwise harmful.</li>
+        <li>Attempt to reverse-engineer, decompile, disassemble, or otherwise derive the source code or underlying ideas of PortaVox, except to the extent that applicable law expressly permits despite this restriction.</li>
+        <li>Bypass, disable, or interfere with any security, rate-limiting, authentication, or encryption mechanism in the service.</li>
+        <li>Use automated means (bots, scrapers, scripts) to access the service except through documented interfaces.</li>
+        <li>Sell, resell, sublicense, redistribute, or share access to PortaVox or your account credentials with any third party.</li>
+        <li>Use the service to send unsolicited communications (spam) or to impersonate any person or entity.</li>
+        <li>Submit content that contains malware, viruses, or other harmful code.</li>
+      </ul>
+      <p>We may suspend or terminate accounts that violate this section. For serious or repeated violations, suspension may be immediate and without prior notice.</p>
+
+      <h2>6. Your content</h2>
+      <p>You retain all rights to the content you create, paste into, or generate through PortaVox (&ldquo;Your Content&rdquo;). We do not claim ownership of Your Content.</p>
+      <p>You grant us a limited, non-exclusive, royalty-free licence to process Your Content solely as necessary to provide the service to you (for example, transmitting an inference request to an AI provider during a ⌥&nbsp;Space generation). This licence ends when you stop using the service or delete the content from your device, whichever occurs first.</p>
+      <p>You are solely responsible for Your Content. You represent that you have the rights necessary to use it with PortaVox and that doing so does not infringe any third-party rights or violate any law.</p>
+
+      <h2>7. Our intellectual property</h2>
+      <p>The PortaVox name, the PortaVox application, our website, our documentation, our trademarks, and all related materials are owned by Good Ventures SAGL or its licensors and are protected by Swiss and international intellectual-property laws. We grant you a personal, non-exclusive, non-transferable, revocable licence to install and use PortaVox on devices you own or control, solely for your own use, subject to these Terms. All rights not expressly granted are reserved.</p>
+
+      <h2>8. Third-party services</h2>
+      <p>PortaVox depends on third-party services to function, including Google Cloud (Vertex AI), OpenAI, Supabase, Lemon Squeezy, and Cloudflare. Your use of PortaVox is subject to those third parties&rsquo; own terms and privacy policies as applicable to the data they process on our behalf. We list each sub-processor on the <a href="/privacy/">Privacy &amp; Security</a> page.</p>
+      <p>We are not responsible for the availability or accuracy of any third-party service, and we are not responsible for content generated by third-party AI models. Generated content may contain inaccuracies, omissions, or material that does not reflect your views or intentions. Review generated content before relying on it.</p>
+
+      <h2>9. Fees</h2>
+      <p>During the beta period, PortaVox is provided free of charge. Once the service exits beta, paid subscriptions may be introduced. We will notify you in advance before applying any fees to your account, and you will have the option to cancel before charges begin.</p>
+      <p>When paid plans become available, billing will be handled by Lemon Squeezy as the merchant of record. Their own terms will apply to the payment portion of the transaction.</p>
+
+      <h2>10. Disclaimer of warranties</h2>
+      <p>PortaVox is provided <strong>&ldquo;as is&rdquo;</strong> and <strong>&ldquo;as available&rdquo;</strong>, without any warranty of any kind, express or implied, including without limitation warranties of merchantability, fitness for a particular purpose, non-infringement, accuracy, reliability, or uninterrupted availability. We do not warrant that the service will meet your requirements, that defects will be corrected, or that the service will be free of errors, malware, or interruptions.</p>
+      <p>To the maximum extent permitted by applicable law, we disclaim all warranties not expressly stated in these Terms. Some jurisdictions do not allow the exclusion of implied warranties; in those jurisdictions, the exclusions in this section apply only to the extent permitted.</p>
+
+      <h2>11. Limitation of liability</h2>
+      <p>To the maximum extent permitted by applicable law, neither Good Ventures SAGL nor its affiliates, directors, employees, or agents will be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, including without limitation damages for lost profits, lost data, loss of goodwill, business interruption, or any other intangible loss, arising out of or in connection with your use of (or inability to use) PortaVox, whether based on warranty, contract, tort (including negligence), or any other legal theory, even if we have been advised of the possibility of such damages.</p>
+      <p>Our total aggregate liability to you for any claim arising from or related to these Terms or your use of PortaVox will not exceed the greater of (a) the amount you paid to us in the twelve (12) months immediately preceding the event giving rise to the claim, or (b) one hundred Swiss francs (CHF 100). During the beta period, where you pay nothing, this limit means our liability is capped at CHF 100.</p>
+      <p>These limitations apply regardless of whether the damages were foreseeable. Some jurisdictions do not allow the exclusion or limitation of certain damages; in those jurisdictions, our liability is limited to the smallest amount permitted by law.</p>
+
+      <h2>12. Indemnification</h2>
+      <p>You agree to defend, indemnify, and hold harmless Good Ventures SAGL and its affiliates, directors, employees, and agents from and against any claims, damages, liabilities, losses, costs, and expenses (including reasonable legal fees) arising out of or related to: (a) your use of PortaVox in violation of these Terms or applicable law; (b) Your Content; or (c) your infringement of any third-party right, including intellectual-property, privacy, or publicity rights.</p>
+
+      <h2>13. Termination</h2>
+      <p>You may stop using PortaVox at any time. You may also request deletion of your account by emailing <a href="mailto:privacy@portavox.ai">privacy@portavox.ai</a>. See the <a href="/privacy/">Privacy &amp; Security</a> policy for the data-deletion procedure.</p>
+      <p>We may suspend or terminate your access to PortaVox at any time, with or without cause and with or without notice. Reasons for termination may include violation of these Terms, suspected fraud or abuse, technical or security risk to the service or its users, or discontinuation of the service.</p>
+      <p>Upon termination, your right to use PortaVox ceases immediately. Sections of these Terms that by their nature should survive termination &mdash; including ownership, disclaimers, limitations of liability, indemnification, and governing law &mdash; will survive.</p>
+
+      <h2>14. Changes to the Service or these Terms</h2>
+      <p>We may modify these Terms from time to time. If we make material changes, we will notify you in advance through reasonable means, such as an in-app notification or an email to the address associated with your account. The updated Terms take effect on the date specified in the notice. Your continued use of PortaVox after that date constitutes acceptance of the updated Terms. If you do not agree, you must stop using PortaVox and may request deletion of your account.</p>
+
+      <h2>15. Export and sanctions compliance</h2>
+      <p>You agree to comply with all applicable export-control laws and sanctions regulations of Switzerland, the European Union, the United States, and any other jurisdiction that applies to you. You represent that you are not located in, and you will not use PortaVox in or from, a country or territory subject to comprehensive Swiss, EU, UK, or US sanctions, and that you are not listed on any government list of prohibited or restricted parties.</p>
+
+      <h2>16. Governing law and dispute resolution</h2>
+      <p>These Terms are governed by the substantive laws of Switzerland, without regard to its conflict-of-laws principles. The United Nations Convention on Contracts for the International Sale of Goods (CISG) does not apply.</p>
+      <p>Any dispute, claim, or controversy arising out of or relating to these Terms or your use of PortaVox will be submitted to the exclusive jurisdiction of the competent courts of the Canton of Ticino, Switzerland, subject to appeal to the Swiss Federal Supreme Court as provided by Swiss law. If you are a consumer with mandatory consumer-protection rights under the law of your country of residence, nothing in this section deprives you of the protection of those mandatory provisions.</p>
+
+      <h2>17. Miscellaneous</h2>
+      <h3>Entire agreement</h3>
+      <p>These Terms, together with the <a href="/privacy/">Privacy &amp; Security</a> policy, constitute the entire agreement between you and Good Ventures SAGL regarding PortaVox and supersede any prior or contemporaneous agreements or communications, whether written or oral.</p>
+      <h3>Severability</h3>
+      <p>If any provision of these Terms is held to be invalid, illegal, or unenforceable, the remaining provisions will remain in full force and effect, and the invalid provision will be replaced by an enforceable provision that most closely reflects the original intent.</p>
+      <h3>No waiver</h3>
+      <p>Our failure to enforce any provision of these Terms is not a waiver of that provision or our right to enforce it later.</p>
+      <h3>Assignment</h3>
+      <p>You may not assign or transfer your rights or obligations under these Terms without our prior written consent. We may assign these Terms to an affiliate or in connection with a merger, acquisition, reorganisation, or sale of assets.</p>
+      <h3>Headings</h3>
+      <p>Section headings are for convenience only and do not affect interpretation.</p>
+      <h3>Notices</h3>
+      <p>We may send notices to you by email to the address associated with your account or by posting them in the application or on our website. You may send notices to us by email to <a href="mailto:christiaan.henny@portavox.ai">christiaan.henny@portavox.ai</a>.</p>
+
+      <div class="callout">
+        <strong>Questions about these Terms?</strong>
+        Email <a href="mailto:christiaan.henny@portavox.ai">christiaan.henny@portavox.ai</a>. For privacy or security matters, use the dedicated addresses listed at the top of this page.
+      </div>
+
+      <p class="legal-note">These Terms are written in English. Translations are provided for convenience only; the English version governs in case of any inconsistency.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p><strong>PortaVox</strong> &middot; Carries your voice.</p>
+    <p>&copy; 2026 PortaVox &middot; <a href="/privacy/">Privacy &amp; Security</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="mailto:christiaan.henny@portavox.ai">christiaan.henny@portavox.ai</a></p>
+  </footer>
+</body>
+</html>
