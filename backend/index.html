@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>PortaVox · backend</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900' fill='black'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #0a0a0a;
+      --fg-muted: #666;
+      --border: #e8e8e8;
+      --soft: #f6f6f6;
+      --accent: #0a0a0a;
+      --good: #16a34a;
+      --warn: #d97706;
+      --bad: #dc2626;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+    }
+
+    /* ── Password gate ─────────────────────────── */
+    .gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .gate-card {
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+    .gate-card h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+    }
+    .gate-card p {
+      color: var(--fg-muted);
+      font-size: 14px;
+      margin: 0 0 24px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.15s;
+    }
+    .gate-input:focus { border-color: var(--fg); }
+    .gate-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--fg);
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .gate-error {
+      color: var(--bad);
+      font-size: 13px;
+      margin-top: 12px;
+      min-height: 1.2em;
+    }
+
+    /* ── Dashboard ─────────────────────────────── */
+    .dash {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .dash-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .dash-title .sub {
+      color: var(--fg-muted);
+      font-weight: 500;
+    }
+    .dash-meta {
+      font-size: 12px;
+      color: var(--fg-muted);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .refresh-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      color: inherit;
+    }
+    .refresh-btn:hover { background: var(--soft); }
+
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg-muted);
+      font-weight: 700;
+      margin: 32px 0 12px;
+    }
+
+    /* Funnel */
+    .funnel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .funnel-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .funnel-card .label {
+      font-size: 12px;
+      color: var(--fg-muted);
+      font-weight: 500;
+    }
+    .funnel-card .value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 4px;
+    }
+    .funnel-card .pct {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-top: 2px;
+    }
+
+    /* Daily chart row */
+    .chart-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .chart-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .chart-card .title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .chart-card .summary {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-bottom: 12px;
+    }
+    .chart-card svg {
+      display: block;
+      width: 100%;
+      height: 80px;
+    }
+
+    /* Latency widget */
+    .lat {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .lat .row {
+      display: flex;
+      gap: 32px;
+      align-items: baseline;
+    }
+    .lat .v {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .lat .k {
+      font-size: 12px;
+      color: var(--fg-muted);
+    }
+
+    /* User table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      font-weight: 600;
+      color: var(--fg-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    th.num { text-align: right; }
+    td.muted { color: var(--fg-muted); }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .pill.good { background: #dcfce7; color: var(--good); }
+    .pill.warn { background: #fef3c7; color: var(--warn); }
+    .pill.cold { background: var(--soft); color: var(--fg-muted); }
+
+    .empty {
+      color: var(--fg-muted);
+      font-size: 14px;
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    /* Loading state */
+    .loading {
+      color: var(--fg-muted);
+      font-size: 14px;
+      padding: 64px 0;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .dash { padding: 20px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Password gate -->
+  <div id="gate" class="gate">
+    <form class="gate-card" id="gate-form">
+      <h1>PortaVox · backend</h1>
+      <p>Enter the admin token to view beta usage.</p>
+      <input
+        type="password"
+        class="gate-input"
+        id="gate-input"
+        placeholder="admin token"
+        autocomplete="current-password"
+        autofocus
+        required
+      >
+      <button type="submit" class="gate-btn">Unlock</button>
+      <div class="gate-error" id="gate-error"></div>
+    </form>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dash" class="dash" hidden>
+    <div class="dash-header">
+      <div class="dash-title">PortaVox · <span class="sub">beta backend</span></div>
+      <div class="dash-meta">
+        <span id="dash-generated"></span>
+        <button class="refresh-btn" id="refresh-btn">Refresh</button>
+      </div>
+    </div>
+
+    <div id="dash-body">
+      <div class="loading">Loading…</div>
+    </div>
+  </div>
+
+  <script>
+    const ENDPOINT = "https://sqcyyrmfvvfzsahnplbv.supabase.co/functions/v1/beta-stats";
+    const STORAGE_KEY = "portavox.backend.token";
+
+    const gateEl   = document.getElementById("gate");
+    const gateForm = document.getElementById("gate-form");
+    const gateInp  = document.getElementById("gate-input");
+    const gateErr  = document.getElementById("gate-error");
+    const dashEl   = document.getElementById("dash");
+    const dashBody = document.getElementById("dash-body");
+    const dashGen  = document.getElementById("dash-generated");
+
+    async function fetchStats(token) {
+      const resp = await fetch(ENDPOINT, {
+        method: "GET",
+        headers: { "x-beta-stats-token": token },
+      });
+      if (resp.status === 401) throw new Error("Invalid token.");
+      if (!resp.ok) throw new Error("Server error (" + resp.status + ").");
+      return resp.json();
+    }
+
+    function fmtDate(s) {
+      if (!s) return "—";
+      const d = new Date(s);
+      return d.toLocaleDateString("en-CA"); // YYYY-MM-DD
+    }
+    function fmtDateTime(s) {
+      if (!s) return "—";
+      return new Date(s).toLocaleString();
+    }
+    function pct(n, d) {
+      if (!d) return "—";
+      return Math.round((n / d) * 100) + "%";
+    }
+
+    function renderFunnel(f) {
+      const cards = [
+        { label: "signups",         value: f.signups,        of: null },
+        { label: "first AI call",   value: f.first_ai_call,  of: f.signups },
+        { label: "first paste",     value: f.first_paste,    of: f.signups },
+        { label: "E2EE activated",  value: f.e2ee_activated, of: f.signups },
+      ];
+      return `
+        <div class="section-title">Funnel</div>
+        <div class="funnel">
+          ${cards.map(c => `
+            <div class="funnel-card">
+              <div class="label">${c.label}</div>
+              <div class="value">${c.value}</div>
+              ${c.of !== null ? `<div class="pct">${pct(c.value, c.of)} of signups</div>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function sparkline(values, color) {
+      if (!values.length) {
+        return `<svg viewBox="0 0 100 30" preserveAspectRatio="none"></svg>`;
+      }
+      const max = Math.max(...values, 1);
+      const w = 100;
+      const h = 30;
+      const step = values.length > 1 ? w / (values.length - 1) : 0;
+      const pts = values.map((v, i) => {
+        const x = i * step;
+        const y = h - (v / max) * h;
+        return `${x.toFixed(2)},${y.toFixed(2)}`;
+      }).join(" ");
+      const last = values[values.length - 1];
+      const lastX = (values.length - 1) * step;
+      const lastY = h - (last / max) * h;
+      return `
+        <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+          <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+          <circle cx="${lastX}" cy="${lastY}" r="1.5" fill="${color}"/>
+        </svg>
+      `;
+    }
+
+    function renderDaily(daily) {
+      const dau   = daily.map(d => d.dau);
+      const calls = daily.map(d => d.ai_calls);
+      const paste = daily.map(d => d.pastes);
+      const sum = a => a.reduce((s, x) => s + x, 0);
+      return `
+        <div class="section-title">Last 30 days</div>
+        <div class="chart-row">
+          <div class="chart-card">
+            <div class="title">DAU</div>
+            <div class="summary">${dau.length ? Math.max(...dau) : 0} peak · ${dau.length ? dau[dau.length - 1] : 0} today</div>
+            ${sparkline(dau, "#0a0a0a")}
+          </div>
+          <div class="chart-card">
+            <div class="title">AI calls</div>
+            <div class="summary">${sum(calls)} total · ${calls.length ? calls[calls.length - 1] : 0} today</div>
+            ${sparkline(calls, "#0a0a0a")}
+          </div>
+          <div class="chart-card">
+            <div class="title">Pastes</div>
+            <div class="summary">${sum(paste)} total · ${paste.length ? paste[paste.length - 1] : 0} today</div>
+            ${sparkline(paste, "#16a34a")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderLatency(lat) {
+      return `
+        <div class="section-title">Latency · last 7 days</div>
+        <div class="lat">
+          <div class="row">
+            <div>
+              <div class="v">${lat.avg_ms !== null ? lat.avg_ms + " ms" : "—"}</div>
+              <div class="k">avg router latency</div>
+            </div>
+            <div>
+              <div class="v">${lat.samples}</div>
+              <div class="k">samples</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function activityPill(last_active) {
+      if (!last_active) return `<span class="pill cold">never</span>`;
+      const days = Math.floor((Date.now() - new Date(last_active).getTime()) / 86400000);
+      if (days <= 1) return `<span class="pill good">today/yest</span>`;
+      if (days <= 7) return `<span class="pill warn">${days}d ago</span>`;
+      return `<span class="pill cold">${days}d ago</span>`;
+    }
+
+    function renderUsers(users) {
+      if (!users.length) {
+        return `<div class="section-title">Users</div><div class="empty">No signups yet.</div>`;
+      }
+      return `
+        <div class="section-title">Users · sorted by last active</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Signup</th>
+              <th>Activity</th>
+              <th class="num">7d calls</th>
+              <th class="num">7d pastes</th>
+              <th class="num">Total calls</th>
+              <th class="num">Total pastes</th>
+              <th>E2EE</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${users.map(u => `
+              <tr>
+                <td>${u.email ?? `<span class="muted">${u.user_id.slice(0, 8)}…</span>`}</td>
+                <td class="muted">${fmtDate(u.signup_at)}</td>
+                <td>${activityPill(u.last_active)}</td>
+                <td class="num">${u.last7_calls}</td>
+                <td class="num">${u.last7_pastes}</td>
+                <td class="num muted">${u.total_calls}</td>
+                <td class="num muted">${u.total_pastes}</td>
+                <td>${u.e2ee_activated_at ? `<span class="pill good">on</span>` : `<span class="pill cold">—</span>`}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function render(stats) {
+      dashGen.textContent = "Generated " + fmtDateTime(stats.generated_at);
+      dashBody.innerHTML = [
+        renderFunnel(stats.funnel),
+        renderDaily(stats.daily),
+        renderLatency(stats.latency_7d),
+        renderUsers(stats.per_user),
+      ].join("");
+    }
+
+    async function loadDashboard(token) {
+      gateEl.hidden = true;
+      dashEl.hidden = false;
+      dashBody.innerHTML = `<div class="loading">Loading…</div>`;
+      try {
+        const stats = await fetchStats(token);
+        render(stats);
+      } catch (e) {
+        if (e.message === "Invalid token.") {
+          sessionStorage.removeItem(STORAGE_KEY);
+          showGate("Token rejected. Try again.");
+        } else {
+          dashBody.innerHTML = `<div class="empty">Failed to load: ${e.message}</div>`;
+        }
+      }
+    }
+
+    function showGate(errMsg) {
+      gateEl.hidden = false;
+      dashEl.hidden = true;
+      gateErr.textContent = errMsg || "";
+      gateInp.value = "";
+      setTimeout(() => gateInp.focus(), 0);
+    }
+
+    gateForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      gateErr.textContent = "";
+      const token = gateInp.value.trim();
+      if (!token) return;
+      try {
+        await fetchStats(token); // probe
+        sessionStorage.setItem(STORAGE_KEY, token);
+        await loadDashboard(token);
+      } catch (err) {
+        gateErr.textContent = err.message;
+      }
+    });
+
+    document.getElementById("refresh-btn").addEventListener("click", () => {
+      const token = sessionStorage.getItem(STORAGE_KEY);
+      if (token) loadDashboard(token);
+    });
+
+    const cached = sessionStorage.getItem(STORAGE_KEY);
+    if (cached) {
+      loadDashboard(cached);
+    }
+  </script>
+</body>
+</html>
