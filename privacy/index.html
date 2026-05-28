@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy &amp; Security &middot; PortaVox</title>
+  <meta name="description" content="PortaVox encrypts your writing style, contacts, memory, and conversations on-device before they sync. Server-side ciphertext only. Inference via Vertex AI in the EU.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-family='-apple-system,sans-serif' font-weight='900'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Page-local styles. The privacy/security page is a long-form reading
+       surface so it deserves a calmer width than the landing's 880px main —
+       narrower line-length, generous vertical rhythm, no decorative tricks. */
+    .doc {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+    .doc h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    .doc .updated {
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+      margin: 0 0 32px;
+    }
+    .doc .lede {
+      font-size: 1.15rem;
+      line-height: 1.55;
+      color: var(--fg);
+      margin: 0 0 48px;
+    }
+    .doc h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 56px 0 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .doc h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+    .doc h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 24px 0 8px;
+    }
+    .doc p, .doc ul, .doc ol {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--fg);
+    }
+    .doc ul, .doc ol { padding-left: 22px; margin: 12px 0 16px; }
+    .doc li { margin: 4px 0; }
+    .doc strong { font-weight: 700; }
+    .doc a {
+      color: var(--fg);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(0,0,0,0.3);
+    }
+    .doc a:hover { text-decoration-color: var(--fg); }
+    .doc code {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      padding: 1px 6px;
+      background: var(--soft);
+      border-radius: 4px;
+    }
+    .doc table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 0.95rem;
+    }
+    .doc th, .doc td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc th {
+      font-weight: 700;
+      background: var(--soft);
+      font-size: 0.88rem;
+    }
+    .callout {
+      padding: 16px 18px;
+      background: var(--soft);
+      border-radius: 10px;
+      margin: 20px 0;
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+    .callout strong { display: block; margin-bottom: 4px; }
+    @media (max-width: 600px) {
+      .doc { padding: 32px 20px 64px; }
+      .doc h2 { font-size: 1.3rem; margin-top: 40px; padding-top: 20px; }
+    }
+  </style>
+</head>
+<body data-page-source="portavox.ai/privacy">
+  <nav>
+    <a class="logo" href="/beta">PortaVox</a>
+    <a class="nav-cta" href="/beta">Back to beta</a>
+  </nav>
+
+  <main>
+    <article class="doc">
+      <h1>Privacy &amp; Security</h1>
+      <p class="updated">Last updated: 28 May 2026</p>
+
+      <p class="lede">PortaVox is built around a simple principle: the model that knows your voice should not require us to know your voice. Your writing style, your contacts, your memory, your conversations — all of it stays encrypted on your device before anything reaches our servers. This page is the technical detail behind that promise.</p>
+
+      <h2>What&rsquo;s encrypted</h2>
+      <p>Encrypted on your Mac before it syncs to our servers:</p>
+      <ul>
+        <li>Writing styles and analysed patterns</li>
+        <li>Contacts and what PortaVox remembers about each one</li>
+        <li>Conversations (your paste history)</li>
+        <li>Memory facts (what PortaVox knows about you)</li>
+        <li>Chat sessions and messages</li>
+        <li>Project contexts and uploaded documents</li>
+        <li>User settings</li>
+      </ul>
+      <p><strong>How:</strong> Argon2id key derivation (64&nbsp;MB memory, 3 iterations) combined with XChaCha20-Poly1305 authenticated encryption. The same primitives Bitwarden, 1Password, and Signal use. Your encryption passphrase is the only key. We genuinely cannot read your synced data &mdash; not us, not our database administrators, not a court order, not a breach. The ciphertext on our servers is opaque without your passphrase.</p>
+
+      <h2>Where AI inference runs</h2>
+      <p>When you press <code>⌥&nbsp;Space</code>, your request leaves your device for one inference call:</p>
+      <h3>Primary model (text generation)</h3>
+      <p>Google Vertex AI in the Netherlands (<code>europe-west4</code> region). Google Cloud&rsquo;s standard <a href="https://cloud.google.com/terms/data-processing-addendum" rel="noopener">Data Processing Agreement</a> auto-attaches to our account. Google does not train on API data and does not retain prompts or responses beyond what is necessary to serve the request.</p>
+      <h3>Voice transcription</h3>
+      <p>OpenAI&rsquo;s API (<code>gpt-4o-mini-transcribe</code>). OpenAI&rsquo;s API policy excludes training on customer data by default. We are working toward Zero Data Retention enrolment for this endpoint as a belt-and-braces measure.</p>
+      <h3>Routing and web search (rare features)</h3>
+      <p>OpenAI&rsquo;s <code>gpt-4o-mini</code> for two specific paths &mdash; the intent classifier that decides what action you want, and the optional web-search variant inside chat mode. Same no-training policy applies.</p>
+      <p>Our edge functions do not log prompt content. Once your response streams back, the request is discarded.</p>
+
+      <h2>What stays plaintext on our servers</h2>
+      <p>We are honest about the full list of plaintext metadata we keep:</p>
+      <ul>
+        <li><strong>Subscription tier</strong> &mdash; for billing (Pro vs Free)</li>
+        <li><strong>Rate-limit counters</strong> &mdash; incremented per request, no message content</li>
+        <li><strong>Per-paste savings counter</strong> &mdash; anonymised count of how many generations you have made</li>
+        <li><strong>Crash reports</strong> &mdash; stack traces only, no user content; sent with consent</li>
+        <li><strong>Email address</strong> &mdash; for account login and beta communications</li>
+      </ul>
+      <p>Everything else &mdash; the actual data PortaVox knows about you &mdash; is ciphertext-only on our servers.</p>
+
+      <h2>Your encryption passphrase</h2>
+      <p>Your passphrase is generated by you when you first set up PortaVox. We never see it. We have no recovery mechanism. If you lose your passphrase, your synced data on other devices stops being readable &mdash; treat it like a password-manager master password. We recommend writing it down in your password manager during setup.</p>
+      <p>If you change your passphrase, your encrypted data does not need to re-sync. We re-wrap the same data encryption key with the new passphrase-derived key &mdash; fast and bandwidth-free.</p>
+
+      <h2>Sub-processors</h2>
+      <p>The third parties that handle any PortaVox data:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>What they process</th>
+            <th>Location</th>
+            <th>DPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Supabase</td>
+            <td>Encrypted blobs plus the metadata listed above</td>
+            <td>EU (Frankfurt)</td>
+            <td>Signed</td>
+          </tr>
+          <tr>
+            <td>Google Cloud (Vertex AI)</td>
+            <td>Plaintext prompts during inference (not retained)</td>
+            <td>EU (Netherlands)</td>
+            <td>Signed</td>
+          </tr>
+          <tr>
+            <td>OpenAI</td>
+            <td>Voice transcription, intent classifier, web search</td>
+            <td>US</td>
+            <td>Standard API terms</td>
+          </tr>
+          <tr>
+            <td>Lemon Squeezy</td>
+            <td>Billing data (subscription tier, email, payment method)</td>
+            <td>US / EU</td>
+            <td>Signed</td>
+          </tr>
+          <tr>
+            <td>Cloudflare</td>
+            <td>DNS for portavox.ai</td>
+            <td>Global</td>
+            <td>Signed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Your rights (GDPR)</h2>
+      <p>You can:</p>
+      <ul>
+        <li><strong>Export all data we hold about you</strong> &mdash; email <a href="mailto:privacy@portavox.ai">privacy@portavox.ai</a>. We respond within 30 days.</li>
+        <li><strong>Delete your account and all associated data</strong> &mdash; same address. Deletion within 30 days.</li>
+        <li><strong>Correct inaccurate metadata</strong> &mdash; same channel.</li>
+      </ul>
+      <p>For most of your data, deletion is immediate and local: signing out of PortaVox wipes the local cache on that device. Server-side ciphertext deletion follows your account-delete request.</p>
+
+      <h2>Security disclosure</h2>
+      <p>If you find a security issue, please email <a href="mailto:security@portavox.ai">security@portavox.ai</a> before public disclosure. We respond within 48&nbsp;hours.</p>
+
+      <h2>What we are not (yet)</h2>
+      <p>We are honest about what we have not built yet, because vague claims invite the opposite of trust:</p>
+      <ul>
+        <li><strong>SOC&nbsp;2</strong> &mdash; planned for 2027. The architecture above is what carries the trust story today; SOC&nbsp;2 is the formal audit of it later.</li>
+        <li><strong>Customer-managed encryption keys</strong> &mdash; Vertex AI supports CMEK at the GCP layer, but PortaVox&rsquo;s user data already uses user-controlled keys (your passphrase), which is the equivalent guarantee one layer up.</li>
+        <li><strong>HIPAA / BAA</strong> &mdash; out of scope for V1. PortaVox is not intended for protected health information.</li>
+        <li><strong>On-premise deployment</strong> &mdash; out of scope. Reach out if your use case requires it.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Questions?</strong>
+        Email <a href="mailto:privacy@portavox.ai">privacy@portavox.ai</a> &mdash; we read every message.
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p><strong>PortaVox</strong> &middot; Carries your voice.</p>
+    <p>&copy; 2026 PortaVox &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:privacy@portavox.ai">privacy@portavox.ai</a></p>
+  </footer>
+</body>
+</html>
