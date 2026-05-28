@@ -115,10 +115,13 @@ async function loadLatestRelease() {
     const dmg = (data.assets || []).find(a => a.name.toLowerCase().endsWith('.dmg'));
     if (!dmg) return;
     cta.href = dmg.browser_download_url;
-    // Mirror the .dmg URL onto the in-hero "Download for Mac" button too,
-    // so both CTAs always point at the same artifact.
-    const heroCta = document.getElementById('hero-download-cta');
-    if (heroCta) heroCta.href = dmg.browser_download_url;
+    // Mirror the .dmg URL onto every secondary download button on the
+    // page so all three CTAs (top card, hero, closing section) always
+    // point at the same artifact.
+    for (const id of ['hero-download-cta', 'footer-download-cta']) {
+      const btn = document.getElementById(id);
+      if (btn) btn.href = dmg.browser_download_url;
+    }
     const version = data.tag_name || '';
     if (title) title.textContent = version ? `PortaVox ${version}` : 'PortaVox';
     if (meta) {
