@@ -137,10 +137,15 @@
       <p>When you press <code>⌥&nbsp;Space</code>, your request leaves your device for one inference call:</p>
       <h3>Primary model (text generation)</h3>
       <p>Google Vertex AI in the Netherlands (<code>europe-west4</code> region). Google Cloud&rsquo;s standard <a href="https://cloud.google.com/terms/data-processing-addendum" rel="noopener">Data Processing Agreement</a> auto-attaches to our account. Google does not train on API data and does not retain prompts or responses beyond what is necessary to serve the request.</p>
-      <h3>Voice transcription</h3>
-      <p>OpenAI&rsquo;s API (<code>gpt-4o-mini-transcribe</code>). OpenAI&rsquo;s API policy excludes training on customer data by default. We are working toward Zero Data Retention enrolment for this endpoint as a belt-and-braces measure.</p>
-      <h3>Routing and web search (rare features)</h3>
-      <p>OpenAI&rsquo;s <code>gpt-4o-mini</code> for two specific paths &mdash; the intent classifier that decides what action you want, and the optional web-search variant inside chat mode. Same no-training policy applies.</p>
+      <h3>Voice transcription, routing, and web search</h3>
+      <p>OpenAI&rsquo;s API handles three smaller paths: voice transcription (<code>gpt-4o-mini-transcribe</code>), the intent classifier that decides what action you want, and the optional web-search variant inside chat mode (<code>gpt-4o-mini</code>).</p>
+      <p>Three concrete safeguards apply here:</p>
+      <ul>
+        <li><strong>No training.</strong> OpenAI&rsquo;s API terms exclude training on customer data by default &mdash; this is contractual, not opt-in.</li>
+        <li><strong>No org-level logging.</strong> We have disabled all customer-facing API call logging at our OpenAI organisation: chat completions, audio transcriptions, and shared platform feedback are all set to Disabled. OpenAI does not retain these calls in our account&rsquo;s accessible logs.</li>
+        <li><strong>No Responses API retention.</strong> Our web-search calls hard-code <code>store=false</code> on the request, so OpenAI&rsquo;s Responses API does not retain the prompt or response on its side.</li>
+      </ul>
+      <p>OpenAI&rsquo;s default abuse-monitoring retention (up to 30 days) still applies as a backstop &mdash; that is a platform-wide policy we cannot disable from the dashboard, only via formal Zero Data Retention enrolment which we will pursue at the appropriate usage tier.</p>
       <p>Our edge functions do not log prompt content. Once your response streams back, the request is discarded.</p>
 
       <h2>What stays plaintext on our servers</h2>
