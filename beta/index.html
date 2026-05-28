@@ -16,8 +16,140 @@
     // restores scroll position (or jumps when the URL bar collapses), which
     // makes the page appear to "jump down" on reload.
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    // Pre-paint gate setup. The /beta/ page is invite-only — visitors
+    // see a password card on first arrival, and (after unlocking) a
+    // download CTA that points at the latest GitHub Release. Returning
+    // visitors who already unlocked see the page immediately, no flash.
+    // This script runs synchronously in <head> so the gate state is
+    // known before first paint — without it, the page would briefly
+    // render the full hero before the gate covered it.
+    if (localStorage.getItem('portavox.beta.unlocked') === 'true') {
+      document.documentElement.classList.add('beta-unlocked');
+    }
   </script>
   <style>
+    /* ── Beta access gate ─────────────────────────────────────
+       Full-page overlay shown to first-time visitors. JS in script.js
+       SHA-256s the input and compares to a baked hash; on match,
+       sets localStorage flag + adds .beta-unlocked to <html>, which
+       this CSS uses to hide the gate. */
+    #beta-gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.97);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    html.beta-unlocked #beta-gate { display: none; }
+    .gate-card {
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+    }
+    .gate-logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0 0 16px;
+    }
+    .gate-prompt {
+      font-size: 15px;
+      color: var(--fg-muted);
+      margin: 0 0 28px;
+      line-height: 1.5;
+    }
+    .gate-card input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+    .gate-card input:focus {
+      outline: none;
+      border-color: var(--fg);
+    }
+    .gate-card button {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--fg);
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .gate-card button:hover { opacity: 0.85; }
+    .gate-error {
+      color: #d33;
+      font-size: 13px;
+      margin: 14px 0 0;
+      min-height: 18px;
+    }
+
+    /* ── Download CTA (shown to unlocked visitors, populated from GitHub Releases API) ─ */
+    #download-section {
+      display: none;
+      padding: 56px 24px 24px;
+      text-align: center;
+    }
+    html.beta-unlocked #download-section.has-release { display: block; }
+    .download-card {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--soft);
+    }
+    .download-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 10px;
+    }
+    .download-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+    }
+    .download-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: var(--fg);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: opacity 0.15s;
+    }
+    .download-cta-btn:hover { opacity: 0.85; }
+    .download-meta {
+      font-size: 13px;
+      color: var(--fg-muted);
+      margin: 14px 0 0;
+    }
+
     /* ── Section rhythm: generous breathing room everywhere ─ */
     main > section { padding: 104px 0; }
 
@@ -535,10 +667,43 @@
   </style>
 </head>
 <body data-page-source="portavox.ai/beta">
+  <!-- Beta access gate — full-screen overlay shown to first-time visitors.
+       Logic in /script.js; hidden via CSS when html.beta-unlocked is set. -->
+  <div id="beta-gate">
+    <div class="gate-card">
+      <h1 class="gate-logo">PortaVox</h1>
+      <p class="gate-prompt">This page is invite-only.<br>Enter your beta access code to continue.</p>
+      <input
+        type="password"
+        id="gate-input"
+        placeholder="Access code"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+      >
+      <button id="gate-submit" type="button">Continue</button>
+      <p class="gate-error" id="gate-error">&nbsp;</p>
+    </div>
+  </div>
+
   <nav>
     <a class="logo" href="/beta">PortaVox</a>
-    <a class="nav-cta" href="#beta">Count me in</a>
+    <a class="nav-cta" href="#download-section">Download</a>
   </nav>
+
+  <!-- Download section — populated from GitHub Releases API on page load.
+       Stays hidden if there's no release yet or the API call fails;
+       falls back to the hero "Count me in" form below. -->
+  <section id="download-section">
+    <div class="download-card">
+      <p class="download-eyebrow">Beta release</p>
+      <h2 class="download-title" id="download-title">PortaVox</h2>
+      <a class="download-cta-btn" id="download-cta" href="https://github.com/christiaanhenny/AskMax/releases/latest" target="_blank" rel="noopener">
+        Download PortaVox
+      </a>
+      <p class="download-meta" id="download-meta">&nbsp;</p>
+    </div>
+  </section>
 
   <main>
 
