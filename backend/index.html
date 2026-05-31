@@ -281,6 +281,102 @@
       text-align: center;
     }
 
+    /* ── User detail view ───────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--fg-muted);
+      text-decoration: none;
+      margin-bottom: 16px;
+    }
+    .back-link:hover { color: var(--fg); }
+    .user-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .user-header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 6px;
+    }
+    .user-header .meta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--fg-muted);
+      font-size: 13px;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .stat-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg-muted);
+      font-weight: 700;
+    }
+    .stat-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-card .sub {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-top: 2px;
+    }
+    .bar-chart-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .bar-chart-card .title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .bar-chart-card .summary {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-bottom: 12px;
+    }
+    .bar-chart-card svg {
+      display: block;
+      width: 100%;
+      height: 120px;
+    }
+    .bar-chart-card .x-axis {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--fg-muted);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    /* Clickable email in user table */
+    .user-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted var(--border);
+    }
+    .user-link:hover { border-bottom-color: var(--fg); }
+
     @media (max-width: 600px) {
       .dash { padding: 20px 16px 48px; }
     }
@@ -353,12 +449,15 @@
       dbg("unhandled promise: " + (e.reason?.message || e.reason || "(unknown)"));
     });
 
-    async function fetchStats(token) {
-      dbg(`POST → ${ENDPOINT}`);
+    async function fetchStats(token, userId) {
+      const url = userId
+        ? `${ENDPOINT}?user=${encodeURIComponent(userId)}`
+        : ENDPOINT;
+      dbg(`GET → ${url}`);
       dbg(`token length=${token.length}, first=${JSON.stringify(token.slice(0,2))}, last=${JSON.stringify(token.slice(-2))}`);
       let resp;
       try {
-        resp = await fetch(ENDPOINT, {
+        resp = await fetch(url, {
           method: "GET",
           headers: { "x-beta-stats-token": token },
         });
@@ -388,6 +487,41 @@
       if (!d) return "—";
       return Math.round((n / d) * 100) + "%";
     }
+    function fmtCost(micros) {
+      const usd = (Number(micros) || 0) / 1_000_000;
+      // < $0.01 still meaningful — show 4 decimals; otherwise 2.
+      if (usd === 0) return "$0";
+      if (usd < 0.01) return "$" + usd.toFixed(4);
+      if (usd < 1)    return "$" + usd.toFixed(3);
+      return "$" + usd.toFixed(2);
+    }
+    function fmtTokens(n) {
+      n = Number(n) || 0;
+      if (n < 1000)      return String(n);
+      if (n < 1_000_000) return (n / 1000).toFixed(n < 10_000 ? 1 : 0) + "K";
+      return (n / 1_000_000).toFixed(2) + "M";
+    }
+    // Fill in zero rows for any of the last 30 days that aren't in `rows`.
+    // Returns an array of length 30, oldest first. Each entry is the
+    // original row for that date or a zeroed placeholder.
+    function zeroFillLast30(rows) {
+      const byDate = new Map(rows.map(r => [r.date, r]));
+      const out = [];
+      const today = new Date();
+      today.setUTCHours(0, 0, 0, 0);
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(today);
+        d.setUTCDate(d.getUTCDate() - i);
+        const iso = d.toISOString().slice(0, 10);
+        out.push(byDate.get(iso) ?? {
+          date: iso,
+          sessions: 0, ai_calls: 0, pastes: 0,
+          tokens_in_sum: 0, tokens_out_sum: 0, cost_micros_sum: 0,
+          avg_latency_ms: null,
+        });
+      }
+      return out;
+    }
 
     function renderFunnel(f) {
       const cards = [
@@ -408,6 +542,29 @@
           `).join("")}
         </div>
       `;
+    }
+
+    // Vertical bar chart, sized to fill its parent. Each bar is one
+    // day (left = oldest). `values` is numeric, `labels` is per-bar
+    // tooltip text (passed via <title>). `color` is the fill.
+    function barChart(values, labels, color) {
+      const w = 100;
+      const h = 100;
+      if (!values.length) {
+        return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"></svg>`;
+      }
+      const max = Math.max(...values, 1);
+      const slot = w / values.length;
+      const gap = Math.min(0.6, slot * 0.18);
+      const barW = Math.max(0.5, slot - gap);
+      const bars = values.map((v, i) => {
+        const x = i * slot + gap / 2;
+        const barH = (v / max) * h;
+        const y = h - barH;
+        const lbl = (labels && labels[i]) || "";
+        return `<rect x="${x.toFixed(2)}" y="${y.toFixed(2)}" width="${barW.toFixed(2)}" height="${barH.toFixed(2)}" fill="${color}"><title>${lbl}</title></rect>`;
+      }).join("");
+      return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">${bars}</svg>`;
     }
 
     function sparkline(values, color) {
@@ -438,7 +595,10 @@
       const dau   = daily.map(d => d.dau);
       const calls = daily.map(d => d.ai_calls);
       const paste = daily.map(d => d.pastes);
+      const cost  = daily.map(d => Number(d.cost_micros) || 0);
       const sum = a => a.reduce((s, x) => s + x, 0);
+      const totalCostMicros = sum(cost);
+      const todayCostMicros = cost.length ? cost[cost.length - 1] : 0;
       return `
         <div class="section-title">Last 30 days</div>
         <div class="chart-row">
@@ -456,6 +616,32 @@
             <div class="title">Pastes</div>
             <div class="summary">${sum(paste)} total · ${paste.length ? paste[paste.length - 1] : 0} today</div>
             ${sparkline(paste, "#16a34a")}
+          </div>
+          <div class="chart-card">
+            <div class="title">Cost</div>
+            <div class="summary">${fmtCost(totalCostMicros)} total · ${fmtCost(todayCostMicros)} today</div>
+            ${sparkline(cost, "#d97706")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCostTotals(c) {
+      if (!c) return "";
+      return `
+        <div class="section-title">Cost</div>
+        <div class="funnel">
+          <div class="funnel-card">
+            <div class="label">all-time</div>
+            <div class="value">${fmtCost(c.total_micros)}</div>
+          </div>
+          <div class="funnel-card">
+            <div class="label">last 30 days</div>
+            <div class="value">${fmtCost(c.last30_micros)}</div>
+          </div>
+          <div class="funnel-card">
+            <div class="label">last 7 days</div>
+            <div class="value">${fmtCost(c.last7_micros)}</div>
           </div>
         </div>
       `;
@@ -500,49 +686,161 @@
               <th>Signup</th>
               <th>Activity</th>
               <th class="num">7d calls</th>
-              <th class="num">7d pastes</th>
+              <th class="num">7d cost</th>
               <th class="num">Total calls</th>
-              <th class="num">Total pastes</th>
+              <th class="num">Total cost</th>
               <th>E2EE</th>
             </tr>
           </thead>
           <tbody>
-            ${users.map(u => `
+            ${users.map(u => {
+              const label = u.email ?? `${u.user_id.slice(0, 8)}…`;
+              const href = `#user=${u.user_id}`;
+              return `
               <tr>
-                <td>${u.email ?? `<span class="muted">${u.user_id.slice(0, 8)}…</span>`}</td>
+                <td><a class="user-link" href="${href}">${label}</a></td>
                 <td class="muted">${fmtDate(u.signup_at)}</td>
                 <td>${activityPill(u.last_active)}</td>
                 <td class="num">${u.last7_calls}</td>
-                <td class="num">${u.last7_pastes}</td>
+                <td class="num">${fmtCost(u.last7_cost_micros)}</td>
                 <td class="num muted">${u.total_calls}</td>
-                <td class="num muted">${u.total_pastes}</td>
+                <td class="num muted">${fmtCost(u.total_cost_micros)}</td>
                 <td>${u.e2ee_activated_at ? `<span class="pill good">on</span>` : `<span class="pill cold">—</span>`}</td>
               </tr>
-            `).join("")}
+              `;
+            }).join("")}
           </tbody>
         </table>
       `;
     }
 
-    function render(stats) {
+    // ── User detail view ───────────────────────────────────────────────
+
+    function renderUserDetail(detail) {
+      const p = detail.profile;
+      if (!p) {
+        return `
+          <a class="back-link" href="#">← back to overview</a>
+          <div class="empty">User not found in beta_user_meta.</div>
+        `;
+      }
+      const t = detail.totals || {};
+      const filled = zeroFillLast30(detail.daily || []);
+      const callsArr   = filled.map(d => d.ai_calls || 0);
+      const costArr    = filled.map(d => Number(d.cost_micros_sum) || 0);
+      const latencyArr = filled.map(d => d.avg_latency_ms || 0);
+      const labels     = filled.map(d => d.date);
+      const dayLabel = (i) => filled[i] ? filled[i].date.slice(5) : "";
+      return `
+        <a class="back-link" href="#">← back to overview</a>
+        <div class="user-header">
+          <h1>${p.email ?? p.user_id}</h1>
+          <div class="meta-row">
+            <span>signed up ${fmtDateTime(p.signup_at)}</span>
+            <span>last active ${t.last_active ? fmtDate(t.last_active) : "never"}</span>
+            <span>${p.e2ee_activated_at ? "E2EE: on" : "E2EE: off"}</span>
+          </div>
+        </div>
+
+        <div class="section-title">Totals</div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="label">total cost</div>
+            <div class="value">${fmtCost(t.total_cost_micros)}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">7d cost</div>
+            <div class="value">${fmtCost(t.last7_cost_micros)}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">avg cost / AI call</div>
+            <div class="value">${t.total_calls ? fmtCost(Math.round(Number(t.total_cost_micros) / t.total_calls)) : "—"}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">tokens in · out</div>
+            <div class="value">${fmtTokens(t.total_tokens_in)} · ${fmtTokens(t.total_tokens_out)}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">total AI calls</div>
+            <div class="value">${t.total_calls || 0}</div>
+            <div class="sub">${t.last7_calls || 0} in last 7d</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">total pastes</div>
+            <div class="value">${t.total_pastes || 0}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">total sessions</div>
+            <div class="value">${t.total_sessions || 0}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">avg latency</div>
+            <div class="value">${t.avg_latency_ms !== null && t.avg_latency_ms !== undefined ? t.avg_latency_ms + " ms" : "—"}</div>
+            <div class="sub">${t.latency_samples || 0} samples</div>
+          </div>
+        </div>
+
+        <div class="section-title">Last 30 days</div>
+        <div class="bar-chart-card">
+          <div class="title">AI calls per day</div>
+          <div class="summary">${callsArr.reduce((a,b)=>a+b,0)} total · peak ${Math.max(...callsArr, 0)}</div>
+          ${barChart(callsArr, labels.map((d,i) => `${d}: ${callsArr[i]} calls`), "#0a0a0a")}
+          <div class="x-axis"><span>${dayLabel(0)}</span><span>${dayLabel(14)}</span><span>${dayLabel(29)}</span></div>
+        </div>
+        <div class="bar-chart-card">
+          <div class="title">Cost per day</div>
+          <div class="summary">${fmtCost(costArr.reduce((a,b)=>a+b,0))} total · peak ${fmtCost(Math.max(...costArr, 0))}</div>
+          ${barChart(costArr, labels.map((d,i) => `${d}: ${fmtCost(costArr[i])}`), "#d97706")}
+          <div class="x-axis"><span>${dayLabel(0)}</span><span>${dayLabel(14)}</span><span>${dayLabel(29)}</span></div>
+        </div>
+        <div class="bar-chart-card">
+          <div class="title">Avg latency per day (ms)</div>
+          <div class="summary">${t.avg_latency_ms !== null && t.avg_latency_ms !== undefined ? "overall avg " + t.avg_latency_ms + " ms" : "no samples"}</div>
+          ${barChart(latencyArr, labels.map((d,i) => `${d}: ${latencyArr[i] || "—"} ms`), "#16a34a")}
+          <div class="x-axis"><span>${dayLabel(0)}</span><span>${dayLabel(14)}</span><span>${dayLabel(29)}</span></div>
+        </div>
+      `;
+    }
+
+    function renderOverview(stats) {
       dashGen.textContent = "Generated " + fmtDateTime(stats.generated_at);
       dashBody.innerHTML = [
         renderFunnel(stats.funnel),
+        renderCostTotals(stats.cost_totals),
         renderDaily(stats.daily),
         renderLatency(stats.latency_7d),
         renderUsers(stats.per_user),
       ].join("");
     }
 
+    function renderDetail(detail) {
+      dashGen.textContent = "Generated " + fmtDateTime(detail.generated_at);
+      dashBody.innerHTML = renderUserDetail(detail);
+    }
+
+    // Hash-based route: empty / "#" → overview, "#user=<uuid>" → detail.
+    function currentRoute() {
+      const h = (location.hash || "").replace(/^#/, "");
+      const m = h.match(/^user=([0-9a-f-]{36})$/i);
+      return m ? { kind: "detail", userId: m[1] } : { kind: "overview" };
+    }
+
     async function loadDashboard(token) {
       gateEl.hidden = true;
       dashEl.hidden = false;
       dashBody.innerHTML = `<div class="loading">Loading…</div>`;
+      const route = currentRoute();
       try {
-        const stats = await fetchStats(token);
-        render(stats);
+        if (route.kind === "detail") {
+          const detail = await fetchStats(token, route.userId);
+          renderDetail(detail);
+        } else {
+          const stats = await fetchStats(token);
+          renderOverview(stats);
+        }
+        window.scrollTo(0, 0);
       } catch (e) {
-        if (e.message === "Invalid token.") {
+        if (/^Invalid token/.test(e.message)) {
           sessionStorage.removeItem(STORAGE_KEY);
           showGate("Token rejected. Try again.");
         } else {
@@ -550,6 +848,11 @@
         }
       }
     }
+
+    window.addEventListener("hashchange", () => {
+      const token = sessionStorage.getItem(STORAGE_KEY);
+      if (token) loadDashboard(token);
+    });
 
     function showGate(errMsg) {
       gateEl.hidden = false;
