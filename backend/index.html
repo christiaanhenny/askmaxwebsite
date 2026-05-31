@@ -86,6 +86,22 @@
       margin-top: 12px;
       min-height: 1.2em;
     }
+    .gate-debug {
+      margin-top: 16px;
+      padding: 10px 12px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: #333;
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .gate-debug:empty { display: none; }
 
     /* ── Dashboard ─────────────────────────────── */
     .dash {
@@ -282,8 +298,9 @@
         autofocus
         required
       >
-      <button type="submit" class="gate-btn">Unlock</button>
+      <button type="submit" class="gate-btn" id="gate-btn">Unlock</button>
       <div class="gate-error" id="gate-error"></div>
+      <div class="gate-debug" id="gate-debug"></div>
     </form>
   </div>
 
@@ -310,16 +327,47 @@
     const gateForm = document.getElementById("gate-form");
     const gateInp  = document.getElementById("gate-input");
     const gateErr  = document.getElementById("gate-error");
+    const gateDbg  = document.getElementById("gate-debug");
+    const gateBtn  = document.getElementById("gate-btn");
     const dashEl   = document.getElementById("dash");
     const dashBody = document.getElementById("dash-body");
     const dashGen  = document.getElementById("dash-generated");
 
+    function dbg(msg) {
+      const t = new Date().toLocaleTimeString();
+      gateDbg.textContent += `[${t}] ${msg}\n`;
+      gateDbg.scrollTop = gateDbg.scrollHeight;
+      try { console.log("[backend]", msg); } catch (_) {}
+    }
+    function dbgClear() { gateDbg.textContent = ""; }
+
+    // Surface ANY uncaught error directly in the UI so we don't
+    // need DevTools to know something went wrong.
+    window.addEventListener("error", (e) => {
+      dbg("window error: " + (e.message || e.error || "(unknown)"));
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      dbg("unhandled promise: " + (e.reason?.message || e.reason || "(unknown)"));
+    });
+
     async function fetchStats(token) {
-      const resp = await fetch(ENDPOINT, {
-        method: "GET",
-        headers: { "x-beta-stats-token": token },
-      });
-      if (resp.status === 401) throw new Error("Invalid token.");
+      dbg(`POST → ${ENDPOINT}`);
+      dbg(`token length=${token.length}, first=${JSON.stringify(token.slice(0,2))}, last=${JSON.stringify(token.slice(-2))}`);
+      let resp;
+      try {
+        resp = await fetch(ENDPOINT, {
+          method: "GET",
+          headers: { "x-beta-stats-token": token },
+        });
+      } catch (netErr) {
+        dbg("fetch threw: " + netErr.message);
+        throw new Error("Network error: " + netErr.message);
+      }
+      dbg(`response status=${resp.status}`);
+      let bodyText = "";
+      try { bodyText = await resp.clone().text(); } catch (_) {}
+      dbg(`response body=${bodyText.slice(0, 200)}`);
+      if (resp.status === 401) throw new Error("Invalid token (401).");
       if (!resp.ok) throw new Error("Server error (" + resp.status + ").");
       return resp.json();
     }
@@ -508,18 +556,37 @@
       setTimeout(() => gateInp.focus(), 0);
     }
 
-    gateForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    async function attemptLogin(rawToken) {
       gateErr.textContent = "";
-      const token = gateInp.value.trim();
-      if (!token) return;
+      dbgClear();
+      const token = (rawToken ?? "").trim();
+      dbg(`submit fired (raw length=${(rawToken ?? "").length}, trimmed length=${token.length})`);
+      if (!token) {
+        dbg("empty token — nothing to send");
+        gateErr.textContent = "Type the admin token first.";
+        return;
+      }
       try {
         await fetchStats(token); // probe
+        dbg("probe OK — caching token + loading dashboard");
         sessionStorage.setItem(STORAGE_KEY, token);
         await loadDashboard(token);
       } catch (err) {
+        dbg("login failed: " + err.message);
         gateErr.textContent = err.message;
       }
+    }
+
+    gateForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      attemptLogin(gateInp.value);
+    });
+    // Defensive: also bind the click directly in case the form's
+    // submit event isn't firing for whatever reason.
+    gateBtn.addEventListener("click", (e) => {
+      if (e.defaultPrevented) return; // already handled by submit
+      e.preventDefault();
+      attemptLogin(gateInp.value);
     });
 
     document.getElementById("refresh-btn").addEventListener("click", () => {
