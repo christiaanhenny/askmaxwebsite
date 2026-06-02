@@ -334,7 +334,7 @@ section h2 {
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin: 0 0 24px;
+  margin: 0 0 48px;
   line-height: 1.15;
   text-align: center;
 }
@@ -602,7 +602,7 @@ footer strong { color: var(--brand-ink); }
   .btn { padding: 13px 24px; font-size: 15px; }
   .cta-note { font-size: 13px; margin-top: 10px; }
   section { padding: 36px 0; }
-  section h2 { margin-bottom: 18px; }
+  section h2 { margin-bottom: 32px; }
   .how-block + .how-block { margin-top: 28px; }
   .how-label { padding-left: calc(1.4rem + 12px); margin-bottom: 10px; }
   .steps-compact { font-size: 1rem; gap: 12px; }
