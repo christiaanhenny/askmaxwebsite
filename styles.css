@@ -4,6 +4,17 @@
   --fg-muted: #666;
   --border: #e8e8e8;
   --soft: #f6f6f6;
+
+  /* PortaVox brand tokens — palette anchored on the burgundy ink + the
+     5 spectrum colors that drive the icon's audio bars. Used sparingly
+     in this editorial layout (highlighter, focus accents) so the page
+     keeps its neutral black-on-white feel. */
+  --brand-ink: #3B001C;
+  --brand-magenta: #D3348A;
+  --brand-coral: #F74458;
+  --brand-lavender: #B963C9;
+  --brand-orange: #F8913F;
+  --brand-amber: #F6A51A;
 }
 
 * { box-sizing: border-box; }
@@ -97,7 +108,9 @@ main {
   line-height: 1.4;
 }
 .tagline mark {
-  background: linear-gradient(180deg, transparent 0 55%, #ffe680 55% 95%, transparent 95%);
+  /* Brand amber replaces the random #ffe680 — same warm-highlighter
+     vibe but pulled from the PortaVox spectrum (audio-bar 5). */
+  background: linear-gradient(180deg, transparent 0 55%, var(--brand-amber) 55% 95%, transparent 95%);
   color: inherit;
   padding: 0 2px;
 }
