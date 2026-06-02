@@ -530,6 +530,9 @@
       font-weight: 700;
     }
 
+    /* Spacer when ri-list and the 4-step flow share a section. */
+    .ri-list + .flow-4 { margin-top: 56px; }
+
     /* ── RI list: vertical stack per item, title above detail ── */
     .ri-list {
       list-style: none;
@@ -737,8 +740,8 @@
         <span class="line"><mark>10&times;</mark> your communication</span>
         <span class="line">in <mark>1/10</mark> of the time.</span>
       </h1>
-      <p class="hero-promises">(Voice)prompt what you want to say. Let AI write hyper-personal messages. Never forget a promise you made. Be attentive without effort.</p>
-      <p class="tagline">Heavy writers save <mark>2&ndash;4 hours a day</mark>.</p>
+      <p class="hero-promises">Click anywhere. (Voice)prompt what you want to say. Let AI write hyper-personal messages. Paste right inside the app.</p>
+      <p class="tagline">Heavy communicators save <mark>2&ndash;4 hours a day</mark>.</p>
       <div class="cta">
         <!-- href is updated by loadLatestRelease() in /script.js to point
              directly at the newest .dmg asset. Fallback href below points
@@ -761,9 +764,32 @@
       </div>
     </section>
 
-    <!-- WHAT IT DOES: 4-step flow -->
+    <!-- WHAT IT DOES: relationship intelligence features under the "Build closer
+         relationships" promise; the 4-step "how it works" flow follows below. -->
     <section>
       <h2>Build closer relationships. 1% of the friction.</h2>
+      <ul class="ri-list">
+        <li>
+          <strong>Captures every to-do and to-get.</strong>
+          <span class="ri-detail">Promises you made, things you&rsquo;re owed, never lost in a thread again.</span>
+        </li>
+        <li>
+          <strong>Tracks what to be attentive for.</strong>
+          <span class="ri-detail">Drafts the check-in before you&rsquo;d have remembered it yourself.</span>
+        </li>
+        <li>
+          <strong>Tracks deadlines and progress.</strong>
+          <span class="ri-detail">Knows what&rsquo;s due, what&rsquo;s slipping, what just shipped.</span>
+        </li>
+        <li>
+          <strong>Answers from your projects.</strong>
+          <span class="ri-detail">Point it at a folder. It replies on autopilot, grounded in your real material.</span>
+        </li>
+        <li>
+          <strong>Pitches that land, because it knows the relationship.</strong>
+          <span class="ri-detail">Hyper-custom outreach: their context, your voice, the right ask.</span>
+        </li>
+      </ul>
       <ol class="flow-4">
         <li class="flow-step">
           <span class="flow-num">1</span>
@@ -828,12 +854,12 @@ John</p>
       <h2>How is this possible?</h2>
       <div class="how-pair">
         <div class="how-card">
-          <p class="how-when">Once</p>
-          <p class="how-text">Upload a handful of emails and messages. PortaVox learns your style.</p>
+          <p class="how-when">Step 1</p>
+          <p class="how-text">Train the AI on your voice.</p>
         </div>
         <div class="how-card active">
-          <p class="how-when">Then, every edit</p>
-          <p class="how-text">PortaVox learns per correspondent, per app, per situation. With <mark>lightning speed</mark>.</p>
+          <p class="how-when">Step 2</p>
+          <p class="how-text"><mark>Hyper personal.</mark></p>
         </div>
       </div>
     </section>
@@ -841,11 +867,11 @@ John</p>
     <!-- IT SEES WHAT YOU SEE -->
     <section>
       <h2>It sees what you see.</h2>
-      <p class="sees-lede">No copy-pasting context. No switching tabs. PortaVox reads the screen you&rsquo;re already on.</p>
+      <p class="sees-lede">When you summon PortaVox, it quietly snapshots the window in front of you and reads it. No copy-pasting context. No switching tabs. The snapshot stays on your Mac, used once to ground the draft, then discarded.</p>
       <div class="two-up">
         <div class="two-up-card">
           <strong>The conversation you&rsquo;re in.</strong>
-          <span>The email thread, the Slack history, the WhatsApp chain, the LinkedIn DM you&rsquo;re replying to. PortaVox knows the context without you re-typing a word of it.</span>
+          <span>The email thread, the Slack history, the WhatsApp chain, the LinkedIn DM you&rsquo;re replying to. PortaVox reads it straight from the screen, so you never re-type a word of context.</span>
         </div>
         <div class="two-up-card">
           <strong>The app and the recipient.</strong>
@@ -866,51 +892,10 @@ John</p>
       </div>
     </section>
 
-    <!-- PRIVACY: on your Mac, end-to-end encrypted, zero retention -->
+    <!-- PRIVACY: end-to-end encrypted, AI doesn't train on anything -->
     <section class="privacy">
-      <h2>End-to-end encrypted. <mark>Not even we can read it.</mark></h2>
-      <p class="lede">Your messages, your style, your relationship memory, encrypted on your device with a key only you hold. What reaches our servers is ciphertext. We don&rsquo;t have the key. Neither does anyone else.</p>
-      <div class="grid-3">
-        <div class="card">
-          <strong>Lives on your Mac.</strong>
-          <span>The app and your data sit on the device in front of you, not in our cloud.</span>
-        </div>
-        <div class="card">
-          <strong>End-to-end encrypted.</strong>
-          <span>Your data is encrypted on your Mac with a key only you hold. To us, and to anyone who breached our servers, it&rsquo;s just gibberish.</span>
-        </div>
-        <div class="card">
-          <strong>AI doesn&rsquo;t train on it.</strong>
-          <span>When PortaVox uses AI to draft a message, that one call goes to OpenAI under our Zero Retention contract. Deleted on return, never used to train any model.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- RELATIONSHIP INTELLIGENCE -->
-    <section>
-      <h2>Relationship intelligence.</h2>
-      <ul class="ri-list">
-        <li>
-          <strong>Captures every to-do and to-get.</strong>
-          <span class="ri-detail">Promises you made, things you&rsquo;re owed, never lost in a thread again.</span>
-        </li>
-        <li>
-          <strong>Tracks what to be attentive for.</strong>
-          <span class="ri-detail">Drafts the check-in before you&rsquo;d have remembered it yourself.</span>
-        </li>
-        <li>
-          <strong>Tracks deadlines and progress.</strong>
-          <span class="ri-detail">Knows what&rsquo;s due, what&rsquo;s slipping, what just shipped.</span>
-        </li>
-        <li>
-          <strong>Answers from your projects.</strong>
-          <span class="ri-detail">Point it at a folder. It replies on autopilot, grounded in your real material.</span>
-        </li>
-        <li>
-          <strong>Pitches that land, because it knows the relationship.</strong>
-          <span class="ri-detail">Hyper-custom outreach: their context, your voice, the right ask.</span>
-        </li>
-      </ul>
+      <h2>End-to-end encrypted. <mark>AI doesn&rsquo;t train on anything.</mark></h2>
+      <p class="lede">Your messages, your style, your relationship memory, encrypted on your device with a key only you hold. What reaches our servers is ciphertext. We don&rsquo;t have the key. Neither does anyone else. And when PortaVox uses AI to draft, that call runs under a Zero Retention contract &mdash; deleted on return, never used to train any model.</p>
     </section>
 
     <!-- USE CASES -->
