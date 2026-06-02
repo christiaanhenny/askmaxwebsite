@@ -39,10 +39,17 @@ nav {
   margin: 0 auto;
 }
 .logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   font-weight: 800;
   font-size: 22px;
   letter-spacing: -0.02em;
-  text-decoration: none;
+}
+.logo img {
+  display: block;
+  height: 32px;
+  width: auto;
 }
 .nav-cta {
   font-size: 14px;
@@ -136,13 +143,13 @@ main {
   transition: transform 0.15s, box-shadow 0.15s;
 }
 .btn.primary {
-  background: var(--fg);
+  background: var(--brand-ink);
   color: #fff;
-  box-shadow: 0 4px 14px -4px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 14px -4px rgba(59, 0, 28, 0.35);
 }
 .btn.primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 20px -6px rgba(59, 0, 28, 0.45);
 }
 
 /* ── Section base ─────────────────────────────────────── */
@@ -255,7 +262,7 @@ section { padding: 56px 0; }
   justify-content: center;
   font-variant-numeric: tabular-nums;
 }
-.mechanic-step.final .mechanic-num { background: #ffe680; color: #0a0a0a; }
+.mechanic-step.final .mechanic-num { background: var(--brand-amber); color: var(--brand-ink); }
 .mechanic-what {
   font-size: 1.08rem;
   font-weight: 700;
@@ -543,7 +550,8 @@ footer {
 }
 footer p { margin: 0 0 4px; }
 footer a { color: inherit; text-decoration: none; }
-footer a:hover { color: var(--fg); }
+footer a:hover { color: var(--brand-ink); }
+footer strong { color: var(--brand-ink); }
 
 /* ── Mobile ───────────────────────────────────────────── */
 @media (max-width: 720px) {

@@ -145,7 +145,7 @@
       align-items: center;
       gap: 10px;
       padding: 14px 24px;
-      background: var(--fg);
+      background: var(--brand-ink);
       color: white;
       border-radius: 10px;
       text-decoration: none;
@@ -188,9 +188,21 @@
        lands at the very edge of the viewport. */
     .hero-10x h1 .line { display: block; }
     .hero-10x h1 mark {
-      background: linear-gradient(180deg, transparent 0 60%, #ffe680 60% 95%, transparent 95%);
+      background: linear-gradient(180deg, transparent 0 60%, var(--brand-amber) 60% 95%, transparent 95%);
       color: inherit;
       padding: 0 4px;
+    }
+    /* Hand+waveform brand mark above the headline — visual anchor that
+       ties the landing to the app icon. Sized so it sits above the H1
+       without competing with the rotating-noun cadence below. */
+    .hero-mark {
+      display: block;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 24px;
+    }
+    @media (max-width: 600px) {
+      .hero-mark { width: 72px; height: 72px; margin-bottom: 18px; }
     }
     .hero-promises {
       max-width: 660px;
@@ -263,7 +275,7 @@
       justify-content: center;
       font-variant-numeric: tabular-nums;
     }
-    .flow-step.final .flow-num { background: #ffe680; color: #0a0a0a; }
+    .flow-step.final .flow-num { background: var(--brand-amber); color: var(--brand-ink); }
     .flow-what {
       font-size: 1.04rem;
       font-weight: 700;
@@ -697,7 +709,9 @@
   </div>
 
   <nav>
-    <a class="logo" href="/beta">PortaVox</a>
+    <a class="logo" href="/beta" aria-label="PortaVox">
+      <img src="/assets/PortaVox_logo_lockup_transparent.png" alt="PortaVox">
+    </a>
     <a class="nav-cta" href="#download-section">Download</a>
   </nav>
 
@@ -718,6 +732,7 @@
 
     <!-- HERO -->
     <section class="hero-10x">
+      <img class="hero-mark" src="/assets/PortaVox_icon_mark.png" alt="" aria-hidden="true">
       <h1>
         <span class="line"><mark>10&times;</mark> your communication</span>
         <span class="line">in <mark>1/10</mark> of the time.</span>
