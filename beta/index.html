@@ -245,6 +245,16 @@ p{text-wrap:pretty;}
 .pcard p{font-size:16px;color:var(--fg-muted);line-height:1.6;}
 .pcard .uline{color:var(--ink);font-weight:600;border-bottom:2px solid var(--brand-orange);padding-bottom:1px;}
 
+/* ---------- how-it-works flow ---------- */
+.flow-steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:8px;}
+.fstep{position:relative;padding:26px 22px;border:1px solid var(--border);border-radius:18px;background:#fff;display:flex;flex-direction:column;gap:11px;}
+.fstep .fnum{width:34px;height:34px;border-radius:10px;background:var(--brand-ink);color:#fff;font-family:var(--f-display);font-weight:500;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(59,0,28,.18);}
+.fstep h3{font-size:16.5px;font-weight:500;line-height:1.25;}
+.fstep p{font-size:13.5px;color:var(--fg-muted);line-height:1.5;}
+.fstep .kbd{font-family:var(--f-body);font-weight:600;color:var(--ink);background:var(--soft);border:1px solid var(--border-2);border-radius:6px;padding:1px 7px;font-size:.92em;white-space:nowrap;}
+@media (max-width:980px){.flow-steps{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.flow-steps{grid-template-columns:1fr;}}
+
 /* ---------- use cases ---------- */
 .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-2);border:1px solid var(--border-2);border-radius:20px;overflow:hidden;margin-top:8px;}
 .case{background:#fff;padding:30px;transition:background .15s ease;}
@@ -420,6 +430,23 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
     </div>
   </div>
 </div>
+
+<!-- ===== HOW IT WORKS (flow) ===== -->
+<section id="how">
+  <div class="wrap">
+    <div class="narrow" style="text-align:center;margin-bottom:48px;">
+      <span class="eyebrow">How it works</span>
+      <h2 style="margin-top:14px;">From blank field to sent,<br>in a few seconds.</h2>
+    </div>
+    <ol class="flow-steps">
+      <li class="fstep"><span class="fnum">1</span><h3>Click in any text field</h3><p>Mail, Slack, WhatsApp — wherever you already type.</p></li>
+      <li class="fstep"><span class="fnum">2</span><h3>Press <span class="kbd">⌥ Space</span></h3><p>PortaVox floats in, right where you are.</p></li>
+      <li class="fstep"><span class="fnum">3</span><h3>Speak or write your intent</h3><p>A few words on what you want to say is enough.</p></li>
+      <li class="fstep"><span class="fnum">4</span><h3>Get a draft that sounds like you</h3><p>In your voice, grounded in the context on screen.</p></li>
+      <li class="fstep"><span class="fnum">5</span><h3>Paste it back and send</h3><p>One keystroke and it's out the door.</p></li>
+    </ol>
+  </div>
+</section>
 
 <!-- ===== STATS ===== -->
 <section>
@@ -603,7 +630,7 @@ Best, John</div>
 </section>
 
 <!-- ===== HOW IS THIS POSSIBLE ===== -->
-<section id="how">
+<section id="learns">
   <div class="wrap">
     <div class="narrow" style="text-align:center;margin-bottom:48px;">
       <span class="eyebrow">How is this possible?</span>
