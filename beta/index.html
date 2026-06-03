@@ -56,12 +56,14 @@ html:not(.beta-unlocked){overflow:hidden;}
   --f-body:"Hanken Grotesk",-apple-system,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow-x:clip;}
 body{
   font-family:var(--f-body);
   color:var(--fg);
   background:var(--bg);
   font-size:17px;line-height:1.6;
+  overflow-x:clip;
+  max-width:100%;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
 }
 ::selection{background:rgba(248,145,63,.25);}
