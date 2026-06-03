@@ -445,6 +445,14 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
 .rel-panel.active .key.lit{animation:keypress 1.8s ease-in-out .4s infinite;}
 .rel-panel.active .key.lit.space{animation:keypress 1.8s ease-in-out .55s infinite;}
 @media (prefers-reduced-motion: reduce){.caret,.recdot,.wave i,.pv-toast,.key.lit{animation:none;}}
+
+/* Mobile accordion: JS adds .acc and relocates each panel directly below its
+   own step, so the mock window opens between the clicked step and the next. */
+.rel-grid.acc .rel-stage{display:none;}
+.rel-grid.acc .rel-panel{position:static;inset:auto;opacity:1;transform:none;pointer-events:auto;display:none;margin:2px 2px 10px;}
+.rel-grid.acc .rel-panel.active{display:block;animation:accIn .3s ease;}
+@keyframes accIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion: reduce){.rel-grid.acc .rel-panel.active{animation:none;}}
 </style>
 </head>
 <body>
@@ -1014,9 +1022,10 @@ Best, John</div>
   // so the "How it works" and "Relationship intelligence" tab sets stay independent.
   document.querySelectorAll('.rel-list').forEach(function(list){
     var grid   = list.closest('.rel-grid');
-    var stage  = grid ? grid.querySelector('.rel-stage') : document;
     var items  = [].slice.call(list.querySelectorAll('.rel-item'));
-    var panels = [].slice.call(stage.querySelectorAll('.rel-panel'));
+    // Query panels at grid level so they're still found after the mobile
+    // accordion relocates them out of .rel-stage and into the tab list.
+    var panels = [].slice.call((grid||document).querySelectorAll('.rel-panel'));
     function sel(i){
       items.forEach(function(b){ var on=b.getAttribute('data-rel')===i; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
       panels.forEach(function(p){ p.classList.toggle('active',p.getAttribute('data-rel')===i); });
@@ -1088,6 +1097,43 @@ Best, John</div>
       var rt2; window.addEventListener('resize',function(){ clearTimeout(rt2); rt2=setTimeout(function(){ place(idx); },150); });
     }
   }
+})();
+
+// Mobile accordion: below 880px, relocate each .rel-panel directly after its
+// matching .rel-item so the mock window opens between the clicked step and the
+// next one. On desktop, restore all panels into .rel-stage (two-column layout).
+(function(){
+  if(!window.matchMedia) return;
+  var mq = matchMedia('(max-width:880px)');
+  var grids = [].slice.call(document.querySelectorAll('.rel-grid')).map(function(grid){
+    var list  = grid.querySelector('.rel-list');
+    var stage = grid.querySelector('.rel-stage');
+    return {
+      grid:grid, list:list, stage:stage,
+      items:[].slice.call(list.querySelectorAll('.rel-item')),
+      panels:[].slice.call(grid.querySelectorAll('.rel-panel'))
+    };
+  });
+  function apply(){
+    var mobile = mq.matches;
+    grids.forEach(function(g){
+      g.grid.classList.toggle('acc', mobile);
+      if(mobile){
+        g.panels.forEach(function(p){
+          var rel = p.getAttribute('data-rel');
+          var item = g.items.filter(function(b){ return b.getAttribute('data-rel')===rel; })[0];
+          if(item && item.nextElementSibling !== p){ item.insertAdjacentElement('afterend', p); }
+        });
+      } else {
+        g.panels.slice().sort(function(a,b){
+          return (+a.getAttribute('data-rel')) - (+b.getAttribute('data-rel'));
+        }).forEach(function(p){ g.stage.appendChild(p); });
+      }
+    });
+  }
+  apply();
+  if(mq.addEventListener) mq.addEventListener('change', apply);
+  else if(mq.addListener) mq.addListener(apply);
 })();
 // Beta gate — SHA-256 of access code compared to baked hash. Casual lock,
 // not real security: anyone can devtools the hash and brute-force a weak
