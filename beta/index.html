@@ -360,6 +360,90 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
 .ctx-chips span{font-size:11.5px;font-family:var(--f-display);font-weight:500;padding:5px 11px;border-radius:999px;border:1px solid var(--border-2);color:#5a4f60;background:#fff;}
 .fld{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--brand-ink);background:#f3ecf3;border:1px solid #e7dcea;border-radius:9px;padding:7px 11px;}
 .fld svg{width:14px;height:14px;}
+
+/* ===== How it works — numbered tabs + extra mock chrome ===== */
+.rel-item .ri-ico.ri-num{font-family:var(--f-display);font-weight:500;font-size:15px;}
+.rel-item.done.active .ri-ico{background:var(--brand-orange);color:#fff;}
+
+/* mock window: app icons in the title bar */
+.mw-ico{width:16px;height:16px;margin-left:6px;flex:none;}
+.mw-logo{width:17px;height:17px;border-radius:4px;margin-left:6px;flex:none;box-shadow:0 1px 2px rgba(40,15,30,.22);}
+/* PortaVox app chrome — dark, branded, clearly a different app than Mail */
+.mw-bar.pv{background:var(--brand-ink);border-bottom-color:rgba(255,255,255,.10);}
+.mw-bar.pv .mw-title{color:rgba(255,255,255,.92);}
+.mw-bar.pv .d{opacity:.92;}
+.mock-win.pv{border-color:#e7dfeb;box-shadow:0 18px 42px rgba(59,0,28,.16),0 4px 12px rgba(59,0,28,.07);}
+.mock-win.pv .mbody{background:linear-gradient(180deg,#fbf9fd,#f6f1fa);}
+.mrow .lbl{color:var(--fg-soft);}
+
+/* compose + intent + caret */
+.compose{border:1px solid var(--border);border-radius:11px;background:#fff;padding:14px;min-height:104px;font-size:13.5px;color:var(--ink);line-height:1.55;}
+.compose.email{white-space:pre-line;}
+.compose .ph{color:var(--fg-soft);}
+.intent{border:1px dashed var(--border-2);border-radius:11px;background:var(--soft);padding:13px 14px;font-size:13.5px;color:var(--ink);line-height:1.5;}
+.intent.typing{border-style:solid;border-color:var(--brand-orange);background:#fff;outline:none;}
+.caret{display:inline-block;width:2px;height:15px;background:var(--brand-orange);vertical-align:-2px;margin-right:1px;animation:blink 1.05s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+/* step 3: listening row */
+.rec{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--brand-coral);}
+.recdot{width:9px;height:9px;border-radius:50%;background:var(--brand-coral);animation:recpulse 1.7s ease-out infinite;}
+@keyframes recpulse{0%{box-shadow:0 0 0 0 rgba(247,68,88,.45);}70%{box-shadow:0 0 0 9px rgba(247,68,88,0);}100%{box-shadow:0 0 0 0 rgba(247,68,88,0);}}
+.wave{display:flex;align-items:center;gap:3px;margin-left:auto;height:18px;}
+.wave i{width:3px;border-radius:2px;background:var(--brand-coral);opacity:.85;animation:waveb 1s ease-in-out infinite;}
+.wave i:nth-child(2){animation-delay:.12s;}.wave i:nth-child(3){animation-delay:.24s;}.wave i:nth-child(4){animation-delay:.36s;}.wave i:nth-child(5){animation-delay:.48s;}
+@keyframes waveb{0%,100%{height:6px;}50%{height:17px;}}
+.type-link{color:var(--brand-coral);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1.5px;cursor:pointer;}
+.type-link:hover{color:var(--brand-ink);}
+
+/* primary action button inside a mock window (Next / Paste / Send) */
+.mact{display:flex;justify-content:flex-end;margin-top:2px;}
+.mbtn{display:inline-flex;align-items:center;gap:9px;background:var(--brand-ink);color:#fff;font-family:var(--f-body);font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:11px;box-shadow:0 3px 10px rgba(59,0,28,.2);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;}
+.mbtn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(59,0,28,.26);}
+.mbtn .ent{font-size:14px;opacity:.6;font-weight:400;}
+
+/* step 4: one continuous draft with a roving "magic" callout */
+.draft-bubble.magic{position:relative;padding:18px 19px;white-space:normal;line-height:2.0;overflow:visible;}
+.draft-text{font-size:13.5px;color:#fff;}
+.draft-text .hl{border-radius:4px;padding:1px 3px;box-shadow:inset 0 -1px 0 rgba(255,255,255,.22);transition:background .3s ease,box-shadow .3s ease;cursor:default;}
+.draft-text .hl.active{box-shadow:none;background:var(--hl,rgba(248,145,63,.34));}
+.magic-callout{position:absolute;z-index:6;left:0;top:0;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:8px;text-align:left;max-width:220px;line-height:1.3;background:#fff;color:var(--ink);border-radius:11px;padding:8px 12px;font-family:var(--f-display);font-weight:500;font-size:11.5px;box-shadow:0 14px 28px rgba(40,15,30,.32);opacity:0;transition:opacity .3s ease,left .4s cubic-bezier(.22,1,.36,1),top .4s cubic-bezier(.22,1,.36,1);pointer-events:none;}
+.magic-callout.show{opacity:1;}
+.magic-callout .mc-dot{width:7px;height:7px;border-radius:50%;background:var(--mc,var(--brand-orange));flex:none;}
+.magic-callout::after{content:"";position:absolute;top:100%;left:var(--ptr,50%);margin-left:-6px;border:6px solid transparent;border-top-color:#fff;}
+.magic-callout.below{transform:translate(-50%,0);}
+.magic-callout.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#fff;}
+
+/* step 1: macOS notification popup */
+.mw-stage{position:relative;}
+.pv-toast{position:absolute;top:46px;right:14px;z-index:5;width:235px;display:flex;gap:11px;align-items:flex-start;background:rgba(250,248,251,.92);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(40,15,30,.08);border-radius:15px;padding:12px 13px;box-shadow:0 16px 34px rgba(40,15,30,.16),0 3px 8px rgba(40,15,30,.08);}
+.rel-panel.active .pv-toast{animation:toastIn .55s cubic-bezier(.22,1,.36,1);}
+@keyframes toastIn{from{transform:translateY(-14px) scale(.95);}to{transform:none;}}
+.pv-toast img{width:34px;height:34px;border-radius:9px;flex:none;box-shadow:0 1px 3px rgba(40,15,30,.18);}
+.pv-toast .pt-tx{flex:1;min-width:0;}
+.pv-toast .pt-app{font-family:var(--f-display);font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:2px;}
+.pv-toast .pt-msg{font-size:12.5px;color:var(--ink);line-height:1.4;}
+.pv-toast .pt-keys{display:inline-flex;gap:4px;vertical-align:1px;}
+.pt-key{font-family:var(--f-display);font-weight:600;font-size:10.5px;color:var(--ink);background:#fff;border:1px solid var(--border-2);border-bottom-width:2px;border-radius:5px;padding:1px 6px;white-space:nowrap;}
+
+/* step 2: keyboard */
+.kbd2{display:inline-flex;align-items:center;font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--ink);background:var(--soft);border:1px solid var(--border-2);border-radius:6px;padding:2px 8px;letter-spacing:.01em;vertical-align:1px;white-space:nowrap;}
+.kboard{background:linear-gradient(180deg,#fbfafc,#f3eff5);border:1px solid var(--border-2);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:7px;box-shadow:inset 0 1px 0 #fff;}
+.krow{display:flex;gap:7px;justify-content:center;}
+.key{height:38px;min-width:38px;border-radius:8px;background:#fff;border:1px solid var(--border-2);border-bottom-width:2px;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--fg-muted);box-shadow:0 1px 2px rgba(40,15,30,.05);transition:transform .12s ease;}
+.key.wide{min-width:64px;}
+.key.space{flex:1;max-width:280px;}
+.key.lit{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff;box-shadow:0 4px 14px rgba(59,0,28,.28);position:relative;}
+.key.opt{flex-direction:column;justify-content:center;gap:4px;padding:5px 0;}
+.key.opt .ksub{font-size:8.5px;font-weight:600;opacity:.75;letter-spacing:.04em;line-height:1;}
+.key.opt .kglyph{font-size:14px;line-height:1;}
+.key.lit.space{background:var(--brand-orange);border-color:var(--brand-orange);box-shadow:0 4px 14px rgba(248,145,63,.34);}
+.kb-cap{display:flex;align-items:center;gap:9px;justify-content:center;margin-top:4px;font-family:var(--f-display);font-weight:500;font-size:13.5px;color:var(--ink);}
+.kb-cap .plus{color:var(--fg-soft);}
+@keyframes keypress{0%,100%{transform:none;}45%{transform:translateY(2px);}}
+.rel-panel.active .key.lit{animation:keypress 1.8s ease-in-out .4s infinite;}
+.rel-panel.active .key.lit.space{animation:keypress 1.8s ease-in-out .55s infinite;}
+@media (prefers-reduced-motion: reduce){.caret,.recdot,.wave i,.pv-toast,.key.lit{animation:none;}}
 </style>
 </head>
 <body>
@@ -438,20 +522,125 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
   </div>
 </div>
 
-<!-- ===== HOW IT WORKS (flow) ===== -->
+<!-- ===== HOW IT WORKS (interactive walkthrough) =====
+     5 steps. Left = clickable tabs. Right = a mock app window per step.
+     Mail steps (1, 5) = light chrome + blue envelope. PortaVox steps (3, 4) = dark ink chrome. -->
 <section id="how">
   <div class="wrap">
     <div class="narrow" style="text-align:center;margin-bottom:48px;">
-      <span class="eyebrow">How it works</span>
-      <h2 style="margin-top:14px;">From blank field to sent,<br>in a few seconds.</h2>
+      <span class="eyebrow">We couldn't make it easier</span>
+      <h2 style="margin-top:14px;">How it works.</h2>
     </div>
-    <ol class="flow-steps">
-      <li class="fstep"><span class="fnum">1</span><h3>Click in any text field</h3><p>Mail, Slack, WhatsApp — wherever you already type.</p></li>
-      <li class="fstep"><span class="fnum">2</span><h3>Press <span class="kbd">⌥ Space</span></h3><p>PortaVox floats in, right where you are.</p></li>
-      <li class="fstep"><span class="fnum">3</span><h3>Speak or write your intent</h3><p>A few words on what you want to say is enough.</p></li>
-      <li class="fstep"><span class="fnum">4</span><h3>Get a draft that sounds like you</h3><p>In your voice, grounded in the context on screen.</p></li>
-      <li class="fstep"><span class="fnum">5</span><h3>Paste it back and send</h3><p>One keystroke and it's out the door.</p></li>
-    </ol>
+    <div class="rel-grid">
+
+      <!-- LEFT: step tabs -->
+      <div class="rel-list" role="tablist" aria-label="How it works">
+        <button class="rel-item active" data-rel="0" role="tab" aria-selected="true">
+          <span class="ri-ico ri-num">1</span>
+          <span class="ri-tx"><h3>Click in any text field</h3><p>Mail, Slack, WhatsApp. Wherever you already type.</p></span>
+        </button>
+        <button class="rel-item" data-rel="1" role="tab" aria-selected="false">
+          <span class="ri-ico ri-num">2</span>
+          <span class="ri-tx"><h3>Press ⌥ Space</h3><p>The only shortcut to remember. That's it.</p></span>
+        </button>
+        <button class="rel-item" data-rel="2" role="tab" aria-selected="false">
+          <span class="ri-ico ri-num">3</span>
+          <span class="ri-tx"><h3>Speak or write your intent</h3><p>A few words on what you want to say is enough.</p></span>
+        </button>
+        <button class="rel-item" data-rel="3" role="tab" aria-selected="false">
+          <span class="ri-ico ri-num">4</span>
+          <span class="ri-tx"><h3>Get a draft that sounds like you</h3><p>In your voice, grounded in the context on screen.</p></span>
+        </button>
+        <button class="rel-item done" data-rel="4" role="tab" aria-selected="false">
+          <span class="ri-ico ri-num">5</span>
+          <span class="ri-tx"><h3>Paste it back and send</h3><p>One keystroke and it's out the door.</p></span>
+        </button>
+      </div>
+
+      <!-- RIGHT: one mock window per step (crossfades) -->
+      <div class="rel-stage">
+        <!-- step 1: blank Mail field + PortaVox notification popup -->
+        <div class="rel-panel active" data-rel="0">
+          <div class="mock"><div class="mock-win mw-stage">
+            <div class="pv-toast">
+              <img src="assets/portavox-icon.png" alt="PortaVox">
+              <div class="pt-tx">
+                <div class="pt-app">PortaVox</div>
+                <div class="pt-msg">Press <span class="pt-keys"><span class="pt-key">⌥</span><span class="pt-key">space</span></span> and I'll help you fill this field.</div>
+              </div>
+            </div>
+            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><svg class="mw-ico" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="3" fill="#2b8bff"></rect><path d="M4.5 8.5l7.5 5 7.5-5" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="mw-title">Mail · New message</span></div>
+            <div class="mbody">
+              <div class="mrow soft"><span class="lbl">To</span><span>Sarah · investor</span></div>
+              <div class="mrow soft"><span class="lbl">Subject</span><span>Friday</span></div>
+              <div class="compose"><span class="caret"></span><span class="ph">The field is blank. Your cursor is right here.</span></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- step 2: the keystroke (keyboard) -->
+        <div class="rel-panel" data-rel="1">
+          <div class="mock"><div class="mock-win">
+            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">⌥ Space</span></div>
+            <div class="mbody">
+              <div class="kboard">
+                <div class="krow"><span class="key wide">tab</span><span class="key">Q</span><span class="key">W</span><span class="key">E</span><span class="key">R</span><span class="key">T</span><span class="key">Y</span><span class="key">U</span><span class="key">I</span></div>
+                <div class="krow"><span class="key wide">caps</span><span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span><span class="key">G</span><span class="key">H</span><span class="key">J</span><span class="key">K</span></div>
+                <div class="krow"><span class="key wide">shift</span><span class="key">Z</span><span class="key">X</span><span class="key">C</span><span class="key">V</span><span class="key">B</span><span class="key">N</span><span class="key">M</span></div>
+                <div class="krow"><span class="key">ctrl</span><span class="key lit opt"><span class="ksub">option</span><span class="kglyph">⌥</span></span><span class="key">⌘</span><span class="key space lit">space</span><span class="key">⌘</span></div>
+              </div>
+              <div class="kb-cap"><span class="kbd2">⌥ option</span><span class="plus">+</span><span class="kbd2">space</span><span style="color:var(--fg-muted);font-weight:400;margin-left:4px;">— that's the whole thing.</span></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- step 3: PortaVox listening (dark chrome) -->
+        <div class="rel-panel" data-rel="2">
+          <div class="mock"><div class="mock-win pv">
+            <div class="mw-bar pv"><span class="d r"></span><span class="d y"></span><span class="d g"></span><img class="mw-logo" src="assets/portavox-icon.png" alt=""><span class="mw-title">PortaVox · listening</span></div>
+            <div class="mbody">
+              <div class="rec"><span class="recdot"></span>Listening… speak or <span class="type-link" role="button" tabindex="0">type</span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div>
+              <div class="intent" data-placeholder="Type what you want to say…">Can't make Friday, propose Tuesday instead</div>
+              <div class="mact"><span class="mbtn">Next<span class="ent">↵</span></span></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- step 4: PortaVox draft (dark chrome) — the key screen -->
+        <div class="rel-panel" data-rel="3">
+          <div class="mock"><div class="mock-win pv">
+            <div class="mw-bar pv"><span class="d r"></span><span class="d y"></span><span class="d g"></span><img class="mw-logo" src="assets/portavox-icon.png" alt=""><span class="mw-title">PortaVox · draft</span></div>
+            <div class="mbody">
+              <div class="draft-bubble magic">
+                <div class="draft-text">Hi <span class="hl" data-note="Knows you always call her Sarah" data-c="185,99,201">Sarah</span>,<br><br><span class="hl" data-note="Attentive, exactly when it counts" data-c="247,68,88">How did the board meeting go yesterday?</span><br><br><span class="hl" data-note="Your intent, written in your voice" data-c="248,145,63">Sorry, I can't do Friday after all. Could we move to Tuesday instead?</span><br><br><span class="hl" data-note="Remembers this is still on your to-do list" data-c="246,165,26">I'll have the cap table ready by then either way.</span><br><br>Thanks,<br><span class="hl" data-note="Signs off the way you always do" data-c="211,52,138">Alex</span></div>
+                <div class="magic-callout"><span class="mc-dot"></span><span class="mc-text"></span></div>
+              </div>
+              <div class="mact"><span class="mbtn">Paste<span class="ent">↵</span></span></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- step 5: pasted back into Mail + Send -->
+        <div class="rel-panel" data-rel="4">
+          <div class="mock"><div class="mock-win">
+            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><svg class="mw-ico" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="3" fill="#2b8bff"></rect><path d="M4.5 8.5l7.5 5 7.5-5" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="mw-title">Mail · New message</span></div>
+            <div class="mbody">
+              <div class="mrow soft"><span class="lbl">To</span><span>Sarah · investor</span></div>
+              <div class="compose email">Hi Sarah,
+
+Sorry, I can't do Friday after all. Could we move to Tuesday instead?
+
+I'll have the cap table ready by then either way.
+
+Thanks,
+Alex</div>
+              <div class="mact"><span class="mbtn">Send</span></div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -820,14 +1009,84 @@ Best, John</div>
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
 })();
 (function(){
-  var items=[].slice.call(document.querySelectorAll('.rel-item'));
-  var panels=[].slice.call(document.querySelectorAll('.rel-panel'));
-  function sel(i){
-    items.forEach(function(b){ var on=b.getAttribute('data-rel')===i; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
-    panels.forEach(function(p){ p.classList.toggle('active',p.getAttribute('data-rel')===i); });
+  // Per-group: each .rel-list only drives the .rel-stage in its own .rel-grid,
+  // so the "How it works" and "Relationship intelligence" tab sets stay independent.
+  document.querySelectorAll('.rel-list').forEach(function(list){
+    var grid   = list.closest('.rel-grid');
+    var stage  = grid ? grid.querySelector('.rel-stage') : document;
+    var items  = [].slice.call(list.querySelectorAll('.rel-item'));
+    var panels = [].slice.call(stage.querySelectorAll('.rel-panel'));
+    function sel(i){
+      items.forEach(function(b){ var on=b.getAttribute('data-rel')===i; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
+      panels.forEach(function(p){ p.classList.toggle('active',p.getAttribute('data-rel')===i); });
+    }
+    items.forEach(function(b){ b.addEventListener('click',function(){ sel(b.getAttribute('data-rel')); }); });
+    sel('0');
+  });
+
+  // Step 3 of "How it works": clicking the underlined "type" turns the intent box editable.
+  document.querySelectorAll('.type-link').forEach(function(link){
+    var panel  = link.closest('.rel-panel');
+    var rec    = panel.querySelector('.rec');
+    var intent = panel.querySelector('.intent');
+    function startTyping(){
+      if (rec) rec.style.display = 'none';
+      intent.classList.add('typing');
+      intent.setAttribute('contenteditable','true');
+      intent.textContent = '';
+      intent.focus();
+    }
+    link.addEventListener('click', startTyping);
+    link.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); startTyping(); } });
+  });
+
+  // Step 4 — roving "magic" callout that points out, one phrase at a time, why the draft works.
+  var bubble=document.querySelector('.draft-bubble.magic');
+  if(bubble){
+    var spans=[].slice.call(bubble.querySelectorAll('.hl'));
+    var callout=bubble.querySelector('.magic-callout');
+    if(callout&&spans.length){
+      var dot=callout.querySelector('.mc-dot'), txt=callout.querySelector('.mc-text');
+      var panel=bubble.closest('.rel-panel');
+      var idx=0, timer=null, paused=false;
+      var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function place(i){
+        var s=spans[i]; if(!s) return;
+        var c=s.getAttribute('data-c')||'248,145,63';
+        spans.forEach(function(sp){sp.classList.remove('active');});
+        s.classList.add('active');
+        s.style.setProperty('--hl','rgba('+c+',.34)');
+        txt.textContent=s.getAttribute('data-note');
+        dot.style.background='rgb('+c+')';
+        var br=bubble.getBoundingClientRect();
+        var rects=s.getClientRects(), r=rects[0]; if(!r) return;
+        var x=(r.left-br.left)+Math.min(r.width,110)/2;
+        var topY=(r.top-br.top);
+        var cw=callout.offsetWidth||160, ch=callout.offsetHeight||32, half=cw/2, pad=8;
+        var cx=Math.max(half+pad, Math.min(bubble.clientWidth-half-pad, x));
+        var ptr=Math.max(12, Math.min(cw-12, half+(x-cx)));
+        callout.style.setProperty('--ptr',ptr+'px');
+        callout.style.left=cx+'px';
+        if(topY-ch-12<0){ callout.classList.add('below'); callout.style.top=(r.bottom-br.top+10)+'px'; }
+        else{ callout.classList.remove('below'); callout.style.top=(topY-8)+'px'; }
+        callout.classList.add('show');
+      }
+      function next(){ idx=(idx+1)%spans.length; place(idx); }
+      function start(){ stop(); if(reduce) return; timer=setInterval(function(){ if(!paused) next(); },2400); }
+      function stop(){ if(timer){clearInterval(timer);timer=null;} }
+      spans.forEach(function(s,i){ s.addEventListener('mouseenter',function(){ paused=true; idx=i; place(i); }); });
+      bubble.addEventListener('mouseleave',function(){ paused=false; });
+      function show(){ requestAnimationFrame(function(){ place(idx); start(); }); }
+      if('MutationObserver' in window){
+        new MutationObserver(function(){
+          if(panel.classList.contains('active')){ show(); }
+          else{ stop(); callout.classList.remove('show'); }
+        }).observe(panel,{attributes:true,attributeFilter:['class']});
+      }
+      if(panel.classList.contains('active')) show();
+      var rt2; window.addEventListener('resize',function(){ clearTimeout(rt2); rt2=setTimeout(function(){ place(idx); },150); });
+    }
   }
-  items.forEach(function(b){ b.addEventListener('click',function(){ sel(b.getAttribute('data-rel')); }); });
-  sel('0');
 })();
 // Beta gate — SHA-256 of access code compared to baked hash. Casual lock,
 // not real security: anyone can devtools the hash and brute-force a weak
