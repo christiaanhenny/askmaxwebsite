@@ -138,6 +138,10 @@ p{text-wrap:pretty;}
 .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand-coral);box-shadow:0 0 0 3px rgba(247,68,88,.28);}
 .hero h1{font-size:clamp(38px,6vw,66px);font-weight:400;letter-spacing:-.025em;line-height:1.03;}
 .hero h1 em{font-style:normal;font-weight:600;color:var(--brand-ink);}
+.hero h1.hero-head{font-weight:600;color:var(--brand-ink);}
+.hero .hero-sub{margin-top:12px;font-size:clamp(24px,3.4vw,38px);font-weight:500;color:var(--ink);letter-spacing:-.02em;line-height:1.08;}
+.hero .amber-uline{position:relative;white-space:nowrap;}
+.hero .amber-uline::after{content:"";position:absolute;left:-.02em;right:-.02em;bottom:-.1em;height:.13em;background:var(--brand-amber);border-radius:999px;}
 .hero .lead{margin:24px auto 0;max-width:560px;font-size:18.5px;color:#4a3c44;}
 .hero .lead b{color:var(--ink);font-weight:600;}
 .hero-cta{margin-top:34px;display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;}
@@ -404,7 +408,8 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
   <div class="hero-fade" style="height:120px;"></div>
   <div class="hero-content">
     <span class="badge"><span class="dot"></span>Private beta · for macOS</span>
-    <h1><em>Hyper-personal</em> messages,<br>in any app.</h1>
+    <h1 class="hero-head">Build stronger relationships.</h1>
+    <h2 class="hero-sub">Heavy communicators save <span class="amber-uline">2&ndash;4h per day</span></h2>
     <p class="lead"><b>Click in any textfield. (Voice)prompt what you want to say. Tracks to-do's, to-get's, attentiveness and much more.</b></p>
     <div class="hero-cta">
       <a class="btn" href="#download">
