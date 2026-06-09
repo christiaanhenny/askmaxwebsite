@@ -9,26 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <meta name="robots" content="noindex,nofollow">
-<script>
-  if (localStorage.getItem('portavox.beta.unlocked') === 'true') {
-    document.documentElement.classList.add('beta-unlocked');
-  }
-</script>
-<style>
-#beta-gate{position:fixed;inset:0;z-index:9999;background:#faf6f3;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
-html.beta-unlocked #beta-gate{display:none;}
-html:not(.beta-unlocked){overflow:hidden;}
-#voice-gate{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-.gate-card{position:relative;max-width:400px;width:100%;padding:36px 32px;text-align:center;background:rgba(255,255,255,.86);backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);border-radius:22px;border:1px solid #ece7ee;box-shadow:0 24px 60px rgba(59,0,28,.12);}
-.gate-mark{width:56px;height:56px;margin:0 auto 18px;display:block;}
-.gate-title{font-family:"Jost",-apple-system,system-ui,sans-serif;font-size:28px;font-weight:400;color:#2a0816;margin:0 0 10px;letter-spacing:-.015em;}
-.gate-prompt{font-family:"Hanken Grotesk",-apple-system,system-ui,sans-serif;font-size:15px;color:#6f6675;line-height:1.55;margin:0 0 22px;}
-.gate-card input{width:100%;padding:12px 18px;border:1px solid #e3dde6;border-radius:999px;font-family:"Hanken Grotesk",-apple-system,system-ui,sans-serif;font-size:15px;margin-bottom:10px;box-sizing:border-box;transition:border-color .15s;background:#fff;}
-.gate-card input:focus{outline:none;border-color:#F8913F;}
-.gate-card button{width:100%;padding:13px 18px;background:#3B001C;color:#fff;border:0;border-radius:999px;font-family:"Hanken Grotesk",-apple-system,system-ui,sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 2px 8px rgba(59,0,28,.18);}
-.gate-card button:hover{transform:translateY(-1.5px);box-shadow:0 12px 26px rgba(59,0,28,.26);}
-.gate-error{color:#c0322a;font-size:13px;margin:14px 0 0;min-height:18px;font-family:"Hanken Grotesk",-apple-system,system-ui,sans-serif;}
-</style>
 <style>
 :root{
   --brand-ink:#3B001C;
@@ -771,19 +751,6 @@ html,body{overflow-x:hidden;}
 </style>
 </head>
 <body>
-
-<!-- ===== BETA GATE ===== Invite-only overlay. Hidden via CSS when html.beta-unlocked is set; pre-paint script in <head> sets that for returning visitors so no flash. -->
-<div id="beta-gate">
-  <svg id="voice-gate" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
-  <div class="gate-card">
-    <img class="gate-mark" src="assets/portavox-icon.png" alt="">
-    <h1 class="gate-title">PortaVox</h1>
-    <p class="gate-prompt">This page is invite-only.<br>Enter your beta access code to continue.</p>
-    <input type="password" id="gate-input" placeholder="Access code" autocomplete="off" autocapitalize="off" spellcheck="false">
-    <button id="gate-submit" type="button">Continue</button>
-    <p class="gate-error" id="gate-error">&nbsp;</p>
-  </div>
-</div>
 
 <!-- ===== NAV ===== -->
 <nav class="nav" id="nav">
@@ -1566,45 +1533,6 @@ Alex</div>
   }
   if(panel.classList.contains('active')) show();
   var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ place(idx); },150); });
-})();
-</script>
-
-<script>
-// Beta gate — SHA-256 of access code compared to baked hash. Casual lock,
-// not real security: anyone can devtools the hash and brute-force a weak
-// code offline. That's fine, the installer is served straight from this public
-// Pages repo (beta/PortaVox-<ver>.pkg) — the AskMax source repo is private,
-// so its GitHub Release assets are NOT publicly downloadable. Goal is
-// "casual visitors bounce", not "stop attackers".
-// To rotate: echo -n "<new code>" | shasum -a 256
-(function(){
-  var HASH='e6014c086c7f260f05fa9365e949a6bfaf4072a28e106461ac245fb98dd55d3f';
-  var KEY='portavox.beta.unlocked';
-  if(localStorage.getItem(KEY)==='true') return;
-  var input=document.getElementById('gate-input');
-  var submit=document.getElementById('gate-submit');
-  var error=document.getElementById('gate-error');
-  if(!input||!submit||!error) return;
-  async function sha256Hex(t){
-    var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));
-    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
-  }
-  async function tryUnlock(){
-    var v=(input.value||'').trim();
-    if(!v) return;
-    var h=await sha256Hex(v);
-    if(h===HASH){
-      localStorage.setItem(KEY,'true');
-      document.documentElement.classList.add('beta-unlocked');
-    } else {
-      error.textContent="That code doesn't match. Email info@portavox.ai for a fresh invite.";
-      input.value='';
-      input.focus();
-    }
-  }
-  submit.addEventListener('click',tryUnlock);
-  input.addEventListener('keydown',function(e){ if(e.key==='Enter') tryUnlock(); });
-  setTimeout(function(){ input.focus(); },50);
 })();
 </script>
 
