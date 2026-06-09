@@ -56,14 +56,12 @@ html:not(.beta-unlocked){overflow:hidden;}
   --f-body:"Hanken Grotesk",-apple-system,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;overflow-x:clip;}
+html{scroll-behavior:smooth;}
 body{
   font-family:var(--f-body);
   color:var(--fg);
   background:var(--bg);
   font-size:17px;line-height:1.6;
-  overflow-x:clip;
-  max-width:100%;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
 }
 ::selection{background:rgba(248,145,63,.25);}
@@ -127,8 +125,10 @@ p{text-wrap:pretty;}
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:760px;height:90vh;max-height:880px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:240px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff);z-index:2;}
-.hero-content{position:relative;z-index:3;text-align:center;padding:0 32px;max-width:780px;margin-top:120px;}
-.hero-content::before{content:"";position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:96%;height:62%;background:radial-gradient(closest-side,rgba(253,247,239,.8),rgba(253,247,239,.34) 56%,rgba(253,247,239,0) 72%);z-index:-1;pointer-events:none;}
+.hero-content{position:relative;z-index:3;text-align:center;padding:0 32px;max-width:880px;margin:120px auto 0;}
+.hero-content::before{content:"";position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:112%;height:78%;background:radial-gradient(closest-side,rgba(253,247,239,.94),rgba(253,247,239,.5) 52%,rgba(253,247,239,0) 74%);z-index:-1;pointer-events:none;}
+.hero-copy{text-align:center;}
+
 .badge{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(43,8,22,.78);color:#fff;backdrop-filter:blur(8px);
@@ -136,18 +136,19 @@ p{text-wrap:pretty;}
   padding:7px 15px 7px 11px;border-radius:999px;margin-bottom:26px;
 }
 .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand-coral);box-shadow:0 0 0 3px rgba(247,68,88,.28);}
-.hero h1{font-size:clamp(38px,6vw,66px);font-weight:400;letter-spacing:-.025em;line-height:1.03;}
+.hero h1{font-size:clamp(40px,6.6vw,76px);font-weight:400;letter-spacing:-.028em;line-height:1.02;}
 .hero h1 em{font-style:normal;font-weight:600;color:var(--brand-ink);}
-.hero h1.hero-head{font-weight:600;color:var(--brand-ink);}
-.hero .hero-sub{margin-top:12px;font-size:clamp(24px,3.4vw,38px);font-weight:500;color:var(--ink);letter-spacing:-.02em;line-height:1.08;}
-.hero .amber-uline{position:relative;white-space:nowrap;}
-.hero .amber-uline::after{content:"";position:absolute;left:-.02em;right:-.02em;bottom:-.1em;height:.13em;background:var(--brand-amber);border-radius:999px;}
 .hero .lead{margin:24px auto 0;max-width:560px;font-size:18.5px;color:#4a3c44;}
 .hero .lead b{color:var(--ink);font-weight:600;}
 .hero-cta{margin-top:34px;display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;}
 .hero-cta .sub{font-family:var(--f-display);font-weight:500;font-size:15px;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
 .hero-cta .sub .play{width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--border-2);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.08);}
 .hero-cta .sub .play svg{width:11px;height:11px;margin-left:1px;color:var(--brand-ink);}
+.hero-caps{margin-top:26px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 18px;}
+.hero-caps .hc{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:500;font-size:14.5px;color:#5a4f60;}
+.hero-caps .hc svg{width:17px;height:17px;color:var(--brand-orange);flex:none;}
+.hero-caps .hc-sep{width:4px;height:4px;border-radius:50%;background:var(--border-2);}
+@media (max-width:560px){.hero-caps .hc-sep{display:none;}}
 
 /* ---------- app cloud ---------- */
 .cloud{padding:54px 0 30px;text-align:center;}
@@ -251,15 +252,38 @@ p{text-wrap:pretty;}
 .pcard p{font-size:16px;color:var(--fg-muted);line-height:1.6;}
 .pcard .uline{color:var(--ink);font-weight:600;border-bottom:2px solid var(--brand-orange);padding-bottom:1px;}
 
-/* ---------- how-it-works flow ---------- */
-.flow-steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:8px;}
-.fstep{position:relative;padding:26px 22px;border:1px solid var(--border);border-radius:18px;background:#fff;display:flex;flex-direction:column;gap:11px;}
-.fstep .fnum{width:34px;height:34px;border-radius:10px;background:var(--brand-ink);color:#fff;font-family:var(--f-display);font-weight:500;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(59,0,28,.18);}
-.fstep h3{font-size:16.5px;font-weight:500;line-height:1.25;}
-.fstep p{font-size:13.5px;color:var(--fg-muted);line-height:1.5;}
-.fstep .kbd{font-family:var(--f-body);font-weight:600;color:var(--ink);background:var(--soft);border:1px solid var(--border-2);border-radius:6px;padding:1px 7px;font-size:.92em;white-space:nowrap;}
-@media (max-width:980px){.flow-steps{grid-template-columns:repeat(2,1fr);}}
-@media (max-width:560px){.flow-steps{grid-template-columns:1fr;}}
+/* ---------- how it works flow ---------- */
+.flow{margin-top:60px;}
+.flow-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative;}
+/* connecting thread runs through the gaps at badge height */
+.flow-row::before{content:"";position:absolute;top:53px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent 0,var(--brand-orange) 8%,var(--brand-orange) 92%,transparent 100%);
+  opacity:.30;z-index:0;}
+.fcard{position:relative;z-index:1;background:#fff;border:1px solid var(--border);border-radius:18px;
+  padding:28px 22px 26px;display:flex;flex-direction:column;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;}
+.fcard:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(40,15,30,.07);border-color:var(--border-2);}
+.fnum{width:30px;height:30px;border-radius:9px;background:var(--brand-ink);color:#fff;
+  font-family:var(--f-display);font-weight:500;font-size:14px;line-height:1;
+  display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+  box-shadow:0 2px 8px rgba(59,0,28,.18);}
+.fcard h3{font-family:var(--f-display);font-size:18px;font-weight:500;letter-spacing:-.005em;
+  line-height:1.25;color:var(--ink);margin-bottom:10px;text-wrap:balance;}
+.fcard p{font-size:14.5px;color:var(--fg-muted);line-height:1.55;margin:0;}
+.fcard h3 .fkbd{margin-left:6px;}
+.fkbd{display:inline-flex;align-items:center;font-family:var(--f-body);font-weight:600;font-size:13px;
+  color:var(--ink);background:var(--soft);border:1px solid var(--border-2);border-radius:6px;
+  padding:2px 8px;letter-spacing:.01em;vertical-align:1px;white-space:nowrap;}
+/* payoff step */
+.fcard.done{background:linear-gradient(160deg,#FFF3E9,#FCE6D4);border-color:#f3d4ba;}
+.fcard.done .fnum{background:var(--brand-orange);box-shadow:0 2px 10px rgba(248,145,63,.4);}
+@media (max-width:880px){
+  .flow-row{grid-template-columns:1fr;gap:12px;}
+  .flow-row::before{display:none;}
+  .fcard{flex-direction:row;align-items:flex-start;gap:18px;padding:20px 22px;}
+  .fnum{margin-bottom:0;flex:none;margin-top:2px;}
+  .fcard h3{margin-bottom:6px;}
+}
 
 /* ---------- use cases ---------- */
 .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-2);border:1px solid var(--border-2);border-radius:20px;overflow:hidden;margin-top:8px;}
@@ -312,7 +336,7 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
 /* ---------- voice-line scenes ---------- */
 .voice-scene{position:absolute;inset:0;overflow:hidden;z-index:0;}
 .voice-scene svg{width:100%;height:100%;display:block;}
-.hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.5) 22%, rgba(255,255,255,.9) 41%, rgba(255,255,255,.9) 59%, rgba(255,255,255,.48) 77%, rgba(255,255,255,0) 100%);}
+.hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.32) 20%, rgba(255,255,255,.62) 40%, rgba(255,255,255,.62) 60%, rgba(255,255,255,.34) 78%, rgba(255,255,255,0) 100%);}
 .closer-veil{background:radial-gradient(92% 62% at 50% 24%, #fff 0%, rgba(255,255,255,.84) 38%, rgba(255,255,255,0) 68%) !important;}
 .band-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(95% 84% at 50% 50%, rgba(42,8,22,.82) 0%, rgba(42,8,22,.5) 44%, rgba(42,8,22,.05) 78%);}
 .band-dark{color:#fff;}
@@ -332,17 +356,15 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
 .rel-item .ri-ico{width:36px;height:36px;border-radius:10px;flex:none;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--brand-ink);transition:background .18s ease,color .18s ease;}
 .rel-item.active .ri-ico{background:var(--brand-ink);color:#fff;}
 .rel-item .ri-ico svg{width:18px;height:18px;}
-.rel-item .ri-tx{flex:1;}
-.rel-item h3{font-size:17.5px;font-weight:500;color:var(--ink);line-height:1.25;margin-bottom:3px;}
+.rel-item .ri-tx{flex:1;min-width:0;display:flex;flex-direction:column;}
+.rel-item h3{font-size:17.5px;font-weight:500;color:var(--ink);line-height:1.25;margin:0 0 3px;}
 .rel-item p{font-size:14px;color:var(--fg-muted);line-height:1.45;}
 .rel-stage{position:relative;min-height:388px;}
-.rel-panel{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .42s ease;}
-.rel-panel.active{position:relative;opacity:1;pointer-events:auto;animation:panelIn .52s cubic-bezier(.22,1,.36,1);}
-@keyframes panelIn{from{opacity:0;transform:translateX(var(--enter,30px)) scale(.985);}55%{opacity:1;}to{opacity:1;transform:none;}}
-@media (prefers-reduced-motion: reduce){.rel-panel.active{animation:none;}}
+.rel-panel{position:absolute;inset:0;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .35s ease,transform .35s ease;}
+.rel-panel.active{position:relative;opacity:1;transform:none;pointer-events:auto;}
 .rel-stage .mock{height:100%;}
 /* generic mock rows */
-.mbody{padding:16px;display:flex;flex-direction:column;gap:9px;container-type:inline-size;}
+.mbody{padding:16px;display:flex;flex-direction:column;gap:9px;}
 .mrow{display:flex;align-items:center;gap:11px;padding:12px 13px;border:1px solid var(--border);border-radius:11px;background:#fff;font-size:13.5px;color:var(--ink);font-family:var(--f-display);font-weight:500;line-height:1.35;}
 .mrow.soft{background:var(--soft);border-color:transparent;}
 .mrow .ci{width:20px;height:20px;border-radius:6px;flex:none;display:flex;align-items:center;justify-content:center;}
@@ -357,123 +379,395 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
 .note .nh{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-orange);font-weight:700;margin-bottom:7px;font-family:var(--f-body);}
 .note .nh .sp{width:6px;height:6px;border-radius:50%;background:var(--brand-orange);}
 .draft-bubble{background:var(--brand-ink);color:#fff;border-radius:13px;border-bottom-left-radius:4px;padding:12px 14px;font-size:13px;line-height:1.5;}
+.email-draft{background:#fff;border:1px solid var(--border);border-radius:11px;padding:14px 15px;font-size:13px;line-height:1.6;color:var(--ink);white-space:pre-line;}
+/* outbox: a queued draft in a dashed frame + edit/send */
+.outbox{border:1.6px dashed #e0c4a8;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 2px 12px rgba(248,145,63,.07);}
+.outbox .ob-head{display:flex;align-items:center;gap:8px;padding:9px 13px;border-bottom:1.6px dashed #efe1d4;background:#fffaf4;}
+.outbox .ob-app{font-family:var(--f-display);font-weight:600;font-size:12px;color:var(--ink);}
+.outbox .ob-tag{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--f-display);font-weight:700;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--brand-orange);}
+.outbox .ob-tag svg{width:12px;height:12px;}
+.outbox .ob-body{padding:13px 15px;font-size:13px;line-height:1.6;color:var(--ink);white-space:pre-line;}
+.outbox .ob-subj{display:block;font-family:var(--f-display);font-weight:600;font-size:13.5px;color:var(--ink);margin-bottom:9px;padding-bottom:9px;border-bottom:1px solid var(--border);white-space:normal;}
+.ri-actions{display:flex;gap:9px;margin-top:12px;}
+.ri-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:11px;padding:11px;font-family:var(--f-body);font-weight:600;font-size:13.5px;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
+.ri-btn svg{width:15px;height:15px;}
+.ri-btn.edit{background:#fff;border:1px solid var(--border-2);color:var(--ink);}
+.ri-btn.edit:hover{background:var(--soft);}
+.ri-btn.send{background:var(--brand-ink);color:#fff;border:1px solid var(--brand-ink);box-shadow:0 3px 10px rgba(59,0,28,.18);}
+.ri-btn.send:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(59,0,28,.26);}
 .bubble.sm{max-width:100%;font-size:12.5px;}
 .ctx-chips{display:flex;flex-wrap:wrap;gap:7px;}
 .ctx-chips span{font-size:11.5px;font-family:var(--f-display);font-weight:500;padding:5px 11px;border-radius:999px;border:1px solid var(--border-2);color:#5a4f60;background:#fff;}
 .fld{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--brand-ink);background:#f3ecf3;border:1px solid #e7dcea;border-radius:9px;padding:7px 11px;}
 .fld svg{width:14px;height:14px;}
+/* document workspace (answers from your files) */
+.docset{border:1px solid var(--border);border-radius:12px;background:#fbfafc;padding:11px 11px 10px;display:flex;flex-direction:column;gap:7px;}
+.docset-h{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:600;font-size:12.5px;color:var(--ink);}
+.docset-h svg{width:16px;height:16px;color:var(--brand-orange);}
+.docset-h .cnt{margin-left:auto;font-family:var(--f-body);font-weight:600;font-size:10.5px;color:var(--fg-soft);background:#fff;border:1px solid var(--border-2);border-radius:999px;padding:2px 9px;}
+.doc{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:#fff;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--ink);}
+.doc-ic{flex:none;width:21px;height:25px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--f-body);font-weight:700;font-size:7px;letter-spacing:.01em;color:#fff;}
+.doc-ic.pdf{background:#e5484d;}
+.doc-ic.docx{background:#2b6fdb;}
+.doc-ic.xls{background:#1f8a5b;}
+.doc .pg{margin-left:auto;font-family:var(--f-body);font-weight:500;font-size:11px;color:var(--fg-soft);}
+.doc.add{justify-content:center;gap:7px;border-style:dashed;border-color:var(--border-2);background:transparent;color:var(--brand-ink);font-family:var(--f-body);font-weight:600;font-size:12.5px;cursor:pointer;}
+.doc.add svg{width:14px;height:14px;}
+.cite{display:flex;width:fit-content;align-items:center;gap:6px;margin-top:10px;font-family:var(--f-display);font-weight:600;font-size:10.5px;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:7px;padding:4px 9px;}
+.cite svg{width:11px;height:12px;flex:none;}
 
-/* ===== How it works — numbered tabs + extra mock chrome ===== */
-.rel-item .ri-ico.ri-num{font-family:var(--f-display);font-weight:500;font-size:15px;}
-.rel-item.done.active .ri-ico{background:var(--brand-orange);color:#fff;}
+/* ===== merged: How it works walkthrough (scoped) ===== */
+#how-it-works{padding:88px 0;background:var(--warm);}
+#how-it-works .head-center{text-align:center;max-width:780px;margin:0 auto 56px;}
+#how-it-works .head-center h2{margin-top:14px;}
+#how-it-works .kbd2{display:inline-flex;align-items:center;font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--ink);background:var(--soft);border:1px solid var(--border-2);border-radius:6px;padding:2px 8px;letter-spacing:.01em;vertical-align:1px;white-space:nowrap;}
 
-/* mock window: app icons in the title bar */
-.mw-ico{width:16px;height:16px;margin-left:6px;flex:none;}
-.mw-logo{width:17px;height:17px;border-radius:4px;margin-left:6px;flex:none;box-shadow:0 1px 2px rgba(40,15,30,.22);}
-/* PortaVox app chrome — dark, branded, clearly a different app than Mail */
-.mw-bar.pv{background:var(--brand-ink);border-bottom-color:rgba(255,255,255,.10);}
-.mw-bar.pv .mw-title{color:rgba(255,255,255,.92);}
-.mw-bar.pv .d{opacity:.92;}
-.mock-win.pv{border-color:#e7dfeb;box-shadow:0 18px 42px rgba(59,0,28,.16),0 4px 12px rgba(59,0,28,.07);}
-.mock-win.pv .mbody{background:linear-gradient(180deg,#fbf9fd,#f6f1fa);}
-.mrow .lbl{color:var(--fg-soft);}
 
-/* compose + intent + caret */
-.compose{border:1px solid var(--border);border-radius:11px;background:#fff;padding:14px;min-height:104px;font-size:13.5px;color:var(--ink);line-height:1.55;}
-.compose.email{white-space:pre-line;}
-.compose .ph{color:var(--fg-soft);}
-.intent{border:1px dashed var(--border-2);border-radius:11px;background:var(--soft);padding:13px 14px;font-size:13.5px;color:var(--ink);line-height:1.5;}
-.intent.typing{border-style:solid;border-color:var(--brand-orange);background:#fff;outline:none;}
-.caret{display:inline-block;width:2px;height:15px;background:var(--brand-orange);vertical-align:-2px;margin-right:1px;animation:blink 1.05s step-end infinite;}
+
+
+
+#how-it-works .rel-grid{display:grid;grid-template-columns:0.68fr 1fr;gap:40px;align-items:start;}
+#how-it-works .rel-list{display:flex;flex-direction:column;gap:6px;}
+#how-it-works .rel-item{appearance:none;text-align:left;width:100%;cursor:pointer;background:none;border:1px solid transparent;border-radius:15px;padding:15px 16px;display:flex;gap:14px;align-items:flex-start;font-family:var(--f-body);transition:background .18s ease,border-color .18s ease,box-shadow .18s ease;}
+#how-it-works .rel-item:hover{background:var(--soft);}
+#how-it-works .rel-item.active{background:#fff;border-color:var(--border);box-shadow:0 8px 26px rgba(40,15,30,.07);}
+#how-it-works .rel-item .ri-ico{width:34px;height:34px;border-radius:10px;flex:none;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--brand-ink);font-family:var(--f-display);font-weight:500;font-size:15px;transition:background .18s ease,color .18s ease;}
+#how-it-works .rel-item.active .ri-ico{background:var(--brand-ink);color:#fff;}
+#how-it-works .rel-item.done.active{background:#fff;border-color:var(--border);box-shadow:0 8px 26px rgba(40,15,30,.07);}
+#how-it-works .rel-item.done.active .ri-ico{background:var(--brand-orange);color:#fff;}
+#how-it-works .rel-item .ri-tx{flex:1;}
+#how-it-works .rel-item h3{font-size:17px;font-weight:500;color:var(--ink);line-height:1.25;margin-bottom:3px;}
+#how-it-works .rel-item p{font-size:13.5px;color:var(--fg-muted);line-height:1.45;}
+#how-it-works .rel-stage{position:relative;min-height:340px;}
+#how-it-works .rel-panel{position:absolute;inset:0;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .35s ease,transform .35s ease;}
+#how-it-works .rel-panel.active{position:relative;opacity:1;transform:none;pointer-events:auto;}
+#how-it-works .rel-stage .mock{height:100%;}
+
+
+#how-it-works .mock{background:linear-gradient(165deg,#f7f4f8,#f1ecf3);border:1px solid var(--border);border-radius:22px;padding:26px;box-shadow:inset 0 1px 0 #fff;}
+#how-it-works .mock-win{background:#fff;border:1px solid var(--border-2);border-radius:14px;box-shadow:0 18px 40px rgba(40,15,30,.10),0 4px 10px rgba(40,15,30,.05);overflow:hidden;}
+#how-it-works .mw-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--border);background:#fbfafc;}
+#how-it-works .mw-bar .d{width:10px;height:10px;border-radius:50%;}
+#how-it-works .d.r{background:#ff5f57;}#how-it-works .d.y{background:#febc2e;}#how-it-works .d.g{background:#28c840;}
+#how-it-works .mw-title{margin-left:2px;font-size:12px;color:var(--fg-soft);font-family:var(--f-display);}
+#how-it-works .mw-ico{width:16px;height:16px;margin-left:6px;flex:none;}
+#how-it-works .mw-logo{width:17px;height:17px;border-radius:4px;margin-left:6px;flex:none;box-shadow:0 1px 2px rgba(40,15,30,.22);}
+
+#how-it-works .mw-bar.pv{background:var(--brand-ink);border-bottom-color:rgba(255,255,255,.10);}
+#how-it-works .mw-bar.pv .mw-title{color:rgba(255,255,255,.92);}
+#how-it-works .mw-bar.pv .d{opacity:.92;}
+#how-it-works .mock-win.pv{border-color:#e7dfeb;box-shadow:0 18px 42px rgba(59,0,28,.16),0 4px 12px rgba(59,0,28,.07);}
+#how-it-works .mock-win.pv .mbody{background:linear-gradient(180deg,#fbf9fd,#f6f1fa);}
+#how-it-works .mbody{padding:16px;display:flex;flex-direction:column;gap:10px;}
+#how-it-works .mrow{display:flex;align-items:center;gap:11px;padding:12px 13px;border:1px solid var(--border);border-radius:11px;background:#fff;font-size:13.5px;color:var(--ink);font-family:var(--f-display);font-weight:500;line-height:1.35;}
+#how-it-works .mrow.soft{background:var(--soft);border-color:transparent;}
+#how-it-works .mrow .lbl{color:var(--fg-soft);}
+
+
+#how-it-works .draft-bubble{background:var(--brand-ink);color:#fff;border-radius:13px;border-bottom-left-radius:4px;padding:13px 15px;font-size:13px;line-height:1.55;white-space:pre-line;}
+
+#how-it-works .draft-bubble.magic{position:relative;padding:18px 19px;white-space:normal;line-height:2.0;overflow:visible;}
+#how-it-works .draft-text{font-size:13.5px;color:#fff;}
+#how-it-works .draft-text .hl{border-radius:4px;padding:1px 3px;box-shadow:inset 0 -1px 0 rgba(255,255,255,.22);transition:background .3s ease,box-shadow .3s ease;cursor:default;}
+#how-it-works .draft-text .hl.active{box-shadow:none;background:var(--hl,rgba(248,145,63,.34));}
+#how-it-works .magic-callout{position:absolute;z-index:6;left:0;top:0;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:8px;text-align:left;max-width:220px;line-height:1.3;background:#fff;color:var(--ink);border-radius:11px;padding:8px 12px;font-family:var(--f-display);font-weight:500;font-size:11.5px;box-shadow:0 14px 28px rgba(40,15,30,.32);opacity:0;transition:opacity .3s ease,left .4s cubic-bezier(.22,1,.36,1),top .4s cubic-bezier(.22,1,.36,1);pointer-events:none;}
+#how-it-works .magic-callout.show{opacity:1;}
+#how-it-works .magic-callout .mc-dot{width:7px;height:7px;border-radius:50%;background:var(--mc,var(--brand-orange));flex:none;}
+#how-it-works .magic-callout::after{content:"";position:absolute;top:100%;left:var(--ptr,50%);margin-left:-6px;border:6px solid transparent;border-top-color:#fff;}
+#how-it-works .magic-callout.below{transform:translate(-50%,0);}
+#how-it-works .magic-callout.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#fff;}
+#how-it-works .ctx-chips{display:flex;flex-wrap:wrap;gap:7px;}
+#how-it-works .ctx-chips span{font-size:11.5px;font-family:var(--f-display);font-weight:500;padding:5px 11px;border-radius:999px;border:1px solid var(--border-2);color:#5a4f60;background:#fff;}
+#how-it-works .compose{border:1px solid var(--border);border-radius:11px;background:#fff;padding:14px;min-height:104px;font-size:13.5px;color:var(--ink);line-height:1.55;}
+#how-it-works .compose.email{white-space:pre-line;}
+#how-it-works .compose .ph{color:var(--fg-soft);}
+#how-it-works .intent{border:1px dashed var(--border-2);border-radius:11px;background:var(--soft);padding:13px 14px;font-size:13.5px;color:var(--ink);line-height:1.5;}
+#how-it-works .intent.empty{color:var(--fg-soft);}
+#how-it-works .intent.typing{border-style:solid;border-color:var(--brand-orange);background:#fff;outline:none;}
+
+#how-it-works .captured{display:flex;align-items:center;gap:11px;padding:9px 11px;border:1px solid rgba(44,122,66,.28);background:rgba(228,243,232,.55);border-radius:11px;}
+#how-it-works .cap-thumb{position:relative;width:50px;height:38px;border-radius:6px;background:#fff;border:1px solid var(--border-2);box-shadow:0 1px 3px rgba(40,15,30,.12);flex:none;}
+#how-it-works .cap-thumb .tbar{border-radius:5px 5px 0 0;}
+#how-it-works .cap-thumb .tbar{height:9px;background:#fbfafc;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:2px;padding:0 3px;}
+#how-it-works .cap-thumb .tbar i{width:2.5px;height:2.5px;border-radius:50%;background:#dcd6e0;}
+#how-it-works .cap-thumb .tlines{padding:5px 5px 0;display:flex;flex-direction:column;gap:3px;}
+#how-it-works .cap-thumb .tlines span{height:2px;border-radius:1px;background:#e6dfea;}
+#how-it-works .cap-thumb .tlines span:nth-child(1){width:55%;}
+#how-it-works .cap-thumb .tlines span:nth-child(2){width:88%;}
+#how-it-works .cap-thumb .tlines span:nth-child(3){width:72%;}
+#how-it-works .cap-badge{position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:50%;background:#2c7a42;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(44,122,66,.4);}
+#how-it-works .cap-tx{font-family:var(--f-display);font-size:11.5px;color:#2c7a42;font-weight:500;line-height:1.35;}
+#how-it-works .cap-tx b{display:block;color:var(--ink);font-weight:600;font-size:12.5px;}
+#how-it-works .caret{display:inline-block;width:2px;height:15px;background:var(--brand-orange);vertical-align:-2px;margin-right:1px;animation:blink 1.05s step-end infinite;}
 @keyframes blink{50%{opacity:0;}}
-
-/* step 3: listening row */
-.rec{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--brand-coral);}
-.recdot{width:9px;height:9px;border-radius:50%;background:var(--brand-coral);animation:recpulse 1.7s ease-out infinite;}
+#how-it-works .rec{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--brand-coral);}
+#how-it-works .recdot{width:9px;height:9px;border-radius:50%;background:var(--brand-coral);animation:recpulse 1.7s ease-out infinite;}
 @keyframes recpulse{0%{box-shadow:0 0 0 0 rgba(247,68,88,.45);}70%{box-shadow:0 0 0 9px rgba(247,68,88,0);}100%{box-shadow:0 0 0 0 rgba(247,68,88,0);}}
-.wave{display:flex;align-items:center;gap:3px;margin-left:auto;height:18px;}
-.wave i{width:3px;border-radius:2px;background:var(--brand-coral);opacity:.85;animation:waveb 1s ease-in-out infinite;}
-.wave i:nth-child(2){animation-delay:.12s;}.wave i:nth-child(3){animation-delay:.24s;}.wave i:nth-child(4){animation-delay:.36s;}.wave i:nth-child(5){animation-delay:.48s;}
+#how-it-works .wave{display:flex;align-items:center;gap:3px;margin-left:auto;height:18px;}
+#how-it-works .wave i{width:3px;border-radius:2px;background:var(--brand-coral);opacity:.85;animation:waveb 1s ease-in-out infinite;}
+#how-it-works .wave i:nth-child(2){animation-delay:.12s;}#how-it-works .wave i:nth-child(3){animation-delay:.24s;}#how-it-works .wave i:nth-child(4){animation-delay:.36s;}#how-it-works .wave i:nth-child(5){animation-delay:.48s;}
 @keyframes waveb{0%,100%{height:6px;}50%{height:17px;}}
-.type-link{color:var(--brand-coral);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1.5px;cursor:pointer;}
-.type-link:hover{color:var(--brand-ink);}
-/* step 3: "captured your screen" card — proof PortaVox saw the Mail situation from step 1 */
-.captured{display:flex;align-items:center;gap:11px;padding:9px 11px;border:1px solid rgba(44,122,66,.28);background:rgba(228,243,232,.55);border-radius:11px;}
-.cap-thumb{position:relative;width:50px;height:38px;border-radius:6px;background:#fff;border:1px solid var(--border-2);box-shadow:0 1px 3px rgba(40,15,30,.12);flex:none;}
-.cap-thumb .tbar{height:9px;background:#fbfafc;border-bottom:1px solid var(--border);border-radius:5px 5px 0 0;display:flex;align-items:center;gap:2px;padding:0 3px;}
-.cap-thumb .tbar i{width:2.5px;height:2.5px;border-radius:50%;background:#dcd6e0;}
-.cap-thumb .tlines{padding:5px 5px 0;display:flex;flex-direction:column;gap:3px;}
-.cap-thumb .tlines span{height:2px;border-radius:1px;background:#e6dfea;}
-.cap-thumb .tlines span:nth-child(1){width:55%;}
-.cap-thumb .tlines span:nth-child(2){width:88%;}
-.cap-thumb .tlines span:nth-child(3){width:72%;}
-.cap-badge{position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:50%;background:#2c7a42;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(44,122,66,.4);}
-.cap-tx{font-family:var(--f-display);font-size:11.5px;color:#2c7a42;font-weight:500;line-height:1.35;}
-.cap-tx b{display:block;color:var(--ink);font-weight:600;font-size:12.5px;}
+#how-it-works .type-link{color:var(--brand-coral);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1.5px;cursor:pointer;}
+#how-it-works .type-link:hover{color:var(--brand-ink);}
 
-/* primary action button inside a mock window (Next / Paste / Send) */
-.mact{display:flex;justify-content:flex-end;margin-top:2px;}
-.mbtn{display:inline-flex;align-items:center;gap:9px;background:var(--brand-ink);color:#fff;font-family:var(--f-body);font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:11px;box-shadow:0 3px 10px rgba(59,0,28,.2);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;}
-.mbtn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(59,0,28,.26);}
-.mbtn .ent{font-size:14px;opacity:.6;font-weight:400;}
 
-/* step 4: one continuous draft with a roving "magic" callout */
-.draft-bubble.magic{position:relative;padding:18px 19px;white-space:normal;line-height:2.0;overflow:visible;}
-.draft-text{font-size:13.5px;color:#fff;}
-.draft-text .hl{border-radius:4px;padding:1px 3px;box-shadow:inset 0 -1px 0 rgba(255,255,255,.22);transition:background .3s ease,box-shadow .3s ease;cursor:default;}
-.draft-text .hl.active{box-shadow:none;background:var(--hl,rgba(248,145,63,.34));}
-.magic-callout{position:absolute;z-index:6;left:0;top:0;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:8px;text-align:left;max-width:220px;line-height:1.3;background:#fff;color:var(--ink);border-radius:11px;padding:8px 12px;font-family:var(--f-display);font-weight:500;font-size:11.5px;box-shadow:0 14px 28px rgba(40,15,30,.32);opacity:0;transition:opacity .3s ease,left .4s cubic-bezier(.22,1,.36,1),top .4s cubic-bezier(.22,1,.36,1);pointer-events:none;}
-.magic-callout.show{opacity:1;}
-.magic-callout .mc-dot{width:7px;height:7px;border-radius:50%;background:var(--mc,var(--brand-orange));flex:none;}
-.magic-callout::after{content:"";position:absolute;top:100%;left:var(--ptr,50%);margin-left:-6px;border:6px solid transparent;border-top-color:#fff;}
-.magic-callout.below{transform:translate(-50%,0);}
-.magic-callout.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#fff;}
+#how-it-works .mact{display:flex;justify-content:flex-end;margin-top:2px;}
+#how-it-works .mbtn{display:inline-flex;align-items:center;gap:9px;background:var(--brand-ink);color:#fff;font-family:var(--f-body);font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:11px;box-shadow:0 3px 10px rgba(59,0,28,.2);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;}
+#how-it-works .mbtn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(59,0,28,.26);}
+#how-it-works .mbtn .ent{font-size:14px;opacity:.6;font-weight:400;}
 
-/* step 1: macOS notification popup */
-.mw-stage{position:relative;}
-.pv-toast{position:absolute;top:46px;right:14px;z-index:5;width:235px;display:flex;gap:11px;align-items:flex-start;background:rgba(250,248,251,.92);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(40,15,30,.08);border-radius:15px;padding:12px 13px;box-shadow:0 16px 34px rgba(40,15,30,.16),0 3px 8px rgba(40,15,30,.08);}
-.rel-panel.active .pv-toast{animation:toastIn .55s cubic-bezier(.22,1,.36,1);}
+
+#how-it-works .mw-stage{position:relative;}
+#how-it-works .pv-toast{position:absolute;top:46px;right:14px;z-index:5;width:235px;display:flex;gap:11px;align-items:flex-start;
+  background:rgba(250,248,251,.92);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid rgba(40,15,30,.08);border-radius:15px;padding:12px 13px;
+  box-shadow:0 16px 34px rgba(40,15,30,.16),0 3px 8px rgba(40,15,30,.08);}
+#how-it-works .rel-panel.active .pv-toast{animation:toastIn .55s cubic-bezier(.22,1,.36,1);}
 @keyframes toastIn{from{transform:translateY(-14px) scale(.95);}to{transform:none;}}
-.pv-toast img{width:34px;height:34px;border-radius:9px;flex:none;box-shadow:0 1px 3px rgba(40,15,30,.18);}
-.pv-toast .pt-tx{flex:1;min-width:0;}
-.pv-toast .pt-app{font-family:var(--f-display);font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:2px;}
-.pv-toast .pt-msg{font-size:12.5px;color:var(--ink);line-height:1.4;}
-.pv-toast .pt-keys{display:inline-flex;gap:4px;vertical-align:1px;}
-.pt-key{font-family:var(--f-display);font-weight:600;font-size:10.5px;color:var(--ink);background:#fff;border:1px solid var(--border-2);border-bottom-width:2px;border-radius:5px;padding:1px 6px;white-space:nowrap;}
+#how-it-works .pv-toast img{width:34px;height:34px;border-radius:9px;flex:none;box-shadow:0 1px 3px rgba(40,15,30,.18);}
+#how-it-works .pv-toast .pt-tx{flex:1;min-width:0;}
+#how-it-works .pv-toast .pt-app{font-family:var(--f-display);font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:2px;}
+#how-it-works .pv-toast .pt-msg{font-size:12.5px;color:var(--ink);line-height:1.4;}
+#how-it-works .pv-toast .pt-keys{display:inline-flex;gap:4px;vertical-align:1px;}
+#how-it-works .pt-key{font-family:var(--f-display);font-weight:600;font-size:10.5px;color:var(--ink);background:#fff;border:1px solid var(--border-2);border-bottom-width:2px;border-radius:5px;padding:1px 6px;white-space:nowrap;}
 
-/* step 2: keyboard */
-.kbd2{display:inline-flex;align-items:center;font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--ink);background:var(--soft);border:1px solid var(--border-2);border-radius:6px;padding:2px 8px;letter-spacing:.01em;vertical-align:1px;white-space:nowrap;}
-/* One scale unit (--ku) sizes every key, so the keyboard keeps its natural
-   key proportions (letters square, modifiers wider, rows centered) and just
-   scales as a whole to fit the stage — never gets stretched apart per row. */
-.kboard{--ku:clamp(12px,6.8cqi,34px);--kg:calc(var(--ku)*.19);background:linear-gradient(180deg,#fbfafc,#f3eff5);border:1px solid var(--border-2);border-radius:14px;padding:calc(var(--ku)*.46);display:flex;flex-direction:column;gap:var(--kg);box-shadow:inset 0 1px 0 #fff;width:max-content;max-width:100%;margin:0 auto;}
-.krow{display:flex;gap:var(--kg);justify-content:center;}
-.key{flex:none;width:var(--ku);height:var(--ku);border-radius:calc(var(--ku)*.22);background:#fff;border:1px solid var(--border-2);border-bottom-width:2px;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:500;font-size:calc(var(--ku)*.36);color:var(--fg-muted);box-shadow:0 1px 2px rgba(40,15,30,.05);transition:transform .12s ease;}
-.key.wide{width:calc(var(--ku)*1.7);}
-.key.space{width:calc(var(--ku)*5.2);}
-.key.lit{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff;box-shadow:0 4px 14px rgba(59,0,28,.28);position:relative;}
-.key.opt{flex-direction:column;justify-content:center;gap:calc(var(--ku)*.08);padding:0;}
-.key.opt .ksub{font-size:calc(var(--ku)*.24);font-weight:600;opacity:.75;letter-spacing:.04em;line-height:1;}
-.key.opt .kglyph{font-size:calc(var(--ku)*.4);line-height:1;}
-.key.lit.space{background:var(--brand-orange);border-color:var(--brand-orange);box-shadow:0 4px 14px rgba(248,145,63,.34);}
-.kb-cap{display:flex;align-items:center;gap:9px;justify-content:center;margin-top:4px;font-family:var(--f-display);font-weight:500;font-size:13.5px;color:var(--ink);}
-.kb-cap .plus{color:var(--fg-soft);}
-@keyframes keypress{0%,100%{transform:none;}45%{transform:translateY(2px);}}
-.rel-panel.active .key.lit{animation:keypress 1.8s ease-in-out .4s infinite;}
-.rel-panel.active .key.lit.space{animation:keypress 1.8s ease-in-out .55s infinite;}
-@media (prefers-reduced-motion: reduce){.caret,.recdot,.wave i,.pv-toast,.key.lit{animation:none;}}
 
-/* Mobile accordion: JS adds .acc and relocates each panel directly below its
-   own step, so the mock window opens between the clicked step and the next. */
-.rel-grid.acc .rel-stage{display:none;}
-.rel-grid.acc .rel-panel{position:static;inset:auto;opacity:1;transform:none;pointer-events:auto;display:none;margin:2px 2px 10px;}
-.rel-grid.acc .rel-panel.active{display:block;animation:accIn .3s ease;}
-@keyframes accIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
-@media (prefers-reduced-motion: reduce){.rel-grid.acc .rel-panel.active{animation:none;}}
-/* Affordance: a chevron on each step (mobile only) that rotates up when open. */
-.rel-grid.acc .rel-item{position:relative;padding-right:44px;}
-.rel-grid.acc .rel-item::after{content:"";position:absolute;right:16px;top:26px;width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233B001C' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;opacity:.45;transition:transform .26s cubic-bezier(.22,1,.36,1),opacity .2s ease;}
-.rel-grid.acc .rel-item.active::after{transform:rotate(180deg);opacity:.85;}
+#how-it-works .kboard{background:linear-gradient(180deg,#fbfafc,#f3eff5);border:1px solid var(--border-2);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:7px;box-shadow:inset 0 1px 0 #fff;}
+#how-it-works .krow{display:flex;gap:7px;justify-content:center;}
+#how-it-works .key{height:38px;min-width:38px;border-radius:8px;background:#fff;border:1px solid var(--border-2);border-bottom-width:2px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--fg-muted);
+  box-shadow:0 1px 2px rgba(40,15,30,.05);transition:transform .12s ease;}
+#how-it-works .key.wide{min-width:64px;}
+#how-it-works .key.space{flex:1;max-width:280px;}
+#how-it-works .key.lit{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff;box-shadow:0 4px 14px rgba(59,0,28,.28);position:relative;}
+#how-it-works .key.opt{flex-direction:column;justify-content:center;gap:4px;padding:5px 0;}
+#how-it-works .key.opt .ksub{font-size:8.5px;font-weight:600;opacity:.75;letter-spacing:.04em;line-height:1;}
+#how-it-works .key.opt .kglyph{font-size:14px;line-height:1;}
+#how-it-works .key.lit.space,#how-it-works .key.lit.opt{background:var(--brand-orange);border-color:var(--brand-orange);box-shadow:0 4px 14px rgba(248,145,63,.34);}
+#how-it-works .kb-cap{display:flex;align-items:center;gap:9px;justify-content:center;margin-top:4px;font-family:var(--f-display);font-weight:500;font-size:13.5px;color:var(--ink);}
+#how-it-works .kb-cap .plus{color:var(--fg-soft);}
+@keyframes keyglow{0%,100%{transform:translateY(0);box-shadow:0 4px 14px rgba(248,145,63,.38);}48%{transform:translateY(3px);box-shadow:0 1px 5px rgba(248,145,63,.55),0 0 0 8px rgba(248,145,63,.22);}}
+#how-it-works .rel-panel.active .key.lit{animation:keyglow 1.4s ease-in-out infinite;}
+
+
+#how-it-works .s3{display:grid;grid-template-columns:1.02fr .98fr;gap:13px;align-items:stretch;height:480px;}
+#how-it-works .s3 .mock-win{display:flex;flex-direction:column;height:100%;}
+#how-it-works .s3 .mbody{gap:11px;flex:1;}
+#how-it-works .listen-pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:600;font-size:12.5px;color:#b5631b;background:#fdecd8;border-radius:999px;padding:6px 13px;}
+#how-it-works .listen-pill .recdot{background:var(--brand-orange);}
+#how-it-works .wavebox{background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:12px;height:70px;display:flex;align-items:center;justify-content:center;}
+#how-it-works .wavebars{display:flex;align-items:center;gap:3px;height:36px;}
+#how-it-works .wavebars i{width:4px;border-radius:2px;animation:vwave 1s ease-in-out infinite;transform-origin:center;}
+@keyframes vwave{0%,100%{transform:scaleY(.38);}50%{transform:scaleY(1);}}
+#how-it-works .att-head{display:flex;align-items:center;gap:7px;font-family:var(--f-display);font-weight:600;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft);}
+#how-it-works .att-head svg{width:14px;height:14px;stroke:var(--fg-soft);}
+#how-it-works .att-card{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;}
+#how-it-works .att-card .ac-th{width:30px;height:24px;border-radius:5px;background:linear-gradient(135deg,#efe9f3,#f6f1f9);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;flex:none;}
+#how-it-works .att-card .ac-th svg{width:14px;height:14px;stroke:#b9aec2;}
+#how-it-works .att-card .ac-tx{min-width:0;}
+#how-it-works .att-card .ac-tx b{font-family:var(--f-display);font-weight:600;color:var(--ink);display:block;font-size:12.5px;line-height:1.25;}
+#how-it-works .att-card .ac-tx span{color:var(--fg-muted);font-size:11.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#how-it-works .att-add{appearance:none;width:100%;text-align:left;display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px dashed var(--border-2);border-radius:10px;background:transparent;font-family:var(--f-body);cursor:pointer;transition:border-color .16s ease,background .16s ease,color .16s ease;}
+#how-it-works .att-add:hover{border-color:var(--brand-orange);background:rgba(248,145,63,.06);}
+#how-it-works .att-add .ad-ic{width:30px;height:24px;border-radius:5px;border:1px dashed var(--border-2);display:flex;align-items:center;justify-content:center;flex:none;color:var(--fg-soft);transition:color .16s ease,border-color .16s ease;}
+#how-it-works .att-add:hover .ad-ic{color:var(--brand-orange);border-color:var(--brand-orange);}
+#how-it-works .att-add .ad-ic svg{width:14px;height:14px;stroke:currentColor;}
+#how-it-works .att-add .ad-tx b{font-family:var(--f-display);font-weight:600;color:var(--ink);display:block;font-size:12.5px;line-height:1.25;}
+#how-it-works .att-add .ad-tx span{color:var(--fg-soft);font-size:11.5px;}
+#how-it-works .listen-alt{display:flex;justify-content:center;margin:3px 0 5px;}
+#how-it-works .listen-alt .type-link{font-size:12.5px;white-space:nowrap;}
+#how-it-works .mbtn.block{width:100%;justify-content:center;border-radius:12px;padding:12px;font-size:14px;}
+#how-it-works .mact.full{margin-top:auto;}
+#how-it-works .listen-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;color:var(--fg-soft);font-family:var(--f-display);}
+#how-it-works .listen-foot .pt{display:inline-flex;align-items:center;gap:5px;}
+#how-it-works .listen-foot svg{width:13px;height:13px;stroke:var(--fg-soft);}
+
+#how-it-works .profile{position:relative;background:#fff;border:1px solid var(--border-2);border-radius:14px;box-shadow:0 18px 40px rgba(40,15,30,.10),0 4px 10px rgba(40,15,30,.05);height:100%;overflow:hidden;}
+#how-it-works .pf-scroll{height:100%;overflow-y:auto;overflow-x:hidden;padding:16px 16px 22px;display:flex;flex-direction:column;gap:13px;scrollbar-width:thin;scrollbar-color:var(--border-2) transparent;}
+#how-it-works .pf-scroll::-webkit-scrollbar{width:6px;}
+#how-it-works .pf-scroll::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:3px;}
+#how-it-works .pf-scroll::-webkit-scrollbar-track{background:transparent;}
+#how-it-works .pf-head{display:flex;align-items:center;gap:11px;}
+#how-it-works .pf-av{width:38px;height:38px;border-radius:50%;flex:none;background:var(--soft);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:13px;color:var(--fg-muted);}
+#how-it-works .pf-name{font-family:var(--f-display);font-weight:600;font-size:16px;color:var(--ink);line-height:1.1;}
+#how-it-works .pf-sub{font-size:12px;color:var(--fg-soft);}
+#how-it-works .pf-intent{display:grid;grid-template-columns:auto 1fr;gap:2px 9px;align-items:center;background:linear-gradient(120deg,#fff3e9,#fde7d4);border:1px solid #f3d4ba;border-radius:11px;padding:11px 13px;}
+#how-it-works .pf-intent svg{width:16px;height:16px;grid-row:span 2;align-self:start;margin-top:2px;}
+#how-it-works .pf-intent .pf-k{font-family:var(--f-display);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#b5631b;}
+#how-it-works .pf-intent .pf-v{font-family:var(--f-display);font-weight:600;font-size:14px;color:var(--ink);line-height:1.2;}
+/* "how to help" highlighted block */
+#how-it-works .pf-help{background:linear-gradient(135deg,#fff6ee,#fdeede);border:1px solid #f3d9c2;border-radius:11px;padding:12px 13px;}
+#how-it-works .pf-help-h{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#b5631b;margin-bottom:10px;}
+#how-it-works .pf-help-h svg{width:15px;height:15px;stroke:var(--brand-orange);}
+#how-it-works .pf-help-item{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;line-height:1.4;color:var(--fg);}
+#how-it-works .pf-help-item + .pf-help-item{margin-top:9px;}
+#how-it-works .pf-help-item .hh{flex:none;width:18px;height:18px;border-radius:6px;background:rgba(248,145,63,.22);display:flex;align-items:center;justify-content:center;margin-top:0;}
+#how-it-works .pf-help-item .hh svg{width:11px;height:11px;stroke:#b5631b;}
+#how-it-works .pf-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+#how-it-works .pf-stat{border:1px solid var(--border);border-radius:10px;padding:9px 11px;min-width:0;overflow:hidden;}
+#how-it-works .pf-stat .pf-sk{font-family:var(--f-display);font-weight:600;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:3px;}
+#how-it-works .pf-stat .pf-sv{font-family:var(--f-display);font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;}
+#how-it-works .pf-sec{display:flex;align-items:center;gap:7px;font-family:var(--f-display);font-weight:600;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);margin-top:1px;}
+#how-it-works .pf-sec svg{width:15px;height:15px;}
+#how-it-works .pf-item{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--fg);line-height:1.4;}
+#how-it-works .pf-item .pf-ic{flex:none;width:15px;height:15px;margin-top:1px;}
+#how-it-works .pf-item.todo .pf-ic{width:14px;height:14px;border-radius:50%;border:1.6px solid var(--brand-orange);margin-top:2px;}
+#how-it-works .pf-item.get .pf-ic{width:14px;height:14px;border-radius:50%;border:1.6px solid var(--border-2);margin-top:2px;}
+#how-it-works .pf-item.warn .pf-ic{width:14px;height:14px;border-radius:50%;border:1.6px solid #d99000;margin-top:2px;}
+#how-it-works .pf-eye{flex:none;width:21px;height:21px;border-radius:6px;background:var(--soft);display:flex;align-items:center;justify-content:center;}
+#how-it-works .pf-eye svg{width:13px;height:13px;}
+#how-it-works .pf-gl{flex:none;width:21px;height:21px;border-radius:6px;background:#e4f3e8;display:flex;align-items:center;justify-content:center;}
+#how-it-works .pf-gl svg{width:13px;height:13px;}
+#how-it-works .pf-divider{height:1px;background:var(--border);margin:1px 0;}
+#how-it-works .pf-fade{position:absolute;left:0;right:0;bottom:0;height:52px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff 70%);pointer-events:none;z-index:2;}
+#how-it-works .pf-more{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 9px;border-radius:999px;background:#fff;border:1px solid var(--border-2);box-shadow:0 4px 12px rgba(40,15,30,.16);color:var(--fg-muted);font-family:var(--f-display);font-weight:600;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;pointer-events:none;animation:morebob 1.5s ease-in-out infinite;}
+#how-it-works .pf-more svg{width:12px;height:12px;stroke:var(--brand-orange);}
+@keyframes morebob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,3px);}}
+@media (prefers-reduced-motion: reduce){#how-it-works .caret,#how-it-works .recdot,#how-it-works .wave i,#how-it-works .wavebars i,#how-it-works .pv-toast,#how-it-works .key.lit,#how-it-works .pf-more{animation:none;}}
+
+@media (max-width:880px){
+  #how-it-works .wrap{padding:0 28px;}
+  #how-it-works .rel-grid{grid-template-columns:1fr;gap:26px;}
+  #how-it-works .rel-stage{min-height:0;}
+  #how-it-works .s3{grid-template-columns:1fr;gap:14px;height:auto;}
+  #how-it-works .profile{height:420px;}
+}
+
+/* ============================================================
+   RESPONSIVE — tablet & mobile
+   ============================================================ */
+
+/* safety: never let a decorative scene cause sideways scroll */
+html,body{overflow-x:hidden;}
+
+/* ---------- tablet (≤1024) ---------- */
+@media (max-width:1024px){
+  section{padding:90px 0;}
+  .nav-inner{padding:15px 28px;}
+  .feature{gap:44px;}
+  .feature + .feature{margin-top:88px;}
+  .hero{min-height:0;height:auto;max-height:none;padding:150px 0 100px;}
+  .hero-content{margin-top:0;}
+  .hero h1{font-size:clamp(40px,7vw,64px);}
+  .rel-head{margin-bottom:38px;}
+}
+
+/* ---------- large phone / portrait tablet: augment the existing 880 tier ---------- */
+@media (max-width:880px){
+  .hero{padding:128px 0 80px;}
+  .hero-content{max-width:600px;}
+  .hero .lead{font-size:17.5px;}
+  .mock{padding:22px;}
+  .band-content{padding:64px 26px;}
+  .pcard{padding:30px;}
+  .foot-bot{flex-direction:column;gap:14px;text-align:center;}
+  #how-it-works{padding:72px 0;}
+  #how-it-works .head-center{margin-bottom:40px;}
+}
+
+/* ---------- phone (≤560) ---------- */
+@media (max-width:560px){
+  :root{--maxw:100%;}
+  section{padding:60px 0;}
+  .wrap{padding:0 20px;}
+  .nav-inner{padding:11px 18px;gap:12px;}
+  .brand img{height:26px;}
+  .brand .wm{font-size:20px;}
+  .btn{padding:12px 22px;font-size:15px;}
+
+  /* hero */
+  .hero{padding:116px 0 64px;}
+  .hero-content{padding:0 20px;}
+  .badge{margin-bottom:18px;font-size:12px;padding:6px 13px 6px 10px;}
+  .hero h1{font-size:clamp(31px,8.6vw,42px);line-height:1.04;letter-spacing:-.02em;}
+  .hero .lead{font-size:16px;margin-top:18px;}
+  .hero-cta{margin-top:26px;gap:12px;}
+  .hero-caps{margin-top:20px;gap:8px 14px;font-size:13px;}
+  .hero-caps .hc{font-size:13px;}
+
+  /* app cloud */
+  .cloud{padding:42px 0 24px;}
+  .chip{font-size:13.5px;padding:8px 13px;}
+
+  /* stats */
+  .stat{padding:26px 4px;}
+  .stat .num{font-size:clamp(38px,12vw,48px);}
+
+  /* three-up + features */
+  .three{gap:26px;margin-top:44px;}
+  .feature + .feature{margin-top:60px;}
+  .ftext .lead{font-size:16.5px;}
+  .mock{padding:16px;border-radius:18px;}
+
+  /* drafts mock: keep readable when stacked */
+  .draft{padding:12px;}
+
+  /* two steps */
+  .pcard{padding:24px;border-radius:18px;}
+  .pcard h3{font-size:22px;}
+
+  /* sky band */
+  .band{min-height:380px;}
+  .band-content{padding:56px 22px;}
+  .band p{font-size:15.5px;}
+
+  /* relationship intelligence */
+  .rel-head{margin-bottom:30px;}
+  .ri-actions{gap:8px;}
+
+  /* footer */
+  .foot-grid{grid-template-columns:1fr;gap:28px;}
+  .foot-brand{grid-column:auto;}
+
+  /* ===== how it works ===== */
+  #how-it-works{padding:60px 0;}
+  #how-it-works .wrap{padding:0 20px;}
+  #how-it-works .head-center{margin-bottom:34px;}
+  #how-it-works .mock{padding:16px;}
+  #how-it-works .rel-item{padding:13px 13px;}
+  #how-it-works .rel-item h3{font-size:16px;}
+  #how-it-works .rel-item p{font-size:13px;}
+
+  /* step 1 popup: never exceed the window */
+  #how-it-works .pv-toast{width:min(235px,calc(100% - 26px));top:42px;}
+
+  /* step 2 keyboard: flex keys so a 9-key row always fits */
+  #how-it-works .kboard{padding:12px;gap:5px;}
+  #how-it-works .krow{gap:5px;}
+  #how-it-works .key{flex:1 1 0;min-width:0;height:34px;font-size:12px;padding-left:0;padding-right:0;}
+  #how-it-works .key.wide{flex:1.4 1 0;}
+  #how-it-works .key.space{flex:3 1 0;max-width:none;}
+
+  /* step 3 two-panel: a touch shorter on phones */
+  #how-it-works .s3{height:auto;}
+  #how-it-works .profile{height:380px;}
+}
+
+/* ============================================================
+   MOBILE ACCORDION — both rel-list sections (≤880)
+   On phones/tablets the right-hand visual collapses and slides
+   in directly beneath the tapped row; a chevron hints it opens.
+   ============================================================ */
+@media (max-width:880px){
+  /* relationship intelligence */
+  #relationships .rel-stage{display:none;}
+  #relationships .rel-panel{position:static;inset:auto;opacity:1;transform:none;pointer-events:auto;}
+  #relationships .rel-list > .rel-panel{display:block;margin:12px 2px 8px;animation:accIn .28s ease both;}
+  #relationships .rel-list > .rel-panel .mock{margin:0;}
+  #relationships .rel-item{position:relative;padding-right:46px;}
+  #relationships .rel-item::after{content:"";position:absolute;right:18px;top:50%;width:9px;height:9px;border-right:2.2px solid var(--fg-soft);border-bottom:2.2px solid var(--fg-soft);transform:translateY(-65%) rotate(45deg);transition:transform .22s ease;}
+  #relationships .rel-item.open::after{transform:translateY(-35%) rotate(-135deg);border-color:var(--brand-orange);}
+
+  /* how it works */
+  #how-it-works .rel-stage{display:none;}
+  #how-it-works .rel-panel{position:static;inset:auto;opacity:1;transform:none;pointer-events:auto;}
+  #how-it-works .rel-list > .rel-panel{display:block;margin:12px 2px 8px;animation:accIn .28s ease both;}
+  #how-it-works .rel-item{position:relative;padding-right:46px;}
+  #how-it-works .rel-item::after{content:"";position:absolute;right:18px;top:50%;width:9px;height:9px;border-right:2.2px solid var(--fg-soft);border-bottom:2.2px solid var(--fg-soft);transform:translateY(-65%) rotate(45deg);transition:transform .22s ease;}
+  #how-it-works .rel-item.open::after{transform:translateY(-35%) rotate(-135deg);border-color:var(--brand-orange);}
+}
+@keyframes accIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+
 </style>
 </head>
 <body>
@@ -499,13 +793,13 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
       <span class="wm">PortaVox</span>
     </a>
     <div class="nav-links">
-      <a href="#how">How it works</a>
+      <a href="#how-it-works">How it works</a>
       <a href="#proof">The drafts</a>
       <a href="#privacy">Privacy</a>
       <a href="#cases">Who it's for</a>
     </div>
     <div class="nav-cta">
-      <a class="btn btn-pill-sm" href="PortaVox-1.0.8.pkg" download>
+      <a class="btn btn-pill-sm" href="#download">
         <svg class="apple" viewBox="0 0 16 16" fill="currentColor"><path d="M11.18 8.46c-.02-1.6 1.3-2.37 1.36-2.41-.74-1.09-1.9-1.24-2.31-1.25-.98-.1-1.92.58-2.42.58-.5 0-1.27-.57-2.09-.55-1.07.02-2.06.62-2.61 1.58-1.11 1.93-.28 4.79.8 6.36.53.77 1.16 1.63 1.98 1.6.8-.03 1.1-.51 2.06-.51.96 0 1.23.51 2.07.5.85-.01 1.4-.78 1.92-1.55.6-.89.85-1.75.86-1.8-.02-.01-1.65-.63-1.67-2.5zM9.7 3.76c.44-.53.73-1.27.65-2.01-.63.03-1.39.42-1.84.95-.4.47-.76 1.22-.66 1.94.7.06 1.42-.36 1.85-.88z"></path></svg>
         Download
       </a>
@@ -521,16 +815,26 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
   <div class="hero-veil"></div>
   <div class="hero-fade" style="height:120px;"></div>
   <div class="hero-content">
+    <div class="hero-copy">
     <span class="badge"><span class="dot"></span>Private beta · for macOS</span>
-    <h1 class="hero-head">Build stronger relationships.</h1>
-    <h2 class="hero-sub">Heavy communicators save <span class="amber-uline">2&ndash;4h per day</span></h2>
-    <p class="lead"><b>Click in any textfield. (Voice)prompt what you want to say. Tracks to-do's, to-get's, attentiveness and much more.</b></p>
+    <h1>Build stronger relationships,<br>in <em>1/10</em> of the time.</h1>
+    <p class="lead">Strong relationships are built on small things: <b>remembering what matters, following up at the right time, and saying the right thing.</b> PortaVox keeps track of it all and helps you write thoughtful messages in your own voice.</p>
     <div class="hero-cta">
-      <a class="btn" href="PortaVox-1.0.8.pkg" download>
+      <a class="btn" href="#download">
         <svg class="apple" viewBox="0 0 16 16" fill="currentColor"><path d="M11.18 8.46c-.02-1.6 1.3-2.37 1.36-2.41-.74-1.09-1.9-1.24-2.31-1.25-.98-.1-1.92.58-2.42.58-.5 0-1.27-.57-2.09-.55-1.07.02-2.06.62-2.61 1.58-1.11 1.93-.28 4.79.8 6.36.53.77 1.16 1.63 1.98 1.6.8-.03 1.1-.51 2.06-.51.96 0 1.23.51 2.07.5.85-.01 1.4-.78 1.92-1.55.6-.89.85-1.75.86-1.8-.02-.01-1.65-.63-1.67-2.5zM9.7 3.76c.44-.53.73-1.27.65-2.01-.63.03-1.39.42-1.84.95-.4.47-.76 1.22-.66 1.94.7.06 1.42-.36 1.85-.88z"></path></svg>
         Download for Mac
       </a>
       <a class="sub" href="#demo"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span>Watch 60-sec demo</a>
+    </div>
+    <div class="hero-caps">
+      <span class="hc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L20 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>To-dos &amp; to-gets</span>
+      <span class="hc-sep"></span>
+      <span class="hc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>Attentive follow-ups</span>
+      <span class="hc-sep"></span>
+      <span class="hc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Deadlines &amp; progress</span>
+    </div>
+    </div>
+  
     </div>
   </div>
 </header>
@@ -552,37 +856,32 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
   </div>
 </div>
 
-<!-- ===== HOW IT WORKS (interactive walkthrough) =====
-     5 steps. Left = clickable tabs. Right = a mock app window per step.
-     Mail steps (1, 5) = light chrome + blue envelope. PortaVox steps (3, 4) = dark ink chrome. -->
-<section id="how">
+<!-- ===== HOW IT WORKS (interactive walkthrough) ===== -->
+<section class="hiw" id="how-it-works">
   <div class="wrap">
-    <div class="narrow" style="text-align:center;margin-bottom:48px;">
-      <span class="eyebrow">We couldn't make it easier</span>
-      <h2 style="margin-top:14px;">How it works.</h2>
-    </div>
+    <div class="head-center"><span class="eyebrow">We couldn't make it easier</span><h2 style="margin-top:14px;">How it works.</h2></div>
     <div class="rel-grid">
 
       <!-- LEFT: step tabs -->
       <div class="rel-list" role="tablist" aria-label="How it works">
         <button class="rel-item active" data-rel="0" role="tab" aria-selected="true">
-          <span class="ri-ico ri-num">1</span>
+          <span class="ri-ico">1</span>
           <span class="ri-tx"><h3>Click in any text field</h3><p>Mail, Slack, WhatsApp. Wherever you already type.</p></span>
         </button>
         <button class="rel-item" data-rel="1" role="tab" aria-selected="false">
-          <span class="ri-ico ri-num">2</span>
+          <span class="ri-ico">2</span>
           <span class="ri-tx"><h3>Press ⌥ Space</h3><p>The only shortcut to remember. That's it.</p></span>
         </button>
         <button class="rel-item" data-rel="2" role="tab" aria-selected="false">
-          <span class="ri-ico ri-num">3</span>
+          <span class="ri-ico">3</span>
           <span class="ri-tx"><h3>Speak or write your intent</h3><p>A few words on what you want to say is enough.</p></span>
         </button>
         <button class="rel-item" data-rel="3" role="tab" aria-selected="false">
-          <span class="ri-ico ri-num">4</span>
+          <span class="ri-ico">4</span>
           <span class="ri-tx"><h3>Get a draft that sounds like you</h3><p>In your voice, grounded in the context on screen.</p></span>
         </button>
         <button class="rel-item done" data-rel="4" role="tab" aria-selected="false">
-          <span class="ri-ico ri-num">5</span>
+          <span class="ri-ico">5</span>
           <span class="ri-tx"><h3>Paste it back and send</h3><p>One keystroke and it's out the door.</p></span>
         </button>
       </div>
@@ -624,27 +923,77 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
           </div></div>
         </div>
 
-        <!-- step 3: PortaVox listening (dark chrome) -->
+        <!-- step 3: speak + screenshots + relationship profile in view -->
         <div class="rel-panel" data-rel="2">
-          <div class="mock"><div class="mock-win pv">
-            <div class="mw-bar pv"><span class="d r"></span><span class="d y"></span><span class="d g"></span><img class="mw-logo" src="assets/portavox-icon.png" alt=""><span class="mw-title">PortaVox · listening</span></div>
-            <div class="mbody">
-              <div class="captured">
-                <span class="cap-thumb">
-                  <span class="tbar"><i></i><i></i><i></i></span>
-                  <span class="tlines"><span></span><span></span><span></span></span>
-                  <span class="cap-badge">✓</span>
-                </span>
-                <span class="cap-tx">Captured your screen<b>Mail · your reply to Sarah</b></span>
+          <div class="mock"><div class="s3">
+
+            <!-- left: PortaVox listening window -->
+            <div class="mock-win pv pv-listen">
+              <div class="mw-bar pv"><span class="d r"></span><span class="d y"></span><span class="d g"></span><img class="mw-logo" src="assets/portavox-icon.png" alt=""><span class="mw-title">PortaVox</span></div>
+              <div class="mbody">
+                <div class="listen-pill"><span class="recdot"></span>Listening · Drafting mode</div>
+                <div class="wavebox"><div class="wavebars">
+                  <i style="height:12px;background:#B963C9;animation-delay:0s"></i><i style="height:18px;background:#D3348A;animation-delay:.06s"></i><i style="height:24px;background:#F74458;animation-delay:.12s"></i><i style="height:16px;background:#F8913F;animation-delay:.18s"></i><i style="height:10px;background:#F6A51A;animation-delay:.24s"></i><i style="height:20px;background:#B963C9;animation-delay:.30s"></i><i style="height:28px;background:#D3348A;animation-delay:.36s"></i><i style="height:34px;background:#F74458;animation-delay:.42s"></i><i style="height:26px;background:#F8913F;animation-delay:.48s"></i><i style="height:18px;background:#F6A51A;animation-delay:.54s"></i><i style="height:12px;background:#B963C9;animation-delay:.60s"></i><i style="height:22px;background:#D3348A;animation-delay:.66s"></i><i style="height:30px;background:#F74458;animation-delay:.72s"></i><i style="height:24px;background:#F8913F;animation-delay:.78s"></i><i style="height:16px;background:#F6A51A;animation-delay:.84s"></i><i style="height:20px;background:#B963C9;animation-delay:.90s"></i><i style="height:13px;background:#D3348A;animation-delay:.96s"></i>
+                </div></div>
+                <div class="listen-alt"><span class="type-link" role="button" tabindex="0">Prefer typing?</span></div>
+                <div class="att-head"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1L8 4h8l1.5 2h1A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.2"></circle></svg>1 screenshot attached</div>
+                <div class="att-card"><span class="ac-th"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 8l9 6 9-6"></path></svg></span><span class="ac-tx"><b>Mail</b><span>Re: Friday?</span></span></div>
+                <button class="att-add"><span class="ad-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span><span class="ad-tx"><b>Add screenshot</b><span>⌥⇧S, or drag a window in</span></span></button>
+                <div class="mact full"><span class="mbtn block">Draft message<span class="ent">↵</span></span></div>
               </div>
-              <div class="rec"><span class="recdot"></span>Listening… speak or <span class="type-link" role="button" tabindex="0">type</span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div>
-              <div class="intent" data-placeholder="Type what you want to say…">Can't make Friday, propose Tuesday instead</div>
-              <div class="mact"><span class="mbtn">Next<span class="ent">↵</span></span></div>
             </div>
+
+            <!-- right: relationship profile -->
+            <div class="profile">
+              <div class="pf-scroll">
+                <div class="pf-head"><span class="pf-av">S</span><div><div class="pf-name">Sarah</div><div class="pf-sub">Relationship profile</div></div></div>
+                <div class="pf-intent">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#F8913F" stroke-width="1.8"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="4"></circle><circle cx="12" cy="12" r="1" fill="#F8913F"></circle></svg>
+                  <span class="pf-k">Intent</span>
+                  <span class="pf-v">Raising money from Sarah</span>
+                </div>
+                <div class="pf-stats">
+                  <div class="pf-stat"><div class="pf-sk">Last contact</div><div class="pf-sv">0d ago</div></div>
+                  <div class="pf-stat"><div class="pf-sk">Cadence</div><div class="pf-sv">2.1×/week</div></div>
+                </div>
+                <div class="pf-divider"></div>
+                <div class="pf-sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand-ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>Attentive to</div>
+                <div class="pf-item"><span class="pf-eye"><svg viewBox="0 0 24 24" fill="none" stroke="var(--fg-muted)" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="2.5"></circle></svg></span>She's running the New York marathon this November</div>
+                
+                <div class="pf-item"><span class="pf-eye"><svg viewBox="0 0 24 24" fill="none" stroke="var(--fg-muted)" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="2.5"></circle></svg></span>Her daughter Mila just started uni in London</div>
+                
+                <div class="pf-divider"></div>
+                <div class="pf-sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand-orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M8 12l3 3 5-6"></path></svg>To-do's</div>
+                <div class="pf-item todo"><span class="pf-ic"></span>Send Sarah the updated raise deck</div>
+                <div class="pf-item todo"><span class="pf-ic"></span>Follow up on the term sheet she hinted at</div>
+                <div class="pf-divider"></div>
+                <div class="pf-sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"></path><rect x="2" y="7" width="20" height="5" rx="1"></rect><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>To-get's</div>
+                <div class="pf-item get"><span class="pf-ic"></span>Her cheque size and timeline for the round</div>
+                <div class="pf-item get"><span class="pf-ic"></span>An intro to her co-investors</div>
+                <div class="pf-divider"></div>
+                                <div class="pf-help">
+                  <div class="pf-help-h"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.4a5 5 0 0 0 0-7.1z"></path></svg>How to help Sarah</div>
+                  <div class="pf-help-item"><span class="hh"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>Intro her to two female founders raising now</div>
+                  <div class="pf-help-item"><span class="hh"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>Forward the fintech deal she'd want to see</div>
+                  <div class="pf-help-item"><span class="hh"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>Keep asks short, she's slammed this quarter</div>
+                </div>
+                <div class="pf-divider"></div>
+                <div class="pf-sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M15.5 8.5l-2.1 4.9-4.9 2.1 2.1-4.9z"></path></svg>Goals</div>
+                <div class="pf-item goal"><span class="pf-gl"><svg viewBox="0 0 24 24" fill="none" stroke="#2c7a42" stroke-width="2"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.2"></circle></svg></span>Become a top-decile seed investor</div>
+                <div class="pf-item goal"><span class="pf-gl"><svg viewBox="0 0 24 24" fill="none" stroke="#2c7a42" stroke-width="2"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.2"></circle></svg></span>Back two more female founders this year</div>
+                <div class="pf-divider"></div>
+                <div class="pf-sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.5 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.5a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4M12 17h.01"></path></svg>Concerns</div>
+                <div class="pf-item warn"><span class="pf-ic"></span>Her fund is wary of pre-revenue bets</div>
+                <div class="pf-item warn"><span class="pf-ic"></span>She's overcommitted this quarter</div>
+              </div>
+              <div class="pf-fade"></div>
+              <div class="pf-more"><span>Scroll</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+            </div>
+
           </div></div>
         </div>
 
-        <!-- step 4: PortaVox draft (dark chrome) — the key screen -->
+        <!-- step 4: PortaVox draft (dark chrome) -->
         <div class="rel-panel" data-rel="3">
           <div class="mock"><div class="mock-win pv">
             <div class="mw-bar pv"><span class="d r"></span><span class="d y"></span><span class="d g"></span><img class="mw-logo" src="assets/portavox-icon.png" alt=""><span class="mw-title">PortaVox · draft</span></div>
@@ -666,6 +1015,8 @@ footer{position:relative;z-index:3;margin-top:96px;background:var(--brand-ink);c
               <div class="mrow soft"><span class="lbl">To</span><span>Sarah · investor</span></div>
               <div class="compose email">Hi Sarah,
 
+How did the board meeting go yesterday?
+
 Sorry, I can't do Friday after all. Could we move to Tuesday instead?
 
 I'll have the cap table ready by then either way.
@@ -686,11 +1037,11 @@ Alex</div>
 <section>
   <div class="wrap">
     <div class="stat-head">
-      <h2>Designed for your voice.<br>Built to save hours.</h2>
+      <h2>Designed for your voice.<br>Built to build relationships.</h2>
     </div>
     <div class="stats">
-      <div class="stat"><div class="num"><em>100%</em></div><div class="cap">In your voice — never a generic, AI-sounding draft</div></div>
-      <div class="stat"><div class="num"><em>0</em></div><div class="cap">To-dos and follow-ups dropped — every promise tracked</div></div>
+      <div class="stat"><div class="num"><em>10×</em></div><div class="cap">The quality of every message you send</div></div>
+      <div class="stat"><div class="num"><em>1/10</em></div><div class="cap">Of the time you spend writing today</div></div>
       <div class="stat"><div class="num">2&ndash;4<span class="unit">hrs</span></div><div class="cap">Saved every day by heavy communicators</div></div>
     </div>
     <div class="three">
@@ -705,9 +1056,9 @@ Alex</div>
         <p>PortaVox reads the window in front of you, sees who you're talking to and in which app, and grounds the draft in it.</p>
       </div>
       <div>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h6"></path></svg></div>
-        <h3>It answers from context</h3>
-        <p>Attach documents and notes to any contact. PortaVox draws on them — and on what it reads from your screen — to ground every reply in your real material.</p>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+        <h3>It never mixes people</h3>
+        <p>Each draft pulls only from your history with that one person. Nothing invented, nothing leaked between contacts.</p>
       </div>
     </div>
   </div>
@@ -726,7 +1077,7 @@ Alex</div>
           <li><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span>Investor formality, co-founder shorthand, sisterly warmth.</span></li>
           <li><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span>Never invents, never mixes context between people.</span></li>
         </ul>
-        <a class="link-arrow" href="PortaVox-1.0.8.pkg" download>Try it on Mac<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <a class="link-arrow" href="#download">Try it on Mac<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
       </div>
       <div class="mock">
         <div class="say-box">
@@ -761,31 +1112,35 @@ Best, John</div>
 <section id="relationships">
   <div class="wrap">
     <div class="rel-head">
-      <span class="eyebrow">Build relationships with minimal friction</span>
-      <h2>Relationship Intelligence</h2>
-      <p class="lead">PortaVox quietly keeps the thread of every relationship, so the next message writes itself before you'd have remembered it. Pick a capability to see it in action.</p>
+      <span class="eyebrow">Build closer relationships with 1% of the friction</span>
+      <h2>AI relationship intelligence.</h2>
+      <p class="lead">PortaVox remembers the whole arc of every relationship: what you owe them, what they care about, what's on their mind. So you don't just keep up, you know how to help. Here it is, with Sarah.</p>
     </div>
     <div class="rel-grid">
       <div class="rel-list" role="tablist" aria-label="Relationship intelligence">
         <button class="rel-item active" data-rel="0" role="tab" aria-selected="true">
           <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L20 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
-          <span class="ri-tx"><h3>Captures every to-do and to-get</h3><p>Promises you made, things you're owed, never lost in a thread again.</p></span>
+          <span class="ri-tx"><h3>Never drops a promise or an ask</h3><p>Every to-do you owe and to-get you're waiting on, tracked per person.</p></span>
         </button>
         <button class="rel-item" data-rel="1" role="tab" aria-selected="false">
           <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg></span>
-          <span class="ri-tx"><h3>Tracks what to be attentive for</h3><p>Drafts the check-in before you'd have remembered it yourself.</p></span>
+          <span class="ri-tx"><h3>Nudges you at the human moments</h3><p>It drafts the good-luck note before you'd have remembered the date.</p></span>
+        </button>
+        <button class="rel-item" data-rel="5" role="tab" aria-selected="false">
+          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V6a2 2 0 1 1 4 0v5"></path><path d="M11 11V4a2 2 0 1 1 4 0v7"></path><path d="M15 10.5V6.5a2 2 0 1 1 4 0V14a6 6 0 0 1-6 6h-2a4 4 0 0 1-2.8-1.2L3 14.5a2 2 0 0 1 2.8-2.8L7 13"></path></svg></span>
+          <span class="ri-tx"><h3>Shows you how to help them</h3><p>Turns what you know into a reason to give first, not just ask.</p></span>
         </button>
         <button class="rel-item" data-rel="2" role="tab" aria-selected="false">
-          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
-          <span class="ri-tx"><h3>Tracks deadlines and progress</h3><p>Knows what's due, what's slipping, what just shipped.</p></span>
+          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle></svg></span>
+          <span class="ri-tx"><h3>Writes toward their goals</h3><p>Frames the message around what they're really trying to achieve.</p></span>
         </button>
         <button class="rel-item" data-rel="3" role="tab" aria-selected="false">
-          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></span>
-          <span class="ri-tx"><h3>Answers from your projects</h3><p>Point it at a folder. It replies on autopilot, grounded in your real material.</p></span>
+          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.4a5 5 0 0 0 0-7.1z"></path></svg></span>
+          <span class="ri-tx"><h3>Empathizes with their concerns</h3><p>Reads what they're worried about, and addresses it gently.</p></span>
         </button>
         <button class="rel-item" data-rel="4" role="tab" aria-selected="false">
-          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-7-8-3z"></path></svg></span>
-          <span class="ri-tx"><h3>Pitches that land</h3><p>Hyper-custom outreach: their context, your voice, the right ask.</p></span>
+          <span class="ri-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></span>
+          <span class="ri-tx"><h3>Answers from your documents</h3><p>Drop your PDFs and docs in a workspace; it answers from them, cited.</p></span>
         </button>
       </div>
 
@@ -794,56 +1149,93 @@ Best, John</div>
           <div class="mock"><div class="mock-win">
             <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">PortaVox · Sarah · investor</span></div>
             <div class="mbody">
-              <div class="mrow"><span class="ci done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>Sent runway projections<span class="pill ok">done</span></div>
-              <div class="mrow"><span class="ci idle"></span>Owe her the updated cap table<span class="pill due">to-do</span></div>
-              <div class="mrow"><span class="ci idle"></span>She owes intro to two LPs<span class="pill due">to-get</span></div>
-              <div class="mrow"><span class="ci idle"></span>Promised a product walkthrough<span class="pill due">to-do</span></div>
+              <div class="mrow"><span class="ci done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>Sent the article she asked for<span class="pill ok">done</span></div>
+              <div class="mrow"><span class="ci idle"></span>Owe her an intro to Mark<span class="pill due">to-do</span></div>
+              <div class="mrow"><span class="ci idle"></span>She owes feedback on the deck<span class="pill due">to-get</span></div>
+              <div class="mrow"><span class="ci idle"></span>Promised her a coffee in London<span class="pill due">to-do</span></div>
             </div>
           </div></div>
+        </div>
+
+        <div class="rel-panel" data-rel="5">
+          <div class="mock">
+            <div class="note" style="margin-bottom:13px;"><div class="nh"><span class="sp"></span>How to help her</div>One of Sarah's portfolio companies is hunting for a Head of Growth, and you know someone perfect.</div>
+            <div class="outbox">
+              <div class="ob-head"><span class="ob-app">Mail · to Sarah</span><span class="ob-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Outbox</span></div>
+              <div class="ob-body"><span class="ob-subj">Thought of you</span>Hi Sarah,
+
+You mentioned one of your portfolio companies is after a Head of Growth. I know someone excellent who's quietly open to it. Want an intro?
+
+No ask on my end, just thought it might help.
+
+Best,
+Alex</div>
+            </div>
+            <div class="ri-actions"><button class="ri-btn edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button><button class="ri-btn send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Send</button></div>
+          </div>
         </div>
 
         <div class="rel-panel" data-rel="1">
-          <div class="mock"><div class="mock-win">
-            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">PortaVox · suggestions</span></div>
-            <div class="mbody">
-              <div class="note"><div class="nh"><span class="sp"></span>Worth a check-in</div>It's been three weeks since you and <b>Marc</b> spoke, and his launch was Tuesday.</div>
-              <div class="draft-bubble">Hey Marc, how did Tuesday's launch go? Been thinking about you all week. Anything I can help push?</div>
-              <div class="mrow soft"><span>Draft ready in your voice</span><span class="pill ok">one-tap send</span></div>
+          <div class="mock">
+            <div class="note" style="margin-bottom:13px;"><div class="nh"><span class="sp"></span>Worth reaching out</div>Sarah runs the New York marathon this Sunday, and her daughter Mila just started uni in London.</div>
+            <div class="outbox">
+              <div class="ob-head"><span class="ob-app">Mail · to Sarah</span><span class="ob-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Outbox</span></div>
+              <div class="ob-body"><span class="ob-subj">Good luck on Sunday</span>Hi Sarah,
+
+Best of luck in New York on Sunday, you've trained so hard for this. Hope Mila is settling into London, too.
+
+Nothing urgent from me this week. Go enjoy the race.
+
+Warmly,
+Alex</div>
             </div>
-          </div></div>
+            <div class="ri-actions"><button class="ri-btn edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button><button class="ri-btn send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Send</button></div>
+          </div>
         </div>
 
         <div class="rel-panel" data-rel="2">
-          <div class="mock"><div class="mock-win">
-            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">PortaVox · what's moving</span></div>
-            <div class="mbody">
-              <div class="mrow">Board deck for Sarah<span class="pill warn">due Fri · slipping</span></div>
-              <div class="mrow">Q3 update to investors<span class="pill ok">shipped</span></div>
-              <div class="mrow">Cap table for the round<span class="pill due">due Mon</span></div>
-              <div class="mrow">Reference call for Priya<span class="pill warn">overdue</span></div>
+          <div class="mock">
+            <div class="note" style="margin-bottom:13px;"><div class="nh"><span class="sp"></span>Her goal</div>Wants to become a top-decile investor, and to back more female founders this year.</div>
+            <div class="outbox">
+              <div class="ob-head"><span class="ob-app">WhatsApp · Sarah</span><span class="ob-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Outbox</span></div>
+              <div class="ob-body">Hey Sarah! Two brilliant female founders just joined our network and both asked how to reach investors like you. Want warm intros? Feels right up your alley.</div>
             </div>
-          </div></div>
+            <div class="ri-actions"><button class="ri-btn edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button><button class="ri-btn send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Send</button></div>
+          </div>
         </div>
 
         <div class="rel-panel" data-rel="3">
-          <div class="mock"><div class="mock-win">
-            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">PortaVox · autopilot</span></div>
-            <div class="mbody">
-              <span class="fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>/Q3-Report</span>
-              <div class="bubble them sm">Quick one: what was Q3 net revenue retention?</div>
-              <div class="draft-bubble">Q3 NRR landed at 118%, up from 111% in Q2. Full breakdown is on p.4 of the report. Want me to send it over?</div>
-              <div class="mrow soft"><span>Grounded in your real material</span><span class="pill ok">cited</span></div>
+          <div class="mock">
+            <div class="note" style="margin-bottom:13px;"><div class="nh"><span class="sp"></span>On her mind</div>Her fund is wary of pre-revenue bets, and she's overcommitted this quarter.</div>
+            <div class="outbox">
+              <div class="ob-head"><span class="ob-app">Mail · to Sarah</span><span class="ob-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Outbox</span></div>
+              <div class="ob-body"><span class="ob-subj">No rush at all</span>Hi Sarah,
+
+No pressure on timing, I know this quarter's been full. When you're ready I'll keep it to a tight 15 minutes and lead with our revenue traction, since I know that's what matters most to the fund.
+
+Whenever suits.
+
+Best,
+Alex</div>
             </div>
-          </div></div>
+            <div class="ri-actions"><button class="ri-btn edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button><button class="ri-btn send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>Send</button></div>
+          </div>
         </div>
 
         <div class="rel-panel" data-rel="4">
           <div class="mock"><div class="mock-win">
-            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">PortaVox · outreach to Priya</span></div>
+            <div class="mw-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mw-title">PortaVox · Fundraise workspace</span></div>
             <div class="mbody">
-              <div class="ctx-chips"><span>their context</span><span>your voice</span><span>the right ask</span></div>
-              <div class="draft-bubble">Priya, loved the seed-raise news. You mentioned scaling comms is the next headache, that's exactly what we cracked at my last company. Worth twenty minutes next week?</div>
-              <div class="mrow soft"><span>Reads like you wrote it</span><span class="pill ok">ready</span></div>
+              <div class="docset">
+                <div class="docset-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Fundraise workspace<span class="cnt">3 files</span></div>
+                <div class="doc"><span class="doc-ic pdf">PDF</span>Q3 financials.pdf<span class="pg">12 pp</span></div>
+                <div class="doc"><span class="doc-ic pdf">PDF</span>Pitch deck.pdf<span class="pg">18 pp</span></div>
+                <div class="doc"><span class="doc-ic docx">DOC</span>Metrics &amp; KPIs.docx<span class="pg">6 pp</span></div>
+                <div class="doc add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>Add PDFs or documents</div>
+              </div>
+              <div class="bubble them sm">Sarah asks: what was your Q3 net revenue retention?</div>
+              <div class="draft-bubble">Q3 NRR was 118%, up from 111% in Q2.<span class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>Q3 financials.pdf · p.4</span></div>
+              <div class="mrow soft"><span>Answered from your files</span><span class="pill ok">cited</span></div>
             </div>
           </div></div>
         </div>
@@ -864,7 +1256,7 @@ Best, John</div>
 </section>
 
 <!-- ===== HOW IS THIS POSSIBLE ===== -->
-<section id="learns">
+<section id="how">
   <div class="wrap">
     <div class="narrow" style="text-align:center;margin-bottom:48px;">
       <span class="eyebrow">How is this possible?</span>
@@ -938,7 +1330,7 @@ Best, John</div>
   <div class="hero-fade" style="height:220px;"></div>
   <div class="closer-inner">
     <h2>10× your communication,<br>in 1/10 of the time.</h2>
-    <p class="lead">Run the installer, sign in, and press <span class="kbd">⌥ Space</span> anywhere you write.</p>
+    <p class="lead">Drag PortaVox into Applications, sign in, and press <span class="kbd">⌥ Space</span> anywhere you write.</p>
     <a class="btn" href="PortaVox-1.0.8.pkg" download>
       <svg class="apple" viewBox="0 0 16 16" fill="currentColor"><path d="M11.18 8.46c-.02-1.6 1.3-2.37 1.36-2.41-.74-1.09-1.9-1.24-2.31-1.25-.98-.1-1.92.58-2.42.58-.5 0-1.27-.57-2.09-.55-1.07.02-2.06.62-2.61 1.58-1.11 1.93-.28 4.79.8 6.36.53.77 1.16 1.63 1.98 1.6.8-.03 1.1-.51 2.06-.51.96 0 1.23.51 2.07.5.85-.01 1.4-.78 1.92-1.55.6-.89.85-1.75.86-1.8-.02-.01-1.65-.63-1.67-2.5zM9.7 3.76c.44-.53.73-1.27.65-2.01-.63.03-1.39.42-1.84.95-.4.47-.76 1.22-.66 1.94.7.06 1.42-.36 1.85-.88z"></path></svg>
       Download for Mac
@@ -954,10 +1346,10 @@ Best, John</div>
         </div>
         <div class="foot-col">
           <h4>Product</h4>
-          <a href="#how">How it works</a>
+          <a href="#how-it-works">How it works</a>
           <a href="#proof">The drafts</a>
           <a href="#cases">Who it's for</a>
-          <a href="PortaVox-1.0.8.pkg" download>Download</a>
+          <a href="#download">Download</a>
         </div>
         <div class="foot-col">
           <h4>Trust</h4>
@@ -968,14 +1360,14 @@ Best, John</div>
         </div>
         <div class="foot-col">
           <h4>Contact</h4>
-          <a href="mailto:info@portavox.ai">Email us</a>
+          <a href="mailto:christiaan.henny@portavox.ai">Email us</a>
           <a href="#">Request beta access</a>
         </div>
       </div>
     </div>
     <div class="foot-bot">
       <span>© 2026 PortaVox · Carries your voice.</span>
-      <span><a href="mailto:info@portavox.ai">info@portavox.ai</a></span>
+      <span>christiaan.henny@portavox.ai</span>
     </div>
   </footer>
 </section>
@@ -1039,158 +1431,149 @@ Best, John</div>
     window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ build(); if(reduce) render(0); },220); });
   }
   function init(){
-    var g=document.getElementById('voice-gate'); if(g) field(g,{n:16,centerY:0.5,spread:0.6,conv:'left'});
-    var a=document.getElementById('voice-hero'); if(a) field(a,{n:14,centerY:0.46,spread:0.47,conv:'left'});
+    var a=document.getElementById('voice-hero'); if(a) field(a,{n:19,centerY:0.5,spread:0.54,conv:'left'});
     var b=document.getElementById('voice-privacy'); if(b) field(b,{n:12,centerY:0.5,spread:0.4,conv:'left',dark:true});
     var c=document.getElementById('voice-closing'); if(c) field(c,{n:9,centerY:0.4,spread:0.42,conv:'right'});
   }
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
 })();
 (function(){
-  // Per-group: each .rel-list only drives the .rel-stage in its own .rel-grid,
-  // so the "How it works" and "Relationship intelligence" tab sets stay independent.
-  var mqMobile = window.matchMedia ? matchMedia('(max-width:880px)') : {matches:false,addEventListener:function(){},addListener:function(){}};
-  var ctrls = [];
-  document.querySelectorAll('.rel-list').forEach(function(list){
-    var grid   = list.closest('.rel-grid');
+  var groups = document.querySelectorAll('.rel-list');
+  var ACC_MQ = window.matchMedia('(max-width:880px)');
+  groups.forEach(function(list){
+    var stage  = list.parentElement.querySelector('.rel-stage');
     var items  = [].slice.call(list.querySelectorAll('.rel-item'));
-    // Query panels at grid level so they're still found after the mobile
-    // accordion relocates them out of .rel-stage and into the tab list.
-    var panels = [].slice.call((grid||document).querySelectorAll('.rel-panel'));
-    var prev = null;
-    function sel(i){
-      // Direction (forward / back) drives the slide so 1->2->3 reads as motion.
-      var dir = (prev==null || i==null) ? 1 : (parseInt(i,10) > parseInt(prev,10) ? 1 : -1);
-      items.forEach(function(b){ var on=i!=null&&b.getAttribute('data-rel')===i; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
-      panels.forEach(function(p){
-        var on=i!=null&&p.getAttribute('data-rel')===i;
-        if(on) p.style.setProperty('--enter', dir>0?'30px':'-30px');
-        p.classList.toggle('active',on);
+    var panels = [].slice.call(stage.querySelectorAll('.rel-panel'));
+    function panelFor(i){ for(var k=0;k<panels.length;k++){ if(panels[k].getAttribute('data-rel')===i) return panels[k]; } return null; }
+    function itemFor(i){ return list.querySelector('.rel-item[data-rel="'+i+'"]'); }
+
+    // ----- desktop: one tab always active, panels live in the stage -----
+    function selectDesktop(i){
+      items.forEach(function(b){
+        var on = b.getAttribute('data-rel') === i;
+        b.classList.toggle('active', on);
+        b.classList.remove('open');
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
       });
-      prev = i;
+      panels.forEach(function(p){
+        p.classList.remove('acc-open');
+        p.classList.toggle('active', p.getAttribute('data-rel') === i);
+      });
     }
+
+    // ----- mobile: accordion — clicked panel slides in below its header -----
+    var openIdx = null;
+    function closeMobile(){
+      if(openIdx === null) return;
+      var b = itemFor(openIdx), p = panelFor(openIdx);
+      if(b){ b.classList.remove('active','open'); b.setAttribute('aria-selected','false'); }
+      if(p){ p.classList.remove('active','acc-open'); stage.appendChild(p); }
+      openIdx = null;
+    }
+    function openMobile(i){
+      if(openIdx === i){ closeMobile(); return; }
+      closeMobile();
+      var b = itemFor(i), p = panelFor(i);
+      if(b){ b.classList.add('active','open'); b.setAttribute('aria-selected','true'); }
+      if(p){ b.insertAdjacentElement('afterend', p); p.classList.add('active','acc-open'); }
+      openIdx = i;
+    }
+
+    function reset(){
+      panels.forEach(function(p){ p.classList.remove('active','acc-open'); stage.appendChild(p); });
+      items.forEach(function(b){ b.classList.remove('active','open'); b.setAttribute('aria-selected','false'); });
+      openIdx = null;
+      if(!ACC_MQ.matches){ selectDesktop(items[0].getAttribute('data-rel')); }
+    }
+
     items.forEach(function(b){
-      b.addEventListener('click',function(){
-        var rel=b.getAttribute('data-rel');
-        // On mobile (accordion) re-tapping the open step collapses it.
-        if(mqMobile.matches && b.classList.contains('active')) sel(null);
-        else sel(rel);
+      b.addEventListener('click', function(){
+        var i = b.getAttribute('data-rel');
+        if(ACC_MQ.matches) openMobile(i); else selectDesktop(i);
       });
     });
-    // Desktop always shows one panel; mobile starts fully collapsed until tapped.
-    function applyDefault(){ sel(mqMobile.matches ? null : '0'); }
-    ctrls.push(applyDefault);
-    applyDefault();
-  });
-  function reDefault(){ ctrls.forEach(function(fn){ fn(); }); }
-  if(mqMobile.addEventListener) mqMobile.addEventListener('change', reDefault);
-  else if(mqMobile.addListener) mqMobile.addListener(reDefault);
 
-  // Step 3 of "How it works": clicking the underlined "type" turns the intent box editable.
+    reset();
+    var onChange = function(){ reset(); };
+    if(ACC_MQ.addEventListener) ACC_MQ.addEventListener('change', onChange);
+    else if(ACC_MQ.addListener) ACC_MQ.addListener(onChange);
+  });
+
+  // step 3: clicking the underlined "type" turns the intent box into an editable field
   document.querySelectorAll('.type-link').forEach(function(link){
     var panel  = link.closest('.rel-panel');
     var rec    = panel.querySelector('.rec');
     var intent = panel.querySelector('.intent');
     function startTyping(){
       if (rec) rec.style.display = 'none';
+      if (!intent) return;
       intent.classList.add('typing');
-      intent.setAttribute('contenteditable','true');
+      intent.setAttribute('contenteditable', 'true');
       intent.textContent = '';
       intent.focus();
     }
     link.addEventListener('click', startTyping);
-    link.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); startTyping(); } });
-  });
-
-  // Step 4 — roving "magic" callout that points out, one phrase at a time, why the draft works.
-  var bubble=document.querySelector('.draft-bubble.magic');
-  if(bubble){
-    var spans=[].slice.call(bubble.querySelectorAll('.hl'));
-    var callout=bubble.querySelector('.magic-callout');
-    if(callout&&spans.length){
-      var dot=callout.querySelector('.mc-dot'), txt=callout.querySelector('.mc-text');
-      var panel=bubble.closest('.rel-panel');
-      var idx=0, timer=null, paused=false;
-      var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function place(i){
-        var s=spans[i]; if(!s) return;
-        var c=s.getAttribute('data-c')||'248,145,63';
-        spans.forEach(function(sp){sp.classList.remove('active');});
-        s.classList.add('active');
-        s.style.setProperty('--hl','rgba('+c+',.34)');
-        txt.textContent=s.getAttribute('data-note');
-        dot.style.background='rgb('+c+')';
-        var br=bubble.getBoundingClientRect();
-        var rects=s.getClientRects(), r=rects[0]; if(!r) return;
-        var x=(r.left-br.left)+Math.min(r.width,110)/2;
-        var topY=(r.top-br.top);
-        var cw=callout.offsetWidth||160, ch=callout.offsetHeight||32, half=cw/2, pad=8;
-        var cx=Math.max(half+pad, Math.min(bubble.clientWidth-half-pad, x));
-        var ptr=Math.max(12, Math.min(cw-12, half+(x-cx)));
-        callout.style.setProperty('--ptr',ptr+'px');
-        callout.style.left=cx+'px';
-        if(topY-ch-12<0){ callout.classList.add('below'); callout.style.top=(r.bottom-br.top+10)+'px'; }
-        else{ callout.classList.remove('below'); callout.style.top=(topY-8)+'px'; }
-        callout.classList.add('show');
-      }
-      function next(){ idx=(idx+1)%spans.length; place(idx); }
-      function start(){ stop(); if(reduce) return; timer=setInterval(function(){ if(!paused) next(); },2400); }
-      function stop(){ if(timer){clearInterval(timer);timer=null;} }
-      spans.forEach(function(s,i){ s.addEventListener('mouseenter',function(){ paused=true; idx=i; place(i); }); });
-      bubble.addEventListener('mouseleave',function(){ paused=false; });
-      function show(){ requestAnimationFrame(function(){ place(idx); start(); }); }
-      if('MutationObserver' in window){
-        new MutationObserver(function(){
-          if(panel.classList.contains('active')){ show(); }
-          else{ stop(); callout.classList.remove('show'); }
-        }).observe(panel,{attributes:true,attributeFilter:['class']});
-      }
-      if(panel.classList.contains('active')) show();
-      var rt2; window.addEventListener('resize',function(){ clearTimeout(rt2); rt2=setTimeout(function(){ place(idx); },150); });
-    }
-  }
-})();
-
-// Mobile accordion: below 880px, relocate each .rel-panel directly after its
-// matching .rel-item so the mock window opens between the clicked step and the
-// next one. On desktop, restore all panels into .rel-stage (two-column layout).
-(function(){
-  if(!window.matchMedia) return;
-  var mq = matchMedia('(max-width:880px)');
-  var grids = [].slice.call(document.querySelectorAll('.rel-grid')).map(function(grid){
-    var list  = grid.querySelector('.rel-list');
-    var stage = grid.querySelector('.rel-stage');
-    return {
-      grid:grid, list:list, stage:stage,
-      items:[].slice.call(list.querySelectorAll('.rel-item')),
-      panels:[].slice.call(grid.querySelectorAll('.rel-panel'))
-    };
-  });
-  function apply(){
-    var mobile = mq.matches;
-    grids.forEach(function(g){
-      g.grid.classList.toggle('acc', mobile);
-      if(mobile){
-        g.panels.forEach(function(p){
-          var rel = p.getAttribute('data-rel');
-          var item = g.items.filter(function(b){ return b.getAttribute('data-rel')===rel; })[0];
-          if(item && item.nextElementSibling !== p){ item.insertAdjacentElement('afterend', p); }
-        });
-      } else {
-        g.panels.slice().sort(function(a,b){
-          return (+a.getAttribute('data-rel')) - (+b.getAttribute('data-rel'));
-        }).forEach(function(p){ g.stage.appendChild(p); });
-      }
+    link.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startTyping(); }
     });
-  }
-  apply();
-  if(mq.addEventListener) mq.addEventListener('change', apply);
-  else if(mq.addListener) mq.addListener(apply);
+  });
 })();
+/* step 4 — roving "magic" callout that points out, one phrase at a time, why the draft works */
+(function(){
+  var bubble=document.querySelector('.draft-bubble.magic'); if(!bubble) return;
+  var spans=[].slice.call(bubble.querySelectorAll('.hl'));
+  var callout=bubble.querySelector('.magic-callout');
+  if(!callout||!spans.length) return;
+  var dot=callout.querySelector('.mc-dot'), txt=callout.querySelector('.mc-text');
+  var panel=bubble.closest('.rel-panel');
+  var idx=0, timer=null, paused=false;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function place(i){
+    var s=spans[i]; if(!s) return;
+    var c=s.getAttribute('data-c')||'248,145,63';
+    spans.forEach(function(sp){sp.classList.remove('active');});
+    s.classList.add('active');
+    s.style.setProperty('--hl','rgba('+c+',.34)');
+    txt.textContent=s.getAttribute('data-note');
+    dot.style.background='rgb('+c+')';
+    var br=bubble.getBoundingClientRect();
+    var rects=s.getClientRects(), r=rects[0]; if(!r) return;
+    var x=(r.left-br.left)+Math.min(r.width,110)/2;
+    var topY=(r.top-br.top);
+    var cw=callout.offsetWidth||160, ch=callout.offsetHeight||32, half=cw/2, pad=8;
+    var cx=Math.max(half+pad, Math.min(bubble.clientWidth-half-pad, x));
+    var ptr=Math.max(12, Math.min(cw-12, half+(x-cx)));
+    callout.style.setProperty('--ptr',ptr+'px');
+    callout.style.left=cx+'px';
+    if(topY-ch-12<0){ callout.classList.add('below'); callout.style.top=(r.bottom-br.top+10)+'px'; }
+    else{ callout.classList.remove('below'); callout.style.top=(topY-8)+'px'; }
+    callout.classList.add('show');
+  }
+  function next(){ idx=(idx+1)%spans.length; place(idx); }
+  function start(){ stop(); if(reduce) return; timer=setInterval(function(){ if(!paused) next(); },2400); }
+  function stop(){ if(timer){clearInterval(timer);timer=null;} }
+
+  spans.forEach(function(s,i){ s.addEventListener('mouseenter',function(){ paused=true; idx=i; place(i); }); });
+  bubble.addEventListener('mouseleave',function(){ paused=false; });
+
+  function show(){ requestAnimationFrame(function(){ place(idx); start(); }); }
+  if('MutationObserver' in window){
+    new MutationObserver(function(){
+      if(panel.classList.contains('active')){ show(); }
+      else{ stop(); callout.classList.remove('show'); }
+    }).observe(panel,{attributes:true,attributeFilter:['class']});
+  }
+  if(panel.classList.contains('active')) show();
+  var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ place(idx); },150); });
+})();
+</script>
+
+<script>
 // Beta gate — SHA-256 of access code compared to baked hash. Casual lock,
 // not real security: anyone can devtools the hash and brute-force a weak
-// code offline. That's fine, the .dmg is served straight from this public
-// Pages repo (beta/PortaVox-<ver>.dmg) — the AskMax source repo is private,
+// code offline. That's fine, the installer is served straight from this public
+// Pages repo (beta/PortaVox-<ver>.pkg) — the AskMax source repo is private,
 // so its GitHub Release assets are NOT publicly downloadable. Goal is
 // "casual visitors bounce", not "stop attackers".
 // To rotate: echo -n "<new code>" | shasum -a 256
