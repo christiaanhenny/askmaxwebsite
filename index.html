@@ -748,6 +748,12 @@ html,body{overflow-x:hidden;}
 }
 @keyframes accIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
 
+/* ===== DEMO VIDEO ===== */
+#demo{padding:84px 0;background:var(--warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);scroll-margin-top:80px;}
+#demo .video-frame{position:relative;max-width:920px;margin:34px auto 0;border-radius:18px;overflow:hidden;background:var(--brand-ink);box-shadow:0 30px 70px -28px rgba(59,0,28,.45),0 2px 8px rgba(59,0,28,.08);border:1px solid var(--border-2);}
+#demo video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--brand-ink);}
+@media (max-width:640px){#demo{padding:56px 0;}}
+
 </style>
 </head>
 <body>
@@ -822,6 +828,19 @@ html,body{overflow-x:hidden;}
     </div>
   </div>
 </div>
+
+<!-- ===== DEMO VIDEO ===== -->
+<section id="demo">
+  <div class="wrap">
+    <div class="head-center"><span class="eyebrow">See it in action</span><h2 style="margin-top:14px;">A look at PortaVox.</h2></div>
+    <div class="video-frame">
+      <video controls preload="metadata" playsinline poster="/assets/portavox-demo-poster.jpg">
+        <source src="/assets/portavox-demo.mp4" type="video/mp4">
+        Your browser doesn't support embedded video.
+      </video>
+    </div>
+  </div>
+</section>
 
 <!-- ===== HOW IT WORKS (interactive walkthrough) ===== -->
 <section class="hiw" id="how-it-works">
@@ -1536,28 +1555,68 @@ Alex</div>
 })();
 </script>
 
-<!-- Beta download password gate (light) -->
+<!-- Beta download password gate (encrypted installer) -->
+<!-- The installer is shipped as PortaVox-1.0.8.pkg.enc: AES-256-GCM,
+     key = PBKDF2(password, salt, 250000, SHA-256). Layout of the file:
+     salt(16) | iv(12) | ciphertext | gcm-tag(16). Without the password
+     the bytes are useless, so the plaintext .pkg is never exposed. -->
 <script>
 (function(){
-  var BETA_PASSWORD = 'feedbackplease';
-  var FILE = 'PortaVox-1.0.8.pkg';
+  var ENC_FILE = 'PortaVox-1.0.8.pkg.enc';
+  var OUT_NAME = 'PortaVox-1.0.8.pkg';
+  var ITER = 250000;
   var btn = document.getElementById('dl-btn');
   if(!btn) return;
+
   btn.addEventListener('click', function(e){
     e.preventDefault();
     var pw = window.prompt('Enter the beta access password to download PortaVox:');
     if(pw === null) return; // cancelled
-    if(pw.trim().toLowerCase() === BETA_PASSWORD){
-      var a = document.createElement('a');
-      a.href = FILE;
-      a.setAttribute('download','');
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } else {
-      window.alert('That password is not correct. Email christiaan.henny@portavox.ai to request beta access.');
-    }
+    pw = pw.trim().toLowerCase();
+    download(pw);
   });
+
+  function fail(){
+    window.alert('That password is not correct (or the download could not start). Email christiaan.henny@portavox.ai to request beta access.');
+  }
+
+  function download(pw){
+    if(!(window.crypto && crypto.subtle)){
+      window.alert('Your browser cannot decrypt the download. Please use an up-to-date Safari, Chrome or Edge.');
+      return;
+    }
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.6';
+    fetch(ENC_FILE).then(function(r){
+      if(!r.ok) throw new Error('fetch failed');
+      return r.arrayBuffer();
+    }).then(function(ab){
+      var buf  = new Uint8Array(ab);
+      var salt = buf.slice(0, 16);
+      var iv   = buf.slice(16, 28);
+      var body = buf.slice(28); // ciphertext + gcm tag
+      return crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey'])
+        .then(function(baseKey){
+          return crypto.subtle.deriveKey(
+            { name:'PBKDF2', salt:salt, iterations:ITER, hash:'SHA-256' },
+            baseKey, { name:'AES-GCM', length:256 }, false, ['decrypt']);
+        })
+        .then(function(key){
+          return crypto.subtle.decrypt({ name:'AES-GCM', iv:iv }, key, body);
+        });
+    }).then(function(plain){
+      var url = URL.createObjectURL(new Blob([plain], { type:'application/octet-stream' }));
+      var a = document.createElement('a');
+      a.href = url; a.download = OUT_NAME;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+    }).catch(function(){
+      fail();
+    }).then(function(){
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+    });
+  }
 })();
 </script>
 
