@@ -1556,14 +1556,14 @@ Alex</div>
 </script>
 
 <!-- Beta download password gate (encrypted installer) -->
-<!-- The installer is shipped as PortaVox-1.0.8.pkg.enc: AES-256-GCM,
+<!-- The installer is shipped as PortaVox-1.0.9.pkg.enc: AES-256-GCM,
      key = PBKDF2(password, salt, 250000, SHA-256). Layout of the file:
      salt(16) | iv(12) | ciphertext | gcm-tag(16). Without the password
      the bytes are useless, so the plaintext .pkg is never exposed. -->
 <script>
 (function(){
-  var ENC_FILE = 'PortaVox-1.0.8.pkg.enc';
-  var OUT_NAME = 'PortaVox-1.0.8.pkg';
+  var ENC_FILE = 'PortaVox-1.0.9.pkg.enc';
+  var OUT_NAME = 'PortaVox-1.0.9.pkg';
   var ITER = 250000;
   var btn = document.getElementById('dl-btn');
   if(!btn) return;
